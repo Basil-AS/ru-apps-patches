@@ -28,7 +28,11 @@ private val adPermissions = setOf(
 
 private val adComponents = setOf(
     "com.yandex.mobile.ads.common.AdActivity",
-    "com.yandex.mobile.ads.core.initializer.MobileAdsInitializeProvider",
+    // Renamed from MobileAdsInitializeProvider in a later Yandex Mobile Ads SDK
+    // release; confirmed against the live 234.5 manifest (2026-10-08) — without
+    // this entry the content provider still auto-initializes the ad SDK at
+    // startup even though AdActivity itself is disabled.
+    "com.yandex.mobile.ads.core.initializer.YandexAdsInitializeProvider",
     "com.my.target.common.MyTargetActivity",
     "com.my.target.common.MyTargetContentProvider",
 )
