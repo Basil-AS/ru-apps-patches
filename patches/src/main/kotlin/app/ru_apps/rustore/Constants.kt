@@ -17,8 +17,16 @@ object Constants {
         apkFileType = ApkFileType.APK,
         appIconColor = 0x0A85FF,
         signatures = setOf(OFFICIAL_SIGNER_SHA256),
+        // A single pinned AppTarget meant every patch here was silently skipped
+        // (compatibleWith() check, before any fingerprint matching) against any
+        // live RuStore newer than AUDITED_VERSION. Following the multi-version
+        // AppTarget list convention used by ozon/avito/tbank/wildberries, keep
+        // the originally-audited version and add 1.111.0.3, which this session
+        // live-decompiled and re-anchored both fingerprints in this package
+        // against (static.rustore.ru/release/RuStore.apk, 2026-10-08).
         targets = listOf(
-            AppTarget(version = AUDITED_VERSION)
+            AppTarget(version = "1.111.0.3", versionCode = 1111003),
+            AppTarget(version = AUDITED_VERSION),
         )
     )
 }

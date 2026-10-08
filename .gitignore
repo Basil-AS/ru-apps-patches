@@ -128,3 +128,11 @@ node_modules/
 # Ignore IDEA files
 .idea/
 local.properties
+
+# BEGIN UNIVERSAL AGENT KIT
+AGENT.local.md
+.agent-cache/
+*.agent-local.*
+.agents/runtime/
+.agents/tmp/
+# END UNIVERSAL AGENT KIT

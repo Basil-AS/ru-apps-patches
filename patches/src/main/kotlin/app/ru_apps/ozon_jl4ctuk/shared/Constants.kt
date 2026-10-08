@@ -14,6 +14,17 @@ internal object Constants {
         apkFileType = ApkFileType.APK,
         appIconColor = 0x005BFF,
         targets = listOf(
+            // A single pinned AppTarget meant every patch here was silently
+            // skipped against any live Ozon newer than 19.31.0 (same
+            // compatibleWith()-gate issue found and fixed for RuStore/RuTube
+            // this session). Add the current live version alongside the
+            // originally-audited one, following the multi-version AppTarget
+            // list convention used elsewhere in this repo.
+            AppTarget(
+                version = "19.37.0",
+                versionCode = 2720,
+                minSdk = 26,
+            ),
             AppTarget(
                 version = "19.31.0",
                 versionCode = 2706,

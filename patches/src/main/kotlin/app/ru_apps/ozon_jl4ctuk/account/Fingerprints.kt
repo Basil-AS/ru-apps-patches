@@ -3,32 +3,6 @@ package app.ru_apps.ozon_jl4ctuk.account
 
 import app.morphe.patcher.Fingerprint
 
-object EntryBannerSingleMapperFingerprint : Fingerprint(
-    definingClass =
-        "Lru/ozon/app/android/regulardraw/widgets/entryBannerWidget/v1/core/single/" +
-            "EntryBannerWidgetSingleMapper;",
-    name = "invoke",
-    returnType = "Ljava/util/List;",
-    parameters = listOf(
-        "Lru/ozon/app/android/regulardraw/widgets/entryBannerWidget/v1/data/" +
-            "EntryBannerSubWidget\$Single;",
-        "L",
-    ),
-)
-
-object EntryBannerMultiMapperFingerprint : Fingerprint(
-    definingClass =
-        "Lru/ozon/app/android/regulardraw/widgets/entryBannerWidget/v1/core/multi/" +
-            "EntryBannerWidgetMultiMapper;",
-    name = "invoke",
-    returnType = "Ljava/util/List;",
-    parameters = listOf(
-        "Lru/ozon/app/android/regulardraw/widgets/entryBannerWidget/v1/data/" +
-            "EntryBannerSubWidget\$Multi;",
-        "L",
-    ),
-)
-
 object EntryBannerContentMapperFingerprint : Fingerprint(
     definingClass =
         "Lru/ozon/app/android/regulardraw/widgets/entryBannerWidget/v2/core/" +

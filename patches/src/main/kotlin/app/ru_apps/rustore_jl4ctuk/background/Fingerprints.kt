@@ -19,9 +19,15 @@ object NetworkCallbackStateProviderInitFingerprint : Fingerprint(
     parameters = listOf("Landroid/content/Context;"),
 )
 
-/** Starts RuStore's foreground VPN-based Connect session. */
+/**
+ * Starts RuStore's foreground VPN-based Connect session.
+ * `definingClass` moved from `Lnd1/m;` (now an unrelated Retrofit-API lambda
+ * bridge for `ConnectSessionConfigV1Api`) to `Lrd1/t;`
+ * (`ConnectSessionLauncherImpl.kt`) - confirmed via live decompile (2026-10)
+ * by matching the `startForegroundService` body, not just the method shape.
+ */
 object ConnectSessionLauncherStartFingerprint : Fingerprint(
-    definingClass = "Lnd1/m;",
+    definingClass = "Lrd1/t;",
     name = "start",
     returnType = "V",
     parameters = emptyList(),
@@ -40,11 +46,19 @@ object ConnectSessionServiceStartFingerprint : Fingerprint(
     ),
 )
 
+// ConnectSessionService's letter-named methods (a/b/c/.../e below) are
+// reassigned by R8 on every rebuild - a live decompile (2026-10) confirmed,
+// by matching each method's body (not just its shape) against the old
+// fingerprints, that the three methods below rotated: the old "a" (protect,
+// Z, [I]) is now "b", the old "b" (tunnel, ParcelFileDescriptor, no params)
+// is now "c", and the old "e" (external-VPN check, Boolean, no params) is
+// now "a".
+
 /** Establishes the TUN interface used by a Connect session. */
 object ConnectSessionEstablishTunnelFingerprint : Fingerprint(
     definingClass =
         "Lru/vk/store/feature/connect/session/impl/presentation/ConnectSessionService;",
-    name = "b",
+    name = "c",
     returnType = "Landroid/os/ParcelFileDescriptor;",
     parameters = emptyList(),
 )
@@ -53,7 +67,7 @@ object ConnectSessionEstablishTunnelFingerprint : Fingerprint(
 object ConnectSessionProtectSocketFingerprint : Fingerprint(
     definingClass =
         "Lru/vk/store/feature/connect/session/impl/presentation/ConnectSessionService;",
-    name = "a",
+    name = "b",
     returnType = "Z",
     parameters = listOf("I"),
 )
@@ -62,7 +76,7 @@ object ConnectSessionProtectSocketFingerprint : Fingerprint(
 object ConnectSessionExternalVpnCheckFingerprint : Fingerprint(
     definingClass =
         "Lru/vk/store/feature/connect/session/impl/presentation/ConnectSessionService;",
-    name = "e",
+    name = "a",
     returnType = "Ljava/lang/Boolean;",
     parameters = emptyList(),
 )

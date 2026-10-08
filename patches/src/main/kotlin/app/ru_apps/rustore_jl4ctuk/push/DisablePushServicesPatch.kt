@@ -52,9 +52,13 @@ private val disablePushManifestPatch = resourcePatch {
                 "ru.vk.store.feature.push.client.",
                 "com.vk.push.",
             )
-            if (disabledComponents != 14) {
+            // Live 1.111.0.3 manifest has 13, not the 14 this guard was written against
+            // (confirmed via aapt2 dump xmltree, 2026-10-08) - one push/VK-push component
+            // present in the older build is gone. disableComponentsByPrefix() disables by
+            // prefix match regardless of count, so this is purely a staleness tripwire.
+            if (disabledComponents != 13) {
                 throw PatchException(
-                    "Expected fourteen push manifest components, " +
+                    "Expected thirteen push manifest components, " +
                         "found $disabledComponents",
                 )
             }

@@ -22,12 +22,17 @@ object MainNavigationTabsFactoryFingerprint : Fingerprint(
     },
 )
 
-/** Matches `RootNavHost`, which selects the app's initial navigation route. */
+/**
+ * Matches `RootNavHost`, which selects the app's initial navigation route. A
+ * live decompile (ru.vk.store 1.111.0.3, 2026-10) found this dropped a
+ * boolean parameter (5 params -> 4) - confirmed by matching the method body
+ * (exactly one `InterestingTabDestination` and one
+ * `RecommendationGamesDestination` const-class reference), not just the shape.
+ */
 object RootNavHostFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf(
         "L",
-        "Z",
         "L",
         "Landroidx/compose/runtime/a;",
         "I",

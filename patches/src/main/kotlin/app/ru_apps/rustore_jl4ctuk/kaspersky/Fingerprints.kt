@@ -2,8 +2,6 @@
 package app.ru_apps.rustore_jl4ctuk.kaspersky
 
 import app.morphe.patcher.Fingerprint
-import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
-import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
 /**
  * Matches `KasperskyScannerDto.isPeriodicScanEnabled()`, the persisted flag
@@ -17,33 +15,26 @@ object KasperskyScannerDtoIsPeriodicScanEnabledFingerprint : Fingerprint(
 )
 
 /**
- * Matches `KasperskyScannerWorker.Companion.enqueuePeriodic()`, which creates
- * the daily `PeriodicKasperskyScanner` WorkManager task.
+ * Matches the app-initializer coroutine step that schedules the daily
+ * `PeriodicKasperskyScanner` task.
+ *
+ * `KasperskyScannerWorker.Companion.enqueuePeriodic()` no longer exists - a
+ * live decompile (2026-10) confirmed its companion object (`KasperskyScannerWorker$a`)
+ * is now empty, and scheduling moved into a generated `AppInitializers.kt`
+ * coroutine continuation that resolves a scheduler instance and calls
+ * `scheduler.a("PeriodicKasperskyScanner")` - the same in-process
+ * coroutine-scheduler architecture migration already seen for AltCraft, Radar,
+ * install-identifier sync, remote analytics, and usage-stats collection (see
+ * analytics/DisableAnalyticsPatch.kt). The generated class name/numeric suffix
+ * (`AppInitializers$initOnIoThreads$N`) shifts whenever initializers are
+ * reordered, so match on the source file plus the literal task-name string
+ * instead, which is more stable.
  */
 object KasperskyScannerWorkerEnqueuePeriodicFingerprint : Fingerprint(
     returnType = "Ljava/lang/Object;",
-    parameters = listOf("L", "L"),
-    custom = { method, classDef ->
-        classDef.sourceFile == "KasperskyScannerWorker.kt" &&
-            method.implementation?.instructions?.any { instruction ->
-                val field = (instruction as? ReferenceInstruction)?.reference as? FieldReference
-
-                field?.definingClass == "Ljava/util/concurrent/TimeUnit;" &&
-                    field.name == "DAYS"
-            } == true
-    },
-)
-
-/** Matches WorkManagerImpl's `cancelUniqueWork()` override after R8 renaming. */
-object KasperskyWorkManagerCancelUniqueFingerprint : Fingerprint(
-    returnType = "L",
-    parameters = listOf("Ljava/lang/String;"),
-    strings = listOf("CancelWorkByName_"),
-    custom = { method, classDef ->
-        classDef.sourceFile == "WorkManagerImpl.java" &&
-            classDef.superclass != null &&
-            method.implementation != null
-    },
+    parameters = listOf("L"),
+    strings = listOf("PeriodicKasperskyScanner"),
+    custom = { _, classDef -> classDef.sourceFile == "AppInitializers.kt" },
 )
 
 /** Matches the coroutine implementation of the already-enqueued Kaspersky scan worker. */

@@ -15,7 +15,12 @@ val disableLotteryPopupPatch = bytecodePatch(
 
     execute {
         LotteryStartOnboardingFingerprint.method.addInstructions(0, "return-void")
-        MorkovskStartOnboardingFingerprint.method.addInstructions(0, "return-void")
+        // MorkovskOnboardingManager (MorkovskStartOnboardingFingerprint's old target) no longer
+        // exists as of a 2026-10 Ozon build — confirmed via live decompile: the standalone
+        // "second onboarding path" class is gone, and its dialog, MorkovskHintDialog, now has
+        // exactly one caller in the whole app (MorkovskHintDialog.Companion.newInstance(), called
+        // only from LotteryOnboardingManager). The two onboarding paths were consolidated into
+        // one, already fully covered by LotteryStartOnboardingFingerprint above.
         InAppPushHostProviderFingerprint.method.addInstructions(
             0,
             """
