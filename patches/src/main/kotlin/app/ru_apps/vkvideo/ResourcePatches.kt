@@ -3,6 +3,8 @@ package app.ru_apps.vkvideo
 
 import app.morphe.patcher.patch.resourcePatch
 import app.ru_apps.vkvideo.Constants.VK_VIDEO
+import app.shared.childrenNamed
+import app.shared.disableComponentsByName
 import app.shared.removeUsesPermissions
 
 // VK Video still declares the AD_ID permission (confirmed live in the 2026-10-08
@@ -25,6 +27,35 @@ val removeVkVideoAdIdPatch = resourcePatch(
                 "android.permission.ACCESS_ADSERVICES_AD_ID",
             )
             println("Disable VK Video advertising ID: removed $removed AD_ID permission(s).")
+        }
+    }
+}
+
+// VK Video bundles a real MyTarget SDK (confirmed via decompile, 2026-10-08: live
+// MyTargetActivity/MyTargetContentProvider/NativeAdContainer/MediaAdView classes,
+// not just the AdvertisingIdClient identifier stub), and the manifest registers its
+// auto-init content provider — `enabled`/`exported` were both still their SDK
+// defaults (no existing patch touched them). Disabling both the activity (so an ad
+// can never be displayed even if requested) and the content provider (so the SDK
+// never auto-initializes at process start) closes this independently of the AD_ID
+// permission removal above, which only affects GAID-based targeting, not MyTarget's
+// own ad-serving path.
+@Suppress("unused")
+val disableVkVideoMyTargetPatch = resourcePatch(
+    name = "Disable VK Video MyTarget SDK",
+    description = "Disables MyTarget's auto-init content provider and ad activity so the SDK never starts.",
+    default = true
+) {
+    compatibleWith(VK_VIDEO)
+
+    execute {
+        document("AndroidManifest.xml").use { document ->
+            val application = document.documentElement.childrenNamed("application").single()
+            val disabled = application.disableComponentsByName(
+                "com.my.target.common.MyTargetActivity",
+                "com.my.target.common.MyTargetContentProvider",
+            )
+            println("Disable VK Video MyTarget SDK: disabled $disabled manifest component(s).")
         }
     }
 }
