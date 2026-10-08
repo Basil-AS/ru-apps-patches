@@ -212,9 +212,21 @@ val disableOzonTelemetryPatch = bytecodePatch(
         }
         val missingNonFatalSignatures =
             nonFatalLoggerNoOpSignatures - foundNonFatalSignatures
-        if (missingNonFatalSignatures.isNotEmpty()) {
+        if (foundNonFatalSignatures.isEmpty()) {
             throw PatchException(
-                "Missing ${missingNonFatalSignatures.size} NonFatalLogger methods",
+                "Missing all ${nonFatalLoggerNoOpSignatures.size} NonFatalLogger methods",
+            )
+        }
+        if (missingNonFatalSignatures.isNotEmpty()) {
+            // A signature going missing while its siblings keep their original (un-obfuscated)
+            // names, as confirmed live against Ozon 19.38.0, means Ozon dropped that method from
+            // NonFatalLogger/OzonLogger entirely (no more call sites anywhere) rather than R8
+            // renaming it — there is nothing left to disable for it. Requiring every signature to
+            // still exist made this patch fail outright on apps that simply shrank their logger
+            // API surface, even though every method that DOES still exist gets disabled below.
+            logger.warning(
+                "NonFatalLogger no longer declares: " +
+                    missingNonFatalSignatures.joinToString { "${it.name}(${it.parameters})" },
             )
         }
         nonFatalLoggerMethods.forEach(MutableMethod::disable)
