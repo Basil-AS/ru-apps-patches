@@ -14,6 +14,13 @@ object Constants {
         apkFileType = ApkFileType.APK,
         appIconColor = 0x005BFF,
         targets = listOf(
+            // 2026-10-08: same stale-pin gate bug as elsewhere in this repo — live Ozon moved to
+            // 19.38.0 (versionCode 2721) and this list wasn't keeping up.
+            AppTarget(
+                version = "19.38.0",
+                versionCode = 2721,
+                minSdk = 26,
+            ),
             AppTarget(
                 version = "19.37.0",
                 versionCode = 2720,
