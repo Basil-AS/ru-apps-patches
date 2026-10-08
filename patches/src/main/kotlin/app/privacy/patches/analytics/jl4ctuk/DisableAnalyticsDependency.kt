@@ -403,9 +403,11 @@ val disableAnalyticsDependency = bytecodePatch(
         }
 
         if (!appMetricaFacadesFound && patchedMyTrackerMethods == 0 && reporterCandidates.isEmpty()) {
-            throw PatchException(
-                "Neither AppMetrica nor MyTracker was found in this app — nothing to disable",
-            )
+            // Contradicts the no-op design above: an app with neither tracker still has Firebase
+            // collection controls to disable below, and this patch is opt-in by default anyway —
+            // hard-failing here only hurt a user who explicitly enabled it on a tracker-free app
+            // (confirmed live on Sberbank/T-Bank/Ozon/Wildberries, 2026-10-08 deep-verify pass).
+            logger.info("Neither AppMetrica nor MyTracker was found in this app — nothing to disable there")
         }
 
         val crashlyticsMethods = FirebaseCrashlyticsCollectionFingerprint
