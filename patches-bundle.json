@@ -1,7 +1,7 @@
 {
-  "created_at": "",
-  "description": "",
-  "download_url": "",
+  "created_at": "2026-10-08T16:46:45",
+  "description": "## Fix\n\n- **Avito: \"Morphe settings\" no longer crashes / hard-fails.** Our `extensions` module only ever shipped the stock ReVanced-template placeholder — the 8 Java runtime classes Avito's `MorpheSettingsPatch`, `RemoveAdsPatch`, `BlockListingsPatch` and `HideProfessionalSellersPatch` call into (`app.avito.morphe.*`, `app.avito.blacklist.*`, `app.avito.sellerfilter.*`) were never ported from upstream. This wasn't just a diagnostic-build artifact: the other three default-enabled patches' hooks were already being baked into the shipped dex calling a class that genuinely didn't exist — a real crash risk opening Avito's Settings screen or any patched feed. Ported the missing sources (GPLv3, from xob0t/morphe-patches) plus the Kotlin-stdlib exclusion needed to keep the merged extension dex crash-free.\n\nVerified on a fresh true-original Avito download: all 29 patches (every opt-in forced on) now apply cleanly, 0 SEVERE/FAILED; default-only build is also clean and `apksigner`-verified.\n\nAll 10 apps in this repo rebuilt from fresh true originals against this release and re-signed.",
+  "download_url": "https://github.com/Basil-AS/ru-apps-patches/releases/download/v1.0.8/patches-1.0.8.mpp",
   "signature_download_url": "",
-  "version": ""
+  "version": "1.0.8"
 }
