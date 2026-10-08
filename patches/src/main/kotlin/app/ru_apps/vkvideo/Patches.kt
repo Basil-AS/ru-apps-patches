@@ -627,6 +627,25 @@ val hidePromotedBannerPatch = bytecodePatch(
 }
 
 @Suppress("unused")
+val disableOpenTelemetryPatch = bytecodePatch(
+    name = "Disable OpenTelemetry APM",
+    description = "Disables the ru.ok.tracer/OpenTelemetry pipeline (OkHttp request interception, CPU/network tech-stats, span/metric/log upload) by forcing its tracing-enabled gate off.",
+    default = true
+) {
+    compatibleWith(VK_VIDEO)
+
+    execute {
+        OpenTelemetryTracingEnabledFingerprint.method.addInstructions(
+            0,
+            """
+                const/4 v0, 0x0
+                return v0
+            """
+        )
+    }
+}
+
+@Suppress("unused")
 val disableAdPixelTrackingPatch = bytecodePatch(
     name = "Disable ad pixel tracking",
     description = "Stops PixelStatsTrackerImpl from sending individual and batch ad pixels.",
