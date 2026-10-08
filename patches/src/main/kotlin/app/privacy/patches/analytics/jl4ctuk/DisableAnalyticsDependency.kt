@@ -93,6 +93,14 @@ private val appMetricaReporterRequirements = setOf(
     MethodSignature("setDataSendingEnabled", listOf("Z")),
 )
 
+// Only the core 3 signatures that are present in every observed MyTracker SDK build are required.
+// `trackMiniAppEvent`/`trackLoginEvent` exist only in some app-specific MyTracker SDK variants
+// (confirmed present e.g. in VK's bundled build) and are absent from the more common minimal build
+// (confirmed via live decompile of MAX 26.35.0 and Sberbank 17.13.0, both missing exactly these 2
+// methods) — requiring them here caused a false-negative PatchException on those apps even though
+// the class and its core API matched. Any public void method actually present (including these two,
+// when they exist) is still disabled below; this set only gates "is this really the MyTracker API
+// class" validation, not what gets disabled.
 private val myTrackerRequirements = setOf(
     MethodSignature(
         "initTracker",
@@ -100,18 +108,6 @@ private val myTrackerRequirements = setOf(
     ),
     MethodSignature("flush", emptyList()),
     MethodSignature("trackEvent", listOf("Ljava/lang/String;")),
-    MethodSignature(
-        "trackMiniAppEvent",
-        listOf("Lcom/my/tracker/miniapps/MiniAppEvent;"),
-    ),
-    MethodSignature(
-        "trackLoginEvent",
-        listOf(
-            "Ljava/lang/String;",
-            "Ljava/lang/String;",
-            "Ljava/util/Map;",
-        ),
-    ),
 )
 
 @Suppress("unused")
@@ -308,80 +304,108 @@ val disableAnalyticsDependency = bytecodePatch(
             }
         }
 
-        val missingFacades = appMetricaFacadeRequirements.keys - patchedFacadeCounts.keys
-        if (missingFacades.isNotEmpty()) {
-            throw PatchException("Missing ${missingFacades.size} AppMetrica facade classes")
+        // Apps bundle AppMetrica, MyTracker, both, or neither — confirmed by live decompile that
+        // MAX and Sberbank ship MyTracker with zero AppMetrica classes present at all. Treat a
+        // tracker's complete absence as a normal no-op (mirrors how the other universal patches in
+        // this bundle log "no local call sites were found" instead of failing); only throw when a
+        // tracker's marker class (or candidate reporter class) IS present but doesn't match the
+        // expected shape, since blindly disabling methods on a wrong/unexpected class is unsafe.
+        val appMetricaFacadesFound = patchedFacadeCounts.isNotEmpty()
+        if (appMetricaFacadesFound) {
+            val missingFacades = appMetricaFacadeRequirements.keys - patchedFacadeCounts.keys
+            if (missingFacades.isNotEmpty()) {
+                logger.info(
+                    "AppMetrica: found ${patchedFacadeCounts.size}/" +
+                        "${appMetricaFacadeRequirements.size} facade classes, proceeding without " +
+                        "the rest (likely stripped by R8 as unused)",
+                )
+            }
+        } else {
+            logger.info("AppMetrica facade classes: not found")
         }
         if (patchedMyTrackerMethods == 0) {
-            throw PatchException("MyTracker API class was not found")
-        }
-        if (reporterCandidates.size != 4) {
-            throw PatchException(
-                "Expected four AppMetrica reporter implementations, " +
-                    "found ${reporterCandidates.size}",
-            )
-        }
-        val abstractReporterCandidates = reporterCandidates
-            .filterValues { isAbstract -> isAbstract }
-            .keys
-        if (abstractReporterCandidates.size != 1) {
-            throw PatchException(
-                "Expected one abstract AppMetrica reporter base, " +
-                    "found ${abstractReporterCandidates.size}",
-            )
-        }
-
-        val reporterTypes = reporterCandidates.keys.toMutableSet()
-        while (true) {
-            val descendants = classHierarchy
-                .filterValues { it in reporterTypes }
-                .keys - reporterTypes
-            if (!reporterTypes.addAll(descendants)) break
-        }
-        val abstractReporterBase = abstractReporterCandidates.single()
-        fun isDescendantOf(type: String, ancestor: String): Boolean {
-            var currentType: String? = type
-            val visitedTypes = mutableSetOf<String>()
-            while (currentType != null && visitedTypes.add(currentType)) {
-                currentType = classHierarchy[currentType]
-                if (currentType == ancestor) return true
-            }
-            return false
-        }
-
-        val inheritedReporterTypes = reporterTypes - reporterCandidates.keys
-        val abstractBaseDescendants = inheritedReporterTypes.filter { reporterType ->
-            isDescendantOf(reporterType, abstractReporterBase)
-        }
-        val reporterRootsWithDescendants = reporterCandidates.keys.count { reporterRoot ->
-            inheritedReporterTypes.any { reporterType ->
-                isDescendantOf(reporterType, reporterRoot)
-            }
-        }
-        if (
-            inheritedReporterTypes.size != 3 ||
-            abstractBaseDescendants.size != 2 ||
-            reporterRootsWithDescendants != 2 ||
-            reporterTypes.size != 7
-        ) {
-            throw PatchException(
-                "Unexpected AppMetrica reporter hierarchy: " +
-                    "${inheritedReporterTypes.size} inherited reporters, " +
-                    "${abstractBaseDescendants.size} abstract-base descendants, " +
-                    "$reporterRootsWithDescendants roots with descendants, and " +
-                    "${reporterTypes.size} covered classes",
-            )
+            logger.info("MyTracker: not found")
         }
 
         var patchedReporterMethods = 0
-        reporterTypes.forEach { reporterType ->
-            val methods = mutableClassDefBy(reporterType).methods
-                .filter(Method::isPublicVoidImplementation)
-            methods.forEach(MutableMethod::disable)
-            patchedReporterMethods += methods.size
+        var reporterTypeCount = 0
+        if (reporterCandidates.isEmpty()) {
+            logger.info("AppMetrica reporter implementations: not found")
+        } else {
+            if (reporterCandidates.size != 4) {
+                throw PatchException(
+                    "Expected four AppMetrica reporter implementations, " +
+                        "found ${reporterCandidates.size}",
+                )
+            }
+            val abstractReporterCandidates = reporterCandidates
+                .filterValues { isAbstract -> isAbstract }
+                .keys
+            if (abstractReporterCandidates.size != 1) {
+                throw PatchException(
+                    "Expected one abstract AppMetrica reporter base, " +
+                        "found ${abstractReporterCandidates.size}",
+                )
+            }
+
+            val reporterTypes = reporterCandidates.keys.toMutableSet()
+            while (true) {
+                val descendants = classHierarchy
+                    .filterValues { it in reporterTypes }
+                    .keys - reporterTypes
+                if (!reporterTypes.addAll(descendants)) break
+            }
+            val abstractReporterBase = abstractReporterCandidates.single()
+            fun isDescendantOf(type: String, ancestor: String): Boolean {
+                var currentType: String? = type
+                val visitedTypes = mutableSetOf<String>()
+                while (currentType != null && visitedTypes.add(currentType)) {
+                    currentType = classHierarchy[currentType]
+                    if (currentType == ancestor) return true
+                }
+                return false
+            }
+
+            val inheritedReporterTypes = reporterTypes - reporterCandidates.keys
+            val abstractBaseDescendants = inheritedReporterTypes.filter { reporterType ->
+                isDescendantOf(reporterType, abstractReporterBase)
+            }
+            val reporterRootsWithDescendants = reporterCandidates.keys.count { reporterRoot ->
+                inheritedReporterTypes.any { reporterType ->
+                    isDescendantOf(reporterType, reporterRoot)
+                }
+            }
+            if (
+                inheritedReporterTypes.size != 3 ||
+                abstractBaseDescendants.size != 2 ||
+                reporterRootsWithDescendants != 2 ||
+                reporterTypes.size != 7
+            ) {
+                throw PatchException(
+                    "Unexpected AppMetrica reporter hierarchy: " +
+                        "${inheritedReporterTypes.size} inherited reporters, " +
+                        "${abstractBaseDescendants.size} abstract-base descendants, " +
+                        "$reporterRootsWithDescendants roots with descendants, and " +
+                        "${reporterTypes.size} covered classes",
+                )
+            }
+
+            reporterTypes.forEach { reporterType ->
+                val methods = mutableClassDefBy(reporterType).methods
+                    .filter(Method::isPublicVoidImplementation)
+                methods.forEach(MutableMethod::disable)
+                patchedReporterMethods += methods.size
+            }
+            if (patchedReporterMethods == 0) {
+                throw PatchException("AppMetrica reporter methods were not found")
+            }
+            reporterTypeCount = reporterTypes.size
         }
-        if (patchedReporterMethods == 0) {
-            throw PatchException("AppMetrica reporter methods were not found")
+
+        if (!appMetricaFacadesFound && patchedMyTrackerMethods == 0 && reporterCandidates.isEmpty()) {
+            throw PatchException(
+                "Neither AppMetrica nor MyTracker was found in this app — nothing to disable",
+            )
         }
 
         val crashlyticsMethods = FirebaseCrashlyticsCollectionFingerprint
@@ -397,7 +421,7 @@ val disableAnalyticsDependency = bytecodePatch(
         logger.info(
             "AppMetrica: patched ${patchedFacadeCounts.values.sum()} facade and " +
                 "$patchedReporterMethods reporter methods across " +
-                "${reporterTypes.size} reporter classes " +
+                "$reporterTypeCount reporter classes " +
                 "(${reporterCandidates.size} contract implementations)",
         )
         logger.info("MyTracker: patched $patchedMyTrackerMethods public void methods")
