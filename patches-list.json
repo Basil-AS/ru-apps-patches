@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.3",
+  "version": "1.0.8",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -17,6 +17,18 @@
           "appIconColor": "#00AAFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "234.5",
+              "versionCodes": {
+                "ARM64_V8A": 3561,
+                "ARMEABI_V7A": 3561,
+                "X86_64": 3561,
+                "X86": 3561
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
             {
               "version": "234.0",
               "versionCodes": {
@@ -146,6 +158,13 @@
           "signatures": null,
           "targets": [
             {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.163",
               "versionCodes": null,
               "isExperimental": false,
@@ -182,6 +201,18 @@
           "appIconColor": "#00AAFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "234.5",
+              "versionCodes": {
+                "ARM64_V8A": 3561,
+                "ARMEABI_V7A": 3561,
+                "X86_64": 3561,
+                "X86": 3561
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
             {
               "version": "234.0",
               "versionCodes": {
@@ -311,6 +342,13 @@
           "signatures": null,
           "targets": [
             {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.163",
               "versionCodes": null,
               "isExperimental": false,
@@ -344,6 +382,13 @@
           "appIconColor": "#1A73E8",
           "signatures": null,
           "targets": [
+            {
+              "version": "26.35.0",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "26.34.0",
               "versionCodes": null,
@@ -385,6 +430,18 @@
           "appIconColor": "#FFDD2D",
           "signatures": null,
           "targets": [
+            {
+              "version": "8.4.2",
+              "versionCodes": {
+                "ARM64_V8A": 13282,
+                "ARMEABI_V7A": 13282,
+                "X86_64": 13282,
+                "X86": 13282
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
             {
               "version": "8.3.0",
               "versionCodes": {
@@ -490,6 +547,13 @@
           "signatures": null,
           "targets": [
             {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.163",
               "versionCodes": null,
               "isExperimental": false,
@@ -523,6 +587,13 @@
           "appIconColor": "#7B2FF7",
           "signatures": null,
           "targets": [
+            {
+              "version": "31.17.2-rustore",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "31.14.2-rustore",
               "versionCodes": null,
@@ -599,26 +670,43 @@
       "options": []
     },
     {
-      "name": "Disable Kaspersky background scan",
-      "description": "Disables periodic Kaspersky scheduling and reports disabled workers as successfully completed.",
+      "name": "Disable MAX advertising ID",
+      "description": "Removes the advertising ID permission so ad and analytics SDKs cannot read the device's real advertising identifier.",
       "default": true,
       "category": null,
-      "dependencies": [
-        "ResourcePatch"
-      ],
+      "dependencies": [],
       "compatiblePackages": [
         {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
+          "packageName": "ru.oneme.app",
+          "name": "MAX",
           "description": null,
           "apkFileType": "APK",
-          "appIconColor": "#0A85FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
+          "appIconColor": "#1A73E8",
+          "signatures": null,
           "targets": [
             {
-              "version": "1.109.1.0",
+              "version": "26.35.0",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "26.34.0",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "26.10.1",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "26.11.3",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -646,6 +734,18 @@
             "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
           ],
           "targets": [
+            {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.108.0.2",
               "versionCodes": {
@@ -688,6 +788,62 @@
           "signatures": null,
           "targets": [
             {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 16030352,
+                "ARMEABI_V7A": 16030352,
+                "X86_64": 16030352,
+                "X86": 16030352
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
+              "version": "19.31.0",
+              "versionCodes": {
+                "ARM64_V8A": 16030335,
+                "ARMEABI_V7A": 16030335,
+                "X86_64": 16030335,
+                "X86": 16030335
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable Ozon Bank advertising ID",
+      "description": "Removes the advertising ID permission so AdMob and other ad SDKs cannot read the device's real advertising identifier.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "ru.ozon.fintech.finance",
+          "name": "Ozon Bank",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#005BFF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 16030352,
+                "ARMEABI_V7A": 16030352,
+                "X86_64": 16030352,
+                "X86": 16030352
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
               "version": "19.31.0",
               "versionCodes": {
                 "ARM64_V8A": 16030335,
@@ -714,12 +870,167 @@
       "options": []
     },
     {
+      "name": "Disable RuTube advertising ID",
+      "description": "Removes the advertising ID permission so ad SDKs cannot read the device's real advertising identifier.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "ru.rutube.app",
+          "name": "RuTube",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#7B2FF7",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "31.17.2-rustore",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "31.14.2-rustore",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable Sberbank advertising ID",
+      "description": "Removes the advertising ID permission so ad and analytics SDKs cannot read the device's real advertising identifier.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "ru.sberbankmobile",
+          "name": "СберБанк",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#21A038",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "17.13.0",
+              "versionCodes": {
+                "ARM64_V8A": 2026062316,
+                "ARMEABI_V7A": 2026062316,
+                "X86_64": 2026062316,
+                "X86": 2026062316
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Disable Sentry telemetry",
       "description": "Disables Sentry telemetry by turning off SDK auto-init and clearing the DSN.",
       "default": false,
       "category": null,
       "dependencies": [],
       "compatiblePackages": null,
+      "options": []
+    },
+    {
+      "name": "Disable VK Video MyTarget SDK",
+      "description": "Disables MyTarget's auto-init content provider and ad activity so the SDK never starts.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.vk.vkvideo",
+          "name": "VK Video",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#0077FF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "1.163",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable VK Video advertising ID",
+      "description": "Removes the advertising ID permission so ad SDKs cannot read the device's real advertising identifier.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.vk.vkvideo",
+          "name": "VK Video",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#0077FF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "1.163",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
       "options": []
     },
     {
@@ -737,6 +1048,13 @@
           "appIconColor": "#0077FF",
           "signatures": null,
           "targets": [
+            {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.163",
               "versionCodes": null,
@@ -771,6 +1089,13 @@
           "appIconColor": "#0077FF",
           "signatures": null,
           "targets": [
+            {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.163",
               "versionCodes": null,
@@ -810,6 +1135,18 @@
           ],
           "targets": [
             {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.108.0.2",
               "versionCodes": {
                 "ARM64_V8A": 1108002,
@@ -830,7 +1167,7 @@
           "title": "Disable loyalty program",
           "description": "Disables loyalty onboarding, points, notifications, links, and cashback banners.",
           "required": false,
-          "type": "boolean (Kotlin reflection is not available)",
+          "type": "kotlin.Boolean",
           "default": true,
           "values": null
         },
@@ -839,7 +1176,7 @@
           "title": "Hide Featured and Games tabs",
           "description": "Removes the Featured and Games tabs and opens Apps by default.",
           "required": false,
-          "type": "boolean (Kotlin reflection is not available)",
+          "type": "kotlin.Boolean",
           "default": true,
           "values": null
         },
@@ -848,7 +1185,7 @@
           "title": "Hide notification buttons",
           "description": "Removes notification buttons from the search bar and Mine screen.",
           "required": false,
-          "type": "boolean (Kotlin reflection is not available)",
+          "type": "kotlin.Boolean",
           "default": true,
           "values": null
         }
@@ -870,6 +1207,13 @@
           "signatures": null,
           "targets": [
             {
+              "version": "31.17.2-rustore",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "31.14.2-rustore",
               "versionCodes": null,
               "isExperimental": false,
@@ -880,37 +1224,6 @@
               "version": null,
               "versionCodes": null,
               "isExperimental": true,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Disable advertisements",
-      "description": "Removes ad providers, sanitizes ad identifiers, returns an empty ad list, and keeps advertising consent disabled.",
-      "default": true,
-      "category": null,
-      "dependencies": [
-        "ResourcePatch"
-      ],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0A85FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
-            {
-              "version": "1.109.1.0",
-              "versionCodes": null,
-              "isExperimental": false,
               "minSdk": null,
               "description": null
             }
@@ -940,6 +1253,18 @@
           ],
           "targets": [
             {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.108.0.2",
               "versionCodes": {
                 "ARM64_V8A": 1108002,
@@ -947,37 +1272,6 @@
                 "X86_64": 1108002,
                 "X86": 1108002
               },
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Disable analytics and trackers",
-      "description": "Disables audited analytics transports and replaces the stable request device identifier.",
-      "default": true,
-      "category": null,
-      "dependencies": [
-        "ResourcePatch"
-      ],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0A85FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
-            {
-              "version": "1.109.1.0",
-              "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
               "description": null
@@ -1009,37 +1303,6 @@
     },
     {
       "name": "Disable background hooks",
-      "description": "Disables audited boot, network-state, VPN, and Connect session hooks.",
-      "default": true,
-      "category": null,
-      "dependencies": [
-        "ResourcePatch"
-      ],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0A85FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
-            {
-              "version": "1.109.1.0",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Disable background hooks",
       "description": "Disables RuStore network-state monitoring, built-in VPN sessions, and startup hooks.",
       "default": true,
       "category": null,
@@ -1057,6 +1320,18 @@
             "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
           ],
           "targets": [
+            {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.108.0.2",
               "versionCodes": {
@@ -1094,6 +1369,18 @@
           ],
           "targets": [
             {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.108.0.2",
               "versionCodes": {
                 "ARM64_V8A": 1108002,
@@ -1125,6 +1412,13 @@
           "appIconColor": "#1A73E8",
           "signatures": null,
           "targets": [
+            {
+              "version": "26.35.0",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "26.34.0",
               "versionCodes": null,
@@ -1166,6 +1460,30 @@
           "appIconColor": "#005BFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 2720,
+                "ARMEABI_V7A": 2720,
+                "X86_64": 2720,
+                "X86": 2720
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
             {
               "version": "19.31.0",
               "versionCodes": {
@@ -1212,6 +1530,18 @@
           ],
           "targets": [
             {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.108.0.2",
               "versionCodes": {
                 "ARM64_V8A": 1108002,
@@ -1244,6 +1574,13 @@
           "signatures": null,
           "targets": [
             {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.163",
               "versionCodes": null,
               "isExperimental": false,
@@ -1254,37 +1591,6 @@
               "version": null,
               "versionCodes": null,
               "isExperimental": true,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Disable invasive permissions",
-      "description": "Removes privileged install, location, storage, billing, USB, and vendor data access while preserving user-driven installs.",
-      "default": true,
-      "category": null,
-      "dependencies": [
-        "ResourcePatch"
-      ],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0A85FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
-            {
-              "version": "1.109.1.0",
-              "versionCodes": null,
-              "isExperimental": false,
               "minSdk": null,
               "description": null
             }
@@ -1312,6 +1618,18 @@
             "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
           ],
           "targets": [
+            {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.108.0.2",
               "versionCodes": {
@@ -1345,6 +1663,30 @@
           "signatures": null,
           "targets": [
             {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 2720,
+                "ARMEABI_V7A": 2720,
+                "X86_64": 2720,
+                "X86": 2720
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
               "version": "19.31.0",
               "versionCodes": {
                 "ARM64_V8A": 2706,
@@ -1354,37 +1696,6 @@
               },
               "isExperimental": false,
               "minSdk": 26,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Disable push services",
-      "description": "Disables RuStore and VK push initialization, services, and audited push receivers.",
-      "default": true,
-      "category": null,
-      "dependencies": [
-        "ResourcePatch"
-      ],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0A85FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
-            {
-              "version": "1.109.1.0",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
               "description": null
             }
           ]
@@ -1411,6 +1722,18 @@
             "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
           ],
           "targets": [
+            {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.108.0.2",
               "versionCodes": {
@@ -1443,6 +1766,18 @@
           "appIconColor": "#00AAFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "234.5",
+              "versionCodes": {
+                "ARM64_V8A": 3561,
+                "ARMEABI_V7A": 3561,
+                "X86_64": 3561,
+                "X86": 3561
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
             {
               "version": "234.0",
               "versionCodes": {
@@ -1574,6 +1909,30 @@
           "signatures": null,
           "targets": [
             {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 2720,
+                "ARMEABI_V7A": 2720,
+                "X86_64": 2720,
+                "X86": 2720
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
               "version": "19.31.0",
               "versionCodes": {
                 "ARM64_V8A": 2706,
@@ -1605,6 +1964,30 @@
           "appIconColor": "#005BFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 2720,
+                "ARMEABI_V7A": 2720,
+                "X86_64": 2720,
+                "X86": 2720
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
             {
               "version": "19.31.0",
               "versionCodes": {
@@ -1639,6 +2022,18 @@
           "appIconColor": "#00AAFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "234.5",
+              "versionCodes": {
+                "ARM64_V8A": 3561,
+                "ARMEABI_V7A": 3561,
+                "X86_64": 3561,
+                "X86": 3561
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
             {
               "version": "234.0",
               "versionCodes": {
@@ -1753,37 +2148,6 @@
       "options": []
     },
     {
-      "name": "Disable verification hooks",
-      "description": "Disables audited SMS, call, phone-state, SID, and Mail.ru verification hooks.",
-      "default": true,
-      "category": null,
-      "dependencies": [
-        "ResourcePatch"
-      ],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0A85FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
-            {
-              "version": "1.109.1.0",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
       "name": "Disable video ad repository",
       "description": "Replaces the real video advertising repository with VK's built-in no-op STUB.",
       "default": true,
@@ -1798,6 +2162,13 @@
           "appIconColor": "#0077FF",
           "signatures": null,
           "targets": [
+            {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.163",
               "versionCodes": null,
@@ -1832,6 +2203,13 @@
           "appIconColor": "#7B2FF7",
           "signatures": null,
           "targets": [
+            {
+              "version": "31.17.2-rustore",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "31.14.2-rustore",
               "versionCodes": null,
@@ -1888,35 +2266,6 @@
       "options": []
     },
     {
-      "name": "Exclude Google Play apps from update checks",
-      "description": "Excludes only apps whose recorded Android installer is Google Play from update requests.",
-      "default": true,
-      "category": null,
-      "dependencies": [],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0A85FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
-            {
-              "version": "1.109.1.0",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
       "name": "Exclude Google Play apps from updates",
       "description": "Excludes Google Play installs from RuStore update checks while keeping RuStore and sideloaded apps.",
       "default": true,
@@ -1933,6 +2282,18 @@
             "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
           ],
           "targets": [
+            {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.108.0.2",
               "versionCodes": {
@@ -1965,6 +2326,13 @@
           "appIconColor": "#0077FF",
           "signatures": null,
           "targets": [
+            {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.163",
               "versionCodes": null,
@@ -2000,6 +2368,13 @@
           "signatures": null,
           "targets": [
             {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.163",
               "versionCodes": null,
               "isExperimental": false,
@@ -2033,6 +2408,13 @@
           "appIconColor": "#0077FF",
           "signatures": null,
           "targets": [
+            {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.163",
               "versionCodes": null,
@@ -2068,6 +2450,30 @@
           "signatures": null,
           "targets": [
             {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 2720,
+                "ARMEABI_V7A": 2720,
+                "X86_64": 2720,
+                "X86": 2720
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
               "version": "19.31.0",
               "versionCodes": {
                 "ARM64_V8A": 2706,
@@ -2100,6 +2506,18 @@
           "signatures": null,
           "targets": [
             {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 16030352,
+                "ARMEABI_V7A": 16030352,
+                "X86_64": 16030352,
+                "X86": 16030352
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
               "version": "19.31.0",
               "versionCodes": {
                 "ARM64_V8A": 16030335,
@@ -2120,7 +2538,7 @@
           "title": "Hide Buy for 1 ruble",
           "description": "Hides the Buy for 1 ruble product carousel.",
           "required": false,
-          "type": "boolean (Kotlin reflection is not available)",
+          "type": "kotlin.Boolean",
           "default": false,
           "values": null
         },
@@ -2129,7 +2547,7 @@
           "title": "Hide Partner benefits",
           "description": "Hides the Partner benefits section.",
           "required": false,
-          "type": "boolean (Kotlin reflection is not available)",
+          "type": "kotlin.Boolean",
           "default": false,
           "values": null
         },
@@ -2138,7 +2556,7 @@
           "title": "Hide For shopping on Ozon",
           "description": "Hides the For shopping on Ozon section.",
           "required": false,
-          "type": "boolean (Kotlin reflection is not available)",
+          "type": "kotlin.Boolean",
           "default": false,
           "values": null
         },
@@ -2147,7 +2565,7 @@
           "title": "Hide Ozon Premium",
           "description": "Hides the Ozon Premium benefits section.",
           "required": false,
-          "type": "boolean (Kotlin reflection is not available)",
+          "type": "kotlin.Boolean",
           "default": false,
           "values": null
         }
@@ -2168,6 +2586,18 @@
           "appIconColor": "#005BFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 16030352,
+                "ARMEABI_V7A": 16030352,
+                "X86_64": 16030352,
+                "X86": 16030352
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
             {
               "version": "19.31.0",
               "versionCodes": {
@@ -2201,6 +2631,30 @@
           "signatures": null,
           "targets": [
             {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 2720,
+                "ARMEABI_V7A": 2720,
+                "X86_64": 2720,
+                "X86": 2720
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
               "version": "19.31.0",
               "versionCodes": {
                 "ARM64_V8A": 2706,
@@ -2233,6 +2687,13 @@
           "signatures": null,
           "targets": [
             {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.163",
               "versionCodes": null,
               "isExperimental": false,
@@ -2243,37 +2704,6 @@
               "version": null,
               "versionCodes": null,
               "isExperimental": true,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Hide gaming profile",
-      "description": "Removes the gaming profile permission, hides both gaming buttons, and blocks navigation to the gaming profile.",
-      "default": true,
-      "category": null,
-      "dependencies": [
-        "ResourcePatch"
-      ],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0A85FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
-            {
-              "version": "1.109.1.0",
-              "versionCodes": null,
-              "isExperimental": false,
               "minSdk": null,
               "description": null
             }
@@ -2297,6 +2727,13 @@
           "appIconColor": "#0077FF",
           "signatures": null,
           "targets": [
+            {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.163",
               "versionCodes": null,
@@ -2333,6 +2770,18 @@
           "appIconColor": "#00AAFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "234.5",
+              "versionCodes": {
+                "ARM64_V8A": 3561,
+                "ARMEABI_V7A": 3561,
+                "X86_64": 3561,
+                "X86": 3561
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
             {
               "version": "234.0",
               "versionCodes": {
@@ -2462,6 +2911,13 @@
           "signatures": null,
           "targets": [
             {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.163",
               "versionCodes": null,
               "isExperimental": false,
@@ -2496,6 +2952,30 @@
           "signatures": null,
           "targets": [
             {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 2720,
+                "ARMEABI_V7A": 2720,
+                "X86_64": 2720,
+                "X86": 2720
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
               "version": "19.31.0",
               "versionCodes": {
                 "ARM64_V8A": 2706,
@@ -2527,6 +3007,13 @@
           "appIconColor": "#7B2FF7",
           "signatures": null,
           "targets": [
+            {
+              "version": "31.17.2-rustore",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "31.14.2-rustore",
               "versionCodes": null,
@@ -2563,6 +3050,18 @@
           "appIconColor": "#00AAFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "234.5",
+              "versionCodes": {
+                "ARM64_V8A": 3561,
+                "ARMEABI_V7A": 3561,
+                "X86_64": 3561,
+                "X86": 3561
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
             {
               "version": "234.0",
               "versionCodes": {
@@ -2693,6 +3192,18 @@
           "appIconColor": "#005BFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
             {
               "version": "19.37.0",
               "versionCodes": {
@@ -2846,7 +3357,7 @@
           "title": "Hide recommendation grids",
           "description": "Removes recommendation grids from product, cart, profile, and favorites screens.",
           "required": false,
-          "type": "boolean (Kotlin reflection is not available)",
+          "type": "kotlin.Boolean",
           "default": true,
           "values": null
         }
@@ -2857,7 +3368,9 @@
       "description": "Removes Ozon ad widgets, checkout promotions, floating promotions, banner carousels, and PDP promo blocks.",
       "default": true,
       "category": null,
-      "dependencies": [],
+      "dependencies": [
+        "ResourcePatch"
+      ],
       "compatiblePackages": [
         {
           "packageName": "ru.ozon.app.android",
@@ -2867,6 +3380,30 @@
           "appIconColor": "#005BFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 2720,
+                "ARMEABI_V7A": 2720,
+                "X86_64": 2720,
+                "X86": 2720
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
             {
               "version": "19.31.0",
               "versionCodes": {
@@ -2888,7 +3425,7 @@
           "title": "Hide recommendation grids",
           "description": "Removes recommendation grids from product, cart, profile, and favorites screens.",
           "required": false,
-          "type": "boolean (Kotlin reflection is not available)",
+          "type": "kotlin.Boolean",
           "default": true,
           "values": null
         }
@@ -2911,6 +3448,18 @@
           "appIconColor": "#FFDD2D",
           "signatures": null,
           "targets": [
+            {
+              "version": "8.4.2",
+              "versionCodes": {
+                "ARM64_V8A": 13282,
+                "ARMEABI_V7A": 13282,
+                "X86_64": 13282,
+                "X86": 13282
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
             {
               "version": "8.3.0",
               "versionCodes": {
@@ -3005,7 +3554,9 @@
       "description": "Removes Wildberries home banners, grid banners, profile banners, promo headers, product recommendations, and lottery popups.",
       "default": true,
       "category": null,
-      "dependencies": [],
+      "dependencies": [
+        "ResourcePatch"
+      ],
       "compatiblePackages": [
         {
           "packageName": "com.wildberries.ru",
@@ -3015,6 +3566,30 @@
           "appIconColor": "#A73AFD",
           "signatures": null,
           "targets": [
+            {
+              "version": "7.8.3002-rustore",
+              "versionCodes": {
+                "ARM64_V8A": 61085,
+                "ARMEABI_V7A": 61085,
+                "X86_64": 61085,
+                "X86": 61085
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
+              "version": "7.8.3002",
+              "versionCodes": {
+                "ARM64_V8A": 10061085,
+                "ARMEABI_V7A": 10061085,
+                "X86_64": 10061085,
+                "X86": 10061085
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
             {
               "version": "7.8.2002-rustore",
               "versionCodes": {
@@ -3288,7 +3863,7 @@
           "title": "Hide recommendation grids",
           "description": "Removes recommendation grids from cart and product screens.",
           "required": false,
-          "type": "boolean (Kotlin reflection is not available)",
+          "type": "kotlin.Boolean",
           "default": true,
           "values": null
         }
@@ -3311,6 +3886,18 @@
           "appIconColor": "#00AAFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "234.5",
+              "versionCodes": {
+                "ARM64_V8A": 3561,
+                "ARMEABI_V7A": 3561,
+                "X86_64": 3561,
+                "X86": 3561
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
             {
               "version": "234.0",
               "versionCodes": {
@@ -3440,6 +4027,13 @@
           "signatures": null,
           "targets": [
             {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.163",
               "versionCodes": null,
               "isExperimental": false,
@@ -3473,6 +4067,13 @@
           "appIconColor": "#0077FF",
           "signatures": null,
           "targets": [
+            {
+              "version": "1.165",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.163",
               "versionCodes": null,
@@ -3510,6 +4111,18 @@
           ],
           "targets": [
             {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.109.1.0",
               "versionCodes": null,
               "isExperimental": false,
@@ -3539,34 +4152,17 @@
           ],
           "targets": [
             {
-              "version": "1.109.1.0",
-              "versionCodes": null,
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
               "isExperimental": false,
               "minSdk": null,
               "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Restore secure-session compatibility",
-      "description": "Adapts secure-session requests to RuStore 1.108 API changes for re-signed APKs.",
-      "default": true,
-      "category": null,
-      "dependencies": [],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0A85FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
+            },
             {
               "version": "1.109.1.0",
               "versionCodes": null,
@@ -3597,6 +4193,18 @@
           ],
           "targets": [
             {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "1.108.0.2",
               "versionCodes": {
                 "ARM64_V8A": 1108002,
@@ -3604,38 +4212,6 @@
                 "X86_64": 1108002,
                 "X86": 1108002
               },
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Restrict background work to updates",
-      "description": "Keeps only the workers required for automatic updates and allows update checks to run while RuStore is foreground or background.",
-      "default": true,
-      "category": null,
-      "dependencies": [
-        "ResourcePatch",
-        "ResourcePatch"
-      ],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0A85FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
-            {
-              "version": "1.109.1.0",
-              "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
               "description": null
@@ -3667,6 +4243,18 @@
             "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
           ],
           "targets": [
+            {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.108.0.2",
               "versionCodes": {
@@ -3700,6 +4288,30 @@
           "signatures": null,
           "targets": [
             {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
+              "version": "19.37.0",
+              "versionCodes": {
+                "ARM64_V8A": 2720,
+                "ARMEABI_V7A": 2720,
+                "X86_64": 2720,
+                "X86": 2720
+              },
+              "isExperimental": false,
+              "minSdk": 26,
+              "description": null
+            },
+            {
               "version": "19.31.0",
               "versionCodes": {
                 "ARM64_V8A": 2706,
@@ -3709,37 +4321,6 @@
               },
               "isExperimental": false,
               "minSdk": 26,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Skip update authentication",
-      "description": "Skips the update authentication suggestion and returns a valid completed result.",
-      "default": true,
-      "category": null,
-      "dependencies": [
-        "ResourcePatch"
-      ],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0A85FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
-            {
-              "version": "1.109.1.0",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
               "description": null
             }
           ]
@@ -3764,6 +4345,18 @@
             "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
           ],
           "targets": [
+            {
+              "version": "1.111.0.3",
+              "versionCodes": {
+                "ARM64_V8A": 1111003,
+                "ARMEABI_V7A": 1111003,
+                "X86_64": 1111003,
+                "X86": 1111003
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "1.108.0.2",
               "versionCodes": {
@@ -3879,6 +4472,18 @@
           "appIconColor": "#00AAFF",
           "signatures": null,
           "targets": [
+            {
+              "version": "234.5",
+              "versionCodes": {
+                "ARM64_V8A": 3561,
+                "ARMEABI_V7A": 3561,
+                "X86_64": 3561,
+                "X86": 3561
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
             {
               "version": "234.0",
               "versionCodes": {
@@ -4007,6 +4612,13 @@
           "appIconColor": "#7B2FF7",
           "signatures": null,
           "targets": [
+            {
+              "version": "31.17.2-rustore",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "31.14.2-rustore",
               "versionCodes": null,
