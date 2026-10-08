@@ -51,34 +51,24 @@ val disableKasperskyScanPatch = bytecodePatch(
     dependsOn(disableKasperskyManifestPatch)
 
     execute {
-        val cancelImplementation = KasperskyWorkManagerCancelUniqueFingerprint
-            .matchAll(1..1)
-            .single()
-        val workManagerType = cancelImplementation.classDef.superclass
-            ?: throw PatchException("WorkManagerImpl has no WorkManager superclass")
-        val cancelUniqueDescriptor =
-            "$workManagerType->${cancelImplementation.method.name}(" +
-                "Ljava/lang/String;)${cancelImplementation.method.returnType}"
-
         KasperskyScannerDtoIsPeriodicScanEnabledFingerprint
             .matchAll(1..1)
             .single()
             .method
             .addInstructions(0, "const/4 v0, 0x0\nreturn v0")
 
+        // Scheduling moved off WorkManager onto an in-process coroutine scheduler
+        // (see KasperskyScannerWorkerEnqueuePeriodicFingerprint) - there is nothing
+        // left to cancel after the fact, so short-circuit the scheduling step itself
+        // before it can call the scheduler, the same pattern used for AltCraft/Radar/
+        // install-identifier/remote-analytics/usage-stats in DisableAnalyticsPatch.kt.
         KasperskyScannerWorkerEnqueuePeriodicFingerprint
             .matchAll(1..1)
             .single()
             .method
             .addInstructions(
                 0,
-                """
-                const-string v0, "PeriodicKasperskyScanner"
-                invoke-virtual {p1, v0}, $cancelUniqueDescriptor
-                invoke-static {}, Ljava/util/UUID;->randomUUID()Ljava/util/UUID;
-                move-result-object v0
-                return-object v0
-                """,
+                "sget-object v0, Lut0/e0;->a:Lut0/e0;\nreturn-object v0",
             )
 
         KasperskyScannerWorkerDoWorkFingerprint

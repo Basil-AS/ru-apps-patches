@@ -18,14 +18,22 @@ private val LOYALTY_CASHBACK_BANNER_GETTERS =
         "getPosition",
     )
 
-/** Matches the feature registry initializer that declares the loyalty flag. */
+/**
+ * Matches the loyalty feature's remote-config accessor. A live decompile
+ * (ru.vk.store 1.111.0.3, 2026-10) found the static `<clinit>`-based
+ * `Features.kt` registry this used to target no longer exists: every feature
+ * flag now has its own wrapper class (`LoyaltyRemoteConfig`) whose suspend
+ * `isEnabled()` forwards the raw key string straight to a remote-config
+ * provider interface (`Lnt2/b;->b(key, default, useCache, continuation)`),
+ * falling back to the literal `false` default when the key is unknown - so
+ * renaming the key string here still disables the feature client-side.
+ */
 object LoyaltyFeatureRegistryFingerprint : Fingerprint(
-    name = "<clinit>",
-    returnType = "V",
-    parameters = emptyList(),
+    returnType = "Ljava/lang/Object;",
+    parameters = listOf("L"),
     strings = listOf(LOYALTY_FLAG_KEY),
     custom = { method, classDef ->
-        classDef.sourceFile == "Features.kt" &&
+        classDef.sourceFile == "LoyaltyRemoteConfig.kt" &&
             method.implementation != null
     },
 )

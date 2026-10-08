@@ -189,15 +189,14 @@ val disableRuStoreAnalyticsPatch = bytecodePatch(
         val altCraftInitializer = AltCraftFlushInitializerFingerprint
             .matchAll(1..1)
             .single()
-        val altCraftWorkManagerFields = altCraftInitializer.classDef.fields
-            .filter { it.type == workManagerType }
-        if (altCraftWorkManagerFields.size != 1) {
-            throw PatchException(
-                "Expected one AltCraft WorkManager field, " +
-                    "found ${altCraftWorkManagerFields.size}",
-            )
-        }
-        val altCraftWorkManagerField = altCraftWorkManagerFields.single()
+        // A 2026-10 RuStore build confirmed (via live decompile) that AltCraft's flush
+        // initializer no longer holds a WorkManager field at all - the periodic flush is
+        // now armed through a plain coroutine call
+        // (`AltCraftFlushEventsWorker$Companion.<schedule>(scope, intervalMs)`) instead of
+        // `WorkManager.enqueueUniquePeriodicWork`. There is nothing left to cancel after
+        // the fact, so short-circuit the initializer itself before it can make that call -
+        // a strictly stronger guarantee (never scheduled, vs. scheduled-then-canceled) that
+        // also still works on older builds where a WorkManager field happened to exist.
         val altCraftReturnedSingletons =
             altCraftInitializer.method.implementation!!.instructions.returnedSingletonFields()
         if (altCraftReturnedSingletons.size != 1) {
@@ -210,9 +209,6 @@ val disableRuStoreAnalyticsPatch = bytecodePatch(
         altCraftInitializer.method.addInstructions(
             0,
             """
-                iget-object p0, p0, ${altCraftInitializer.classDef.type}->${altCraftWorkManagerField.name}:$workManagerType
-                const-string p1, "AltCraftFlushEventsWorker"
-                invoke-virtual {p0, p1}, $cancelUniqueDescriptor
                 sget-object p0, ${altCraftResultSingleton.definingClass}->${altCraftResultSingleton.name}:${altCraftResultSingleton.type}
                 return-object p0
             """,
@@ -226,14 +222,8 @@ val disableRuStoreAnalyticsPatch = bytecodePatch(
         val radarInitializer = RadarInitializerFingerprint
             .matchAll(1..1)
             .single()
-        val radarWorkManagerFields = radarInitializer.classDef.fields
-            .filter { it.type == workManagerType }
-        if (radarWorkManagerFields.size != 1) {
-            throw PatchException(
-                "Expected one Radar WorkManager field, found ${radarWorkManagerFields.size}",
-            )
-        }
-        val radarWorkManagerField = radarWorkManagerFields.single()
+        // Same WorkManager-field removal confirmed for Radar's initializer as AltCraft's
+        // above - short-circuit before the (now coroutine-based) scheduling call instead.
         val radarReturnedSingletons =
             radarInitializer.method.implementation!!.instructions.returnedSingletonFields()
         if (radarReturnedSingletons.size != 1) {
@@ -246,9 +236,6 @@ val disableRuStoreAnalyticsPatch = bytecodePatch(
         radarInitializer.method.addInstructions(
             0,
             """
-                iget-object p0, p0, ${radarInitializer.classDef.type}->${radarWorkManagerField.name}:$workManagerType
-                const-string p1, "RadarFlushSnapshotsWorker"
-                invoke-virtual {p0, p1}, $cancelUniqueDescriptor
                 sget-object p0, ${radarResultSingleton.definingClass}->${radarResultSingleton.name}:${radarResultSingleton.type}
                 return-object p0
             """,
@@ -332,105 +319,34 @@ val disableRuStoreAnalyticsPatch = bytecodePatch(
                     "return-void",
             )
 
-        val installIdentifierInitializer = InstallIdentifierInitializerFingerprint
+        // Install-identifier sync, remote-analytics event upload (one-shot + periodic),
+        // and usage-stats collection all moved off WorkManager the same way AltCraft/Radar
+        // did above (confirmed via live decompile: none of their classes has a WorkManager
+        // field anymore) - short-circuit each initializer/scheduler method directly rather
+        // than finding-and-canceling a job that's no longer created through WorkManager.
+        InstallIdentifierInitializerFingerprint
             .matchAll(1..1)
             .single()
-        val installIdentifierWorkManagerFields =
-            installIdentifierInitializer.classDef.fields.filter { it.type == workManagerType }
-        if (installIdentifierWorkManagerFields.size != 1) {
-            throw PatchException(
-                "Expected one install-identifier WorkManager field, found " +
-                    installIdentifierWorkManagerFields.size,
-            )
-        }
-        val installIdentifierWorkManagerField =
-            installIdentifierWorkManagerFields.single()
-        installIdentifierInitializer.method.addInstructions(
-            0,
-            "move-object/from16 v0, p0\n" +
-                "iget-object v0, v0, ${installIdentifierInitializer.classDef.type}->" +
-                "${installIdentifierWorkManagerField.name}:$workManagerType\n" +
-                "const-string v1, \"InstallIdentifierSyncWorker\"\n" +
-                "invoke-virtual {v0, v1}, $cancelUniqueDescriptor\n" +
-                "sget-object v0, Lut0/e0;->a:Lut0/e0;\n" +
-                "return-object v0",
-        )
+            .method
+            .addInstructions(0, "sget-object v0, Lut0/e0;->a:Lut0/e0;\nreturn-object v0")
 
-        val remoteAnalyticsScheduler = RemoteAnalyticsSchedulerFingerprint
+        RemoteAnalyticsSchedulerFingerprint
             .matchAll(1..1)
             .single()
-        val remoteAnalyticsWorkManagerFields =
-            remoteAnalyticsScheduler.classDef.fields.filter { it.type == workManagerType }
-        if (remoteAnalyticsWorkManagerFields.size != 1) {
-            throw PatchException(
-                "Expected one remote-analytics WorkManager field, found " +
-                    remoteAnalyticsWorkManagerFields.size,
-            )
-        }
-        val remoteAnalyticsWorkManagerField = remoteAnalyticsWorkManagerFields.single()
-        remoteAnalyticsScheduler.method.addInstructions(
-            0,
-            "move-object/from16 v0, p0\n" +
-                "iget-object v0, v0, ${remoteAnalyticsScheduler.classDef.type}->" +
-                "${remoteAnalyticsWorkManagerField.name}:$workManagerType\n" +
-                "const-string v1, \"SendAnalyticsEventWorker\"\n" +
-                "invoke-virtual {v0, v1}, $cancelUniqueDescriptor\n" +
-                "sget-object v0, Lut0/e0;->a:Lut0/e0;\n" +
-                "return-object v0",
-        )
+            .method
+            .addInstructions(0, "sget-object v0, Lut0/e0;->a:Lut0/e0;\nreturn-object v0")
 
-        val remoteAnalyticsInitializer = RemoteAnalyticsInitializerFingerprint
+        RemoteAnalyticsInitializerFingerprint
             .matchAll(1..1)
             .single()
-        val remoteAnalyticsSchedulerFields =
-            remoteAnalyticsInitializer.classDef.fields.filter {
-                it.type == remoteAnalyticsScheduler.classDef.type
-            }
-        if (remoteAnalyticsSchedulerFields.size != 1) {
-            throw PatchException(
-                "Expected one remote-analytics scheduler field, found " +
-                    remoteAnalyticsSchedulerFields.size,
-            )
-        }
-        val remoteAnalyticsSchedulerField = remoteAnalyticsSchedulerFields.single()
-        remoteAnalyticsInitializer.method.addInstructions(
-            0,
-            "move-object/from16 v0, p0\n" +
-                "iget-object v0, v0, ${remoteAnalyticsInitializer.classDef.type}->" +
-                "${remoteAnalyticsSchedulerField.name}:" +
-                "${remoteAnalyticsScheduler.classDef.type}\n" +
-                "iget-object v0, v0, ${remoteAnalyticsScheduler.classDef.type}->" +
-                "${remoteAnalyticsWorkManagerField.name}:$workManagerType\n" +
-                "const-string v1, \"SendAnalyticsEventPeriodicWorker\"\n" +
-                "invoke-virtual {v0, v1}, $cancelUniqueDescriptor\n" +
-                "const-string v1, \"SendAnalyticsEventWorker\"\n" +
-                "invoke-virtual {v0, v1}, $cancelUniqueDescriptor\n" +
-                "sget-object v0, Lut0/e0;->a:Lut0/e0;\n" +
-                "return-object v0",
-        )
+            .method
+            .addInstructions(0, "sget-object v0, Lut0/e0;->a:Lut0/e0;\nreturn-object v0")
 
-        val usageStatsInitializer = UsageStatsInitializerFingerprint
+        UsageStatsInitializerFingerprint
             .matchAll(1..1)
             .single()
-        val usageStatsWorkManagerFields =
-            usageStatsInitializer.classDef.fields.filter { it.type == workManagerType }
-        if (usageStatsWorkManagerFields.size != 1) {
-            throw PatchException(
-                "Expected one usage-stats WorkManager field, found " +
-                    usageStatsWorkManagerFields.size,
-            )
-        }
-        val usageStatsWorkManagerField = usageStatsWorkManagerFields.single()
-        usageStatsInitializer.method.addInstructions(
-            0,
-            "move-object/from16 v0, p0\n" +
-                "iget-object v0, v0, ${usageStatsInitializer.classDef.type}->" +
-                "${usageStatsWorkManagerField.name}:$workManagerType\n" +
-                "const-string v1, \"UsageStatsCollectorWorker\"\n" +
-                "invoke-virtual {v0, v1}, $cancelUniqueDescriptor\n" +
-                "sget-object v0, Lut0/e0;->a:Lut0/e0;\n" +
-                "return-object v0",
-        )
+            .method
+            .addInstructions(0, "sget-object v0, Lut0/e0;->a:Lut0/e0;\nreturn-object v0")
 
         PublisherTrackingScheduleFingerprint
             .matchAll(1..1)

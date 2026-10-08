@@ -19,6 +19,17 @@ object Constants {
         // Approximate RUTUBE brand violet; adjust to the exact launcher icon background.
         appIconColor = 0x7B2FF7,
         targets = listOf(
+            // A live test (2026-10-08) confirmed the `version = null,
+            // isExperimental = true` wildcard target below does NOT actually
+            // satisfy morphe's compatibility check in practice (every patch was
+            // silently skipped as "incompatible" against this newer build) -
+            // same pinning-gate issue found and fixed for RuStore this session.
+            // Pin the exact newer version explicitly instead, following the
+            // multi-version AppTarget list convention used by
+            // ozon/avito/tbank/wildberries/rustore.
+            AppTarget(
+                version = "31.17.2-rustore",
+            ),
             // The version these patches are developed against. Note RuTube is not on
             // apkmirror.com or uptodown.com and the site only links app stores, so the
             // practical way to obtain this exact apk is to install from RuStore and pull
@@ -27,7 +38,8 @@ object Constants {
             AppTarget(
                 version = "31.14.2-rustore",
             ),
-            // Newer builds are expected to work while the ad SDK keeps its shape.
+            // Kept for documentation of intent, though not functionally
+            // effective on its own (see note above) - still harmless to leave.
             AppTarget(
                 version = null,
                 isExperimental = true,

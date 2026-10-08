@@ -32,13 +32,6 @@ private fun Method.referencesField(definingClass: String, name: String) =
         reference?.definingClass == definingClass && reference.name == name
     } == true
 
-private fun Method.referencesFieldType(definingClass: String, type: String) =
-    implementation?.instructions?.any { instruction ->
-        val reference =
-            (instruction as? ReferenceInstruction)?.reference as? FieldReference
-        reference?.definingClass == definingClass && reference.type == type
-    } == true
-
 /**
  * Matches `AltCraftAnalyticsImpl.send(String, Map, String, boolean, li2.f)`,
  * the central entry point used for AltCraft events.
@@ -241,19 +234,21 @@ object RadarDoWorkFingerprint : Fingerprint(
 
 /**
  * Matches the startup decision for the Usage Stats analytics permission sheet.
- * The aggregate permission builder also references `USAGE_STATS`, so the remote-feature field
- * requirement keeps this fingerprint pinned to the boolean producer.
+ * A live decompile (ru.vk.store 1.111.0.3, 2026-10) found the eligibility
+ * check simplified to a direct `UsageStatsRemoteConfig.isUsagestatsDialogEnabled()`
+ * call - it no longer touches the legacy `featuretoggle.Feature$Remote$a`
+ * field this fingerprint used to require, so that half of the match was
+ * dropped. The `USAGE_STATS` field-reference requirement alone is still
+ * enough to uniquely identify the one Object-returning, single-param suspend
+ * method in this sourceFile that reaches it (the other candidate, `d()`,
+ * returns `Ljava/io/Serializable;` and is already excluded by returnType).
  */
 object UsageStatsPromptEligibilityFingerprint : Fingerprint(
     returnType = "Ljava/lang/Object;",
     parameters = listOf("L"),
     custom = { method, classDef ->
         classDef.sourceFile == "GetStartPermissionsUseCaseImpl.kt" &&
-            method.referencesField(START_PERMISSION_TYPE, "USAGE_STATS") &&
-            method.referencesFieldType(
-                "Lru/vk/store/lib/featuretoggle/b;",
-                "Lru/vk/store/lib/featuretoggle/Feature\$Remote\$a;",
-            )
+            method.referencesField(START_PERMISSION_TYPE, "USAGE_STATS")
     },
 )
 
@@ -317,12 +312,15 @@ object TracerSampleUploadFingerprint : Fingerprint(
     ),
 )
 
+// First parameter's type renamed Lj31/d; -> Lj31/c; (confirmed via live decompile,
+// ru.vk.store 1.111.0.3, 2026-10: same NetworkDataRetriever.kt source, same
+// try/catch-into-ERROR body) - everything else about the method is unchanged.
 object OmicronNetworkRequestFingerprint : Fingerprint(
     definingClass = "Lt31/b;",
     name = "a",
     returnType = "Lt31/e;",
     parameters = listOf(
-        "Lj31/d;",
+        "Lj31/c;",
         "Lt31/a;",
         "Ll31/d;",
     ),
@@ -395,8 +393,12 @@ object PublisherTrackingScheduleFingerprint : Fingerprint(
     },
 )
 
+// definingClass renamed Lso2/e; -> Las2/g; (confirmed via live decompile,
+// ru.vk.store 1.111.0.3, 2026-10: sourceFile AnalyticsSenderImpl.kt, same
+// fan-out-to-all-trackers body iterating a Set<Lzr2/a;>) - method names and
+// signatures are unchanged.
 object AnalyticsDispatchFingerprint : Fingerprint(
-    definingClass = "Lso2/e;",
+    definingClass = "Las2/g;",
     name = "d",
     returnType = "V",
     parameters = listOf(
@@ -407,7 +409,7 @@ object AnalyticsDispatchFingerprint : Fingerprint(
 )
 
 object AnalyticsUserIdFingerprint : Fingerprint(
-    definingClass = "Lso2/e;",
+    definingClass = "Las2/g;",
     name = "b",
     returnType = "V",
     parameters = listOf("J"),
