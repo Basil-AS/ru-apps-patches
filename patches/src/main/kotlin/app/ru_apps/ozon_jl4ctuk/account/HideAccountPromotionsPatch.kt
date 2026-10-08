@@ -53,9 +53,13 @@ val hideAccountPromotionsPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_OZON_CURRENT)
 
     execute {
+        // EntryBannerSingleMapperFingerprint/EntryBannerMultiMapperFingerprint used to also match
+        // here, targeting the "v1" entry-banner widget variant (EntryBannerWidgetSingleMapper /
+        // EntryBannerWidgetMultiMapper). Live decompile of a 2026-10 Ozon build confirmed the
+        // entire v1 widget package is gone — Ozon consolidated onto the v2 widget architecture
+        // (EntryBannerContentMapper / EntryBannerOverlayMapper below), which still exists and is
+        // still matched and disabled.
         listOf(
-            EntryBannerSingleMapperFingerprint,
-            EntryBannerMultiMapperFingerprint,
             EntryBannerContentMapperFingerprint,
             EntryBannerOverlayMapperFingerprint,
         ).forEach { fingerprint ->

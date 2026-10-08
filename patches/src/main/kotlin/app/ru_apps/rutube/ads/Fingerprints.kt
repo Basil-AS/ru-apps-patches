@@ -30,3 +30,21 @@ object AdSdkInitializeFingerprint : Fingerprint(
         string("initBlock"),
     ),
 )
+
+/**
+ * `ru.rutube.app.application.RtApp#onCreate`, the app's `Application.onCreate()`.
+ *
+ * A 2026-10 RuTube build removed the standalone `AdSdk.initialize(...)` entry point
+ * entirely: the ad SDK kernel (`ru.rutube.adsdk.core.internal.b`, still unobfuscated,
+ * still built from the same shape of inputs the old method took) is now constructed
+ * inline inside this method, guarded by a one-shot static boolean flag checked right
+ * before it. [AdSdkKernelConstructionFingerprint] locates that guard from inside this
+ * method's instructions rather than matching the method itself, since `onCreate()` does
+ * unrelated application bootstrap work before and after the ad SDK section.
+ */
+object RtAppOnCreateFingerprint : Fingerprint(
+    definingClass = "Lru/rutube/app/application/RtApp;",
+    name = "onCreate",
+    returnType = "V",
+    parameters = emptyList(),
+)

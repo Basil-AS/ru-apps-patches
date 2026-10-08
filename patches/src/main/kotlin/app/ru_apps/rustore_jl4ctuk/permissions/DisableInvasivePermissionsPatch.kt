@@ -18,8 +18,10 @@ private val removedPermissionCounts = mapOf(
     "android.permission.ACCESS_COARSE_LOCATION" to 1,
     "com.android.vending.BILLING" to 1,
     "android.permission.USB_HOST" to 1,
-    "android.permission.WRITE_EXTERNAL_STORAGE" to 1,
-    "com.huawei.appmarket.service.commondata.permission.GET_COMMON_DATA" to 1,
+    // android.permission.WRITE_EXTERNAL_STORAGE and
+    // com.huawei.appmarket.service.commondata.permission.GET_COMMON_DATA are gone from the
+    // live 1.111.0.3 manifest entirely (confirmed via aapt2 dump xmltree, 2026-10-08) -
+    // nothing left here to remove, same drift as ManifestPatches.kt's inventory guard.
     "android.permission.READ_PHONE_STATE" to 1,
     "android.permission.READ_CALL_LOG" to 2,
     "android.permission.READ_PHONE_NUMBERS" to 2,

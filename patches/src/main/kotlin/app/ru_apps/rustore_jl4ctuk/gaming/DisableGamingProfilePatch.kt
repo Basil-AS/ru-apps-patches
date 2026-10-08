@@ -171,14 +171,15 @@ internal fun disableGamingProfile() {
         ),
     )
 
-    val composableMatches = listOf(
-        GameCenterV2ButtonComposableFingerprint,
-        GameCenterV1ButtonComposableFingerprint,
-    ).map { fingerprint ->
-        fingerprint
-            .matchAll(1..1)
-            .single()
-    }
+    // RuStore 1.111.0.3 dropped the classic/V2 Game Center widget fork (see the
+    // Fingerprints.kt doc comment): GameCenterV2ButtonWidget.kt no longer
+    // exists, and the one remaining composable lives in GameCenterButtonWidget.kt
+    // alongside the V1 implementation. Match V2 optionally so this still works
+    // on older/forked builds without requiring a now-nonexistent second method.
+    val composableMatches = listOfNotNull(
+        GameCenterV2ButtonComposableFingerprint.matchOrNull(),
+        GameCenterV1ButtonComposableFingerprint.matchAll(1..1).single(),
+    )
     require(composableMatches.all { match ->
         match.method.parameterTypes[2].toString() == viewModelType
     }) {

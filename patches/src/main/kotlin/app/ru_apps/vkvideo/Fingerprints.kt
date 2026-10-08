@@ -299,6 +299,14 @@ internal object InstreamNamedSectionStartFingerprint : Fingerprint(
     )
 )
 // Home "For you" native MyTarget showcase card factory.
+//
+// The methodCall filter targets the call this factory makes to build the real
+// AdShowCaseBannerVh. Live decompile of a 2026-10 build confirmed that helper - still in
+// the same class, still returning `AdShowCaseBannerVh` from the same two obfuscated-type
+// params - was renamed by R8 from "a" to "J" (the enclosing factory method itself was also
+// reshuffled from its old name onto the unrelated short name "g", which is why this
+// fingerprint intentionally leaves its own name/definingClass unset and matches purely on
+// this call-site shape).
 internal object HomeShowcaseCatalogFactoryFingerprint : Fingerprint(
     returnType = "Lcom/vk/catalog2/common/ui/holders/api/CatalogViewHolder;",
     parameters = listOf(
@@ -311,15 +319,20 @@ internal object HomeShowcaseCatalogFactoryFingerprint : Fingerprint(
     filters = listOf(
         methodCall(
             definingClass = "Lcom/vk/catalog2/common/ui/mvp/configuration/a;",
-            name = "a"
+            name = "J"
         )
     )
 )
 
 // Real video-player advertising repository.
+//
+// `name` is an R8-assigned short identifier shared by this method and its interface
+// declaration (VideoAdvertisementsComponent) - it shuffles on recompilation. Confirmed
+// via live decompile of a 2026-10 build that it moved from "Q6" to "V6"; the return type
+// (an unobfuscated API-boundary interface) still disambiguates it reliably.
 internal object VideoAdvertisementsRepositoryFingerprint : Fingerprint(
     definingClass = "Lcom/vk/libvideo/impl/di/VideoAdvertisementsComponentImpl;",
-    name = "Q6",
+    name = "V6",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     returnType = "Lcom/vk/libvideo/api/ad/VideoAdvertisementsRepository;",
     parameters = emptyList()

@@ -204,6 +204,11 @@ object PromoRepositoryGetFingerprint : Fingerprint(
 /**
  * Matches `SearchZeroState.Content`, whose first, second, and fourth fields
  * contain recommendations shown before a search query is entered.
+ * A live decompile (2026-10) confirmed two new trailing-ish fields (a `Z` and
+ * an `Lut0/n;`) were inserted after the fifth parameter, pushing the
+ * constructor from six to eight parameters - but the first five positions
+ * (including the first/second/fourth ones this patch zeroes) kept their
+ * original types and order, so only the parameter list below needed updating.
  */
 object SearchZeroContentConstructorFingerprint : Fingerprint(
     name = "<init>",
@@ -214,6 +219,8 @@ object SearchZeroContentConstructorFingerprint : Fingerprint(
         "L",
         "L",
         "Ljava/util/Map;",
+        "Z",
+        "L",
         "Ljava/util/Map;",
     ),
     custom = { method, classDef ->

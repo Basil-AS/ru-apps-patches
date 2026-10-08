@@ -219,11 +219,21 @@ val disableOzonTelemetryPatch = bytecodePatch(
         }
         nonFatalLoggerMethods.forEach(MutableMethod::disable)
 
-        FintechGraylogEnqueueFingerprint
-            .matchAll(1..1)
-            .single()
-            .method
-            .disable()
+        // FintechGraylogEnqueueFingerprint (matched by exact parameter-list shape) used to target
+        // the ru.ozon.fintech.analytic.models.GraylogData data class constructor here, but that
+        // class gains/loses fields across Ozon releases, making an exact-arity match brittle (it
+        // broke after a field was added — confirmed via live decompile of a 2026-10 build).
+        // Disabling a data class constructor is also unsafe in general: unlike a regular method,
+        // short-circuiting it to return early skips the superclass constructor call and leaves
+        // final fields uninitialized, which can fail bytecode verification or hand back a
+        // corrupt instance to whatever reads its fields next.
+        // It is also unnecessary: live decompile confirms GraylogData's constructor has exactly
+        // one call site (an inner lambda, compiled from GraylogSendWorker's own suspend body),
+        // reached only by executing GraylogSendWorker's coroutine logic end-to-end (reading
+        // pending entries from the local queue, building GraylogData per entry, then uploading).
+        // FintechGraylogWorkerFingerprint below patches that coroutine's real entry point to
+        // return success immediately, so this entire call chain — including the GraylogData
+        // construction — never executes; there is nothing left for a second patch step to add.
         FintechGraylogWorkerFingerprint.method.addInstructions(0, returnWorkerSuccess)
 
         VkIdAnalyticsAddTrackerFingerprint.method.disable()
