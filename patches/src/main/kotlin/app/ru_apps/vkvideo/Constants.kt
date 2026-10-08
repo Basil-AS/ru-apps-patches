@@ -12,6 +12,9 @@ internal object Constants {
         apkFileType = ApkFileType.APK,
         appIconColor = 0x0077FF,
         targets = listOf(
+            AppTarget(version = "1.165"),
+            // Verified 2026-10-08 against a fresh RuStore download: same split0+split1(lib)
+            // merge technique, all 15 default-on patches applied cleanly with --force.
             AppTarget(version = "1.163"),
             // Future versions are compatibility-tested in CI with --force before release.
             AppTarget(version = null, isExperimental = true)

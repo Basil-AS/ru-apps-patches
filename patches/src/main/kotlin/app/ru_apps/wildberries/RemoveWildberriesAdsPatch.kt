@@ -7,7 +7,9 @@ import app.morphe.patcher.extensions.InstructionExtensions.instructionsOrNull
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.booleanOption
 import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.patch.resourcePatch
 import app.shared.fieldReferenceOrNull
+import app.shared.removeUsesPermissions
 import app.ru_apps.wildberries.Constants.COMPATIBILITY_WILDBERRIES
 import com.android.tools.smali.dexlib2.iface.Method
 
@@ -214,6 +216,25 @@ private fun String.isRaffleSharedComposableClass() = startsWith("Lru/wildberries
 private fun String.isRaffleItemComposableClass() = startsWith("Lru/wildberries/raffle/") &&
     endsWith("RaffleItemKt;")
 
+// Wildberries still declares the AD_ID permission (confirmed live in the
+// 2026-10-08 exhaustive audit) with no active AdMob/Ad Manager integration of
+// its own — removing it makes Play Services hand back an all-zero advertising
+// ID to any ad/analytics SDK that still asks for it.
+private val removeWildberriesAdIdPatch = resourcePatch {
+    compatibleWith(COMPATIBILITY_WILDBERRIES)
+
+    execute {
+        document("AndroidManifest.xml").use { document ->
+            val removed = document.documentElement.removeUsesPermissions(
+                "com.google.android.gms.permission.AD_ID",
+                "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+                "android.permission.ACCESS_ADSERVICES_AD_ID",
+            )
+            println("Disable Wildberries advertising ID: removed $removed AD_ID permission(s).")
+        }
+    }
+}
+
 @Suppress("unused")
 val removeWildberriesAdsPatch = bytecodePatch(
     name = "Remove Wildberries ads",
@@ -221,6 +242,7 @@ val removeWildberriesAdsPatch = bytecodePatch(
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WILDBERRIES)
+    dependsOn(removeWildberriesAdIdPatch)
 
     val hideRecommendationGrids by booleanOption(
         key = "hideRecommendationGrids",

@@ -5,8 +5,10 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.option
+import app.morphe.patcher.patch.resourcePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.ru_apps.ozon_jl4ctuk.shared.Constants.COMPATIBILITY_OZON_CURRENT
+import app.shared.removeUsesPermissions
 import com.android.tools.smali.dexlib2.iface.Method
 
 private const val OZON_AD_WIDGETS_PREFIX = "Lru/ozon/app/android/ads/widgets/"
@@ -184,6 +186,29 @@ private fun Method.isShellNavbarBgSetBackground(classType: String) =
         parameterTypes[0].toString() == "Landroid/graphics/drawable/Drawable;" &&
         hasImplementation()
 
+// Ozon bundles a real, production Google AdMob/Ad Manager integration
+// (meta-data com.google.android.gms.ads.APPLICATION_ID = ca-app-pub-1360555279826491~...,
+// confirmed live in the 2026-10-08 audit) with no own AdActivity/init-provider
+// manifest entries to disable — the SDK sources its targeting signal from the
+// device advertising ID via Play Services. Removing the AD_ID permission (same
+// mechanism already used in rustore_jl4ctuk/ads/DisableAdsPatch.kt) makes Play
+// Services hand back an all-zero advertising ID to AdMob (and any other ad SDK
+// in the app) without needing to track down every SDK's own entry point.
+private val disableOzonAdvertisingIdPatch = resourcePatch {
+    compatibleWith(COMPATIBILITY_OZON_CURRENT)
+
+    execute {
+        document("AndroidManifest.xml").use { document ->
+            val removed = document.documentElement.removeUsesPermissions(
+                "com.google.android.gms.permission.AD_ID",
+                "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+                "android.permission.ACCESS_ADSERVICES_AD_ID",
+            )
+            println("Disable Ozon advertising ID: removed $removed AD_ID permission(s).")
+        }
+    }
+}
+
 @Suppress("unused")
 val removeOzonAdsPatch = bytecodePatch(
     name = "Remove Ozon ads",
@@ -191,6 +216,7 @@ val removeOzonAdsPatch = bytecodePatch(
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_OZON_CURRENT)
+    dependsOn(disableOzonAdvertisingIdPatch)
 
     val hideRecommendationGrids by option<Boolean>(
         key = "hideRecommendationGrids",
