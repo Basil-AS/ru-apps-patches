@@ -17,7 +17,7 @@
 ## 🩹 Список патчей
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.0.8](https://github.com/Basil-AS/ru-apps-patches/releases/tag/v1.0.8)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;87 patches total
+> **[v1.1.0](https://github.com/Basil-AS/ru-apps-patches/releases/tag/v1.1.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;88 patches total
 <details open>
 <summary>📦 Avito&nbsp;&nbsp;•&nbsp;&nbsp;8 patches</summary>
 <br>
@@ -31,7 +31,7 @@
 |----------|----------------|-----------|
 | [AMOLED dark theme](#amoled-dark-theme) | Makes dark-theme page, app navigation and system bars pure black (AMOLED) while keeping elevated cards, sheets and controls gray so their boundaries remain visible. |  |
 | [Block listings](#block-listings) | Hides Avito offers from blacklisted adverts or sellers and adds a blacklist manager (import/export compatible with the Ave Blacklist extension). |  |
-| [Disable telemetry](#disable-telemetry) | Disables Avito first-party clickstream analytics and Avito's direct Adjust telemetry wrapper. |  |
+| [Disable telemetry](#disable-telemetry) | Disables Avito first-party clickstream analytics, Avito's direct Adjust telemetry wrapper, AppMetrica, and Varioqub A/B-test reporting. |  |
 | [Disable update prompts](#disable-update-prompts) | Prevents Avito's force-update screen opener from launching update screens. Toggleable in Настройки Morphe. |  |
 | [Hide professional sellers](#hide-professional-sellers) | Adds a maximum seller review count to Avito search filters and hides or dims offers from sellers above that limit. |  |
 | [Morphe settings](#morphe-settings) | Adds a "Настройки Morphe" entry to Avito's settings that hosts the configuration for the other Morphe patches. |  |
@@ -41,7 +41,7 @@
 </details>
 
 <details open>
-<summary>📦 VK Video&nbsp;&nbsp;•&nbsp;&nbsp;17 patches</summary>
+<summary>📦 VK Video&nbsp;&nbsp;•&nbsp;&nbsp;18 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -54,6 +54,7 @@
 | [Block deep midroll ads](#block-deep-midroll-ads) | Disables the dedicated request_midroll runnable, midpoint configuration, and direct named midroll starts. |  |
 | [Block midroll ads](#block-midroll-ads) | Stops the runtime MIDROLL branch before VideoAutoPlay pauses or switches the main video player to the instream ad engine. |  |
 | [Bypass native signature check](#bypass-native-signature-check) | Prevents libvkcore.so from terminating re-signed VK Video builds at startup. |  |
+| [Disable OpenTelemetry APM](#disable-opentelemetry-apm) | Disables the ru.ok.tracer/OpenTelemetry pipeline (OkHttp request interception, CPU/network tech-stats, span/metric/log upload) by forcing its tracing-enabled gate off. |  |
 | [Disable VK Video MyTarget SDK](#disable-vk-video-mytarget-sdk) | Disables MyTarget's auto-init content provider and ad activity so the SDK never starts. |  |
 | [Disable VK Video advertising ID](#disable-vk-video-advertising-id) | Removes the advertising ID permission so ad SDKs cannot read the device's real advertising identifier. |  |
 | [Disable ad pixel tracking](#disable-ad-pixel-tracking) | Stops PixelStatsTrackerImpl from sending individual and batch ad pixels. |  |
