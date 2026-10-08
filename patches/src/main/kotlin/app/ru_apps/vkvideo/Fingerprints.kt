@@ -53,6 +53,21 @@ internal object PixelStatsSingleFingerprint : Fingerprint(
     )
 )
 
+// Confirmed live (2026-10-08 census) against com.vk.vkvideo 1.165: VideoOpenTelemetryComponent
+// is a DI-scoped interface with a single Z-returning, no-arg abstract method (its Kotlin source
+// property is `isTracingEnabled`, confirmed via the class's own KProperty reflection metadata
+// in its <clinit>) that gates the whole ru.ok.tracer/io.opentelemetry pipeline: an OkHttp
+// request interceptor, CPU/network tech-stats collectors, and span/metric/log exporters that
+// upload to a VK-owned backend. The implementing method's own short name is R8-unstable (seen
+// as "R4" in this build) — matched here by definingClass + returnType + parameter shape instead
+// of by name, same as VideoFeaturesEnabledFingerprint/ClipsFeaturesEnabledFingerprint above.
+internal object OpenTelemetryTracingEnabledFingerprint : Fingerprint(
+    definingClass = "Lcom/vk/core/telemetry/VideoOpenTelemetryComponentImpl;",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Z",
+    parameters = emptyList()
+)
+
 internal object PixelStatsBatchFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     returnType = "Lio/reactivex/rxjava3/disposables/c;",
