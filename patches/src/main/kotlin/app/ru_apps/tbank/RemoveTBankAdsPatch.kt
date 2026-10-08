@@ -7,6 +7,7 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.resourcePatch
 import app.ru_apps.tbank.Constants.COMPATIBILITY_TBANK
+import app.shared.removeUsesPermissions
 import org.w3c.dom.Element
 
 private val storyLayoutFiles = listOf(
@@ -239,11 +240,24 @@ private val removeTBankAdResourcesPatch = resourcePatch {
             missingLayouts = missing.toSet(),
         )
 
+        // T-Bank still declares the AD_ID permission (confirmed live in the 2026-10-08
+        // exhaustive audit) even though it has no active AdMob/Ad Manager integration
+        // of its own — removing it makes Play Services hand back an all-zero
+        // advertising ID to any ad/analytics SDK that still asks for it.
+        val removedAdIdPermissions = document("AndroidManifest.xml").use { document ->
+            document.documentElement.removeUsesPermissions(
+                "com.google.android.gms.permission.AD_ID",
+                "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+                "android.permission.ACCESS_ADSERVICES_AD_ID",
+            )
+        }
+
         println(
             "Remove TBank ads: hid $hiddenStoryViews story views, " +
                 "collapsed $collapsedStoryAppBars story app bars, " +
                 "hid $hiddenOfferViews offer views, " +
-                "hid $hiddenProductViews product stream views.",
+                "hid $hiddenProductViews product stream views, " +
+                "removed $removedAdIdPermissions AD_ID permission(s).",
         )
     }
 }

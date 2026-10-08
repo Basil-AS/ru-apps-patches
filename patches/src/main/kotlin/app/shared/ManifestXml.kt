@@ -73,6 +73,21 @@ internal fun Element.disableComponentsByName(vararg names: String): Int {
 
 internal fun Element.disableComponentsByPrefix(vararg prefixes: String): Int = disableComponentsWhere { name -> prefixes.any { prefix -> name.startsWith(prefix) } }
 
+/**
+ * Removes `<uses-permission>`/`<uses-permission-sdk-23>` entries by name from the
+ * manifest root element. Used to strip `com.google.android.gms.permission.AD_ID`
+ * (and the Android 13+ AdServices equivalents), which makes Google Play Services
+ * hand back an all-zero advertising ID to every ad SDK in the app instead of just
+ * the one or two SDKs a patch happens to target explicitly.
+ */
+internal fun Element.removeUsesPermissions(vararg names: String): Int {
+    val namesSet = names.toSet()
+    val matches = childrenNamed("uses-permission", "uses-permission-sdk-23")
+        .filter { it.getAttribute("android:name") in namesSet }
+    removeChildren(matches)
+    return matches.size
+}
+
 internal fun Element.removeComponentDiscoveryRegistrarsWhere(predicate: (String) -> Boolean): Int {
     var removed = 0
 

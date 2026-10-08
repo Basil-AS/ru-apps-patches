@@ -3,6 +3,31 @@ package app.ru_apps.vkvideo
 
 import app.morphe.patcher.patch.resourcePatch
 import app.ru_apps.vkvideo.Constants.VK_VIDEO
+import app.shared.removeUsesPermissions
+
+// VK Video still declares the AD_ID permission (confirmed live in the 2026-10-08
+// exhaustive audit, manifest_com.vk.vkvideo.txt) on top of its own my.target/VK Ads
+// mediation stack — removing it makes Play Services hand back an all-zero
+// advertising ID to any ad SDK that still asks for it.
+@Suppress("unused")
+val removeVkVideoAdIdPatch = resourcePatch(
+    name = "Disable VK Video advertising ID",
+    description = "Removes the advertising ID permission so ad SDKs cannot read the device's real advertising identifier.",
+    default = true
+) {
+    compatibleWith(VK_VIDEO)
+
+    execute {
+        document("AndroidManifest.xml").use { document ->
+            val removed = document.documentElement.removeUsesPermissions(
+                "com.google.android.gms.permission.AD_ID",
+                "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+                "android.permission.ACCESS_ADSERVICES_AD_ID",
+            )
+            println("Disable VK Video advertising ID: removed $removed AD_ID permission(s).")
+        }
+    }
+}
 
 private val AD_XML_LAYOUTS = listOf(
     "res/layout/catalog_ad_banner.xml",
