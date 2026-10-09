@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -428,6 +428,33 @@
         {
           "packageName": "ru.ozon.fintech.finance",
           "name": "Ozon Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Bypass STCrypt CKey root detection",
+      "description": "Disables the STCrypt/CKey SDK's aggregate root-detection check so it always reports a clean (non-rooted) result.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.idamob.tinkoff.android",
+          "name": "T-Bank",
           "description": null,
           "apkFileType": null,
           "appIconColor": null,

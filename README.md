@@ -17,7 +17,7 @@
 ## 🩹 Список патчей
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.1.2](https://github.com/Basil-AS/ru-apps-patches/releases/tag/v1.1.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;110 patches total
+> **[v1.2.0](https://github.com/Basil-AS/ru-apps-patches/releases/tag/v1.2.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;111 patches total
 <details open>
 <summary>📦 Avito&nbsp;&nbsp;•&nbsp;&nbsp;11 patches</summary>
 <br>
@@ -78,12 +78,13 @@
 </details>
 
 <details open>
-<summary>📦 T-Bank&nbsp;&nbsp;•&nbsp;&nbsp;6 patches</summary>
+<summary>📦 T-Bank&nbsp;&nbsp;•&nbsp;&nbsp;7 patches</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Bypass RootBeer root detection](#bypass-rootbeer-root-detection) | Stubs calls into the scottyab/rootbeer native root-checking library so it always reports a clean (non-rooted) result. |  |
+| [Bypass STCrypt CKey root detection](#bypass-stcrypt-ckey-root-detection) | Disables the STCrypt/CKey SDK's aggregate root-detection check so it always reports a clean (non-rooted) result. |  |
 | [Bypass anti-tamper](#bypass-anti-tamper) | Stubs TBank's native RASP executor calls and neutralizes tamper flag reporting. |  |
 | [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
 | [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
