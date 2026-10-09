@@ -459,6 +459,21 @@ val disableAnalyticsDependency = bytecodePatch(
             .map { it.method }
         crashlyticsMethods.forEach(MutableMethod::disable)
 
+        // Closes the second, boxed-Boolean public overload of the same setter (see
+        // Fingerprints.kt) - leaving it live would let app/library code re-enable
+        // collection without ever calling the (Z) overload disabled above.
+        val crashlyticsBoxedMethods = FirebaseCrashlyticsCollectionBoxedFingerprint
+            .matchAll(0..1)
+            .map { it.method }
+        crashlyticsBoxedMethods.forEach(MutableMethod::disable)
+
+        // Closes the documented sendUnsentReports() bypass (see Fingerprints.kt) of the
+        // collection-enabled gate set above and forced false in the manifest patch.
+        val crashlyticsSendUnsentReportsMethods = FirebaseCrashlyticsSendUnsentReportsFingerprint
+            .matchAll(0..1)
+            .map { it.method }
+        crashlyticsSendUnsentReportsMethods.forEach(MutableMethod::disable)
+
         val performanceMethods = FirebasePerformanceCollectionFingerprint
             .matchAll(0..1)
             .map { it.method }
