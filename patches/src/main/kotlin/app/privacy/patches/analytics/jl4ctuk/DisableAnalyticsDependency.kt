@@ -2,6 +2,7 @@
 package app.privacy.patches.analytics.jl4ctuk
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
+import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.resourcePatch
@@ -14,6 +15,34 @@ import java.util.logging.Logger
 
 private val logger = Logger.getLogger("DisableAnalytics")
 
+/**
+ * Every app in this bundle that this dependency has been wired into via `dependsOn`.
+ *
+ * `dependsOn` only orders execution between patches that are independently enabled -
+ * confirmed by direct testing (2026-10-09): a `dependsOn`-only wiring on a `default =
+ * false`, non-package-gated patch like this one is silently skipped in a real default
+ * build ("Skipping disabled: Disable analytics libraries (default)"), even though every
+ * one of its dependents is itself `default = true`. Without its own real package gate
+ * this patch can never be `default = true` either - morphe-patcher's framework forces
+ * any `default = true` patch with no (or no package-scoped) `Compatibility` back to
+ * `false` (see BypassRootBeerPatch.kt for the same constraint and the same fix: real,
+ * version-unrestricted `Compatibility` entries). Declaring the gate here, rather than
+ * leaving this "shared, invisible" and relying on being `dependsOn`-ed, is what actually
+ * makes it run in the apps that need it instead of silently never executing.
+ */
+private val DISABLE_ANALYTICS_COMPATIBILITY = arrayOf(
+    Compatibility(packageName = "com.avito.android", name = "Avito"),
+    Compatibility(packageName = "com.idamob.tinkoff.android", name = "T-Bank"),
+    Compatibility(packageName = "ru.ozon.app.android", name = "Ozon"),
+    Compatibility(packageName = "ru.ozon.fintech.finance", name = "Ozon Bank"),
+    Compatibility(packageName = "ru.oneme.app", name = "MAX"),
+    Compatibility(packageName = "com.vk.vkvideo", name = "VK Video"),
+    Compatibility(packageName = "ru.sberbankmobile", name = "Sberbank"),
+    Compatibility(packageName = "com.wildberries.ru", name = "Wildberries"),
+    Compatibility(packageName = "ru.rutube.app", name = "RuTube"),
+    Compatibility(packageName = "ru.vk.store", name = "RuStore"),
+)
+
 private const val APP_METRICA_API_CLASS = "Lio/appmetrica/analytics/AppMetrica;"
 private const val APP_METRICA_LIBRARY_ADAPTER_CLASS =
     "Lio/appmetrica/analytics/AppMetricaLibraryAdapter;"
@@ -21,6 +50,21 @@ private const val APP_METRICA_MODULES_FACADE_CLASS =
     "Lio/appmetrica/analytics/ModulesFacade;"
 private const val APP_METRICA_IMPL_PREFIX = "Lio/appmetrica/analytics/impl/"
 private const val MY_TRACKER_API_CLASS = "Lcom/my/tracker/MyTracker;"
+
+// Legacy (pre-rename) AppMetrica SDK entry points. Folded in from the old standalone
+// `DisableAppMetricaPatch` (xob0t/morphe-patches), which targeted only this namespace and
+// had gone stale/0-matches on every app observed to have migrated to the io.appmetrica.*
+// namespace above - the two namespaces are different major SDK versions of the same
+// product and apps bundle one or the other, never both, so folding both checks into this
+// one always-wired dependency (rather than keeping a second, separately-gated patch that
+// nothing depended on) is what actually keeps old-namespace apps covered going forward.
+private const val LEGACY_YANDEX_METRICA_IMPL_CLASS = "Lcom/yandex/metrica/impl/ob/U1;"
+private const val LEGACY_YANDEX_METRICA_IMPL_CALLBACK_CLASS = "Lcom/yandex/metrica/impl/ob/U1\$g;"
+private val legacyYandexMetricaFacadeClasses = listOf(
+    "Lcom/yandex/metrica/YandexMetrica;",
+    "Lcom/yandex/metrica/AppMetricaJsInterface;",
+    "Lcom/yandex/metrica/AppMetricaInitializerJsInterface;",
+)
 
 private data class MethodSignature(
     val name: String,
@@ -114,8 +158,10 @@ private val myTrackerRequirements = setOf(
 val disableAnalyticsManifestPatch = resourcePatch(
     name = "Disable analytics manifest components",
     description = "Disables analytics and tracking components and metadata in AndroidManifest.xml.",
-    default = false,
+    default = true,
 ) {
+    compatibleWith(*DISABLE_ANALYTICS_COMPATIBILITY)
+
     execute {
         document("AndroidManifest.xml").use { document ->
             val manifest = document.documentElement
@@ -231,16 +277,14 @@ val disableAnalyticsManifestPatch = resourcePatch(
     }
 }
 
-/**
- * Shared, unnamed dependency. It is included in the bundle only through app-specific patches
- * and does not appear as a standalone patch in Morphe Manager.
- */
 @Suppress("unused")
 val disableAnalyticsDependency = bytecodePatch(
     name = "Disable analytics libraries",
     description = "Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase).",
-    default = false,
+    default = true,
 ) {
+    compatibleWith(*DISABLE_ANALYTICS_COMPATIBILITY)
+
     dependsOn(disableAnalyticsManifestPatch)
 
     execute {
@@ -420,6 +464,64 @@ val disableAnalyticsDependency = bytecodePatch(
             .map { it.method }
         performanceMethods.forEach(MutableMethod::disable)
 
+        var patchedLegacyMetricaMethods = 0
+
+        legacyYandexMetricaFacadeClasses.forEach { classType ->
+            mutableClassDefByOrNull(classType)?.methods
+                ?.filter { method ->
+                    method.name != "<init>" &&
+                        method.returnType == "V" &&
+                        method.implementation != null
+                }
+                ?.forEach { method ->
+                    method.disable()
+                    patchedLegacyMetricaMethods++
+                }
+        }
+
+        mutableClassDefByOrNull(LEGACY_YANDEX_METRICA_IMPL_CLASS)?.methods?.forEach { method ->
+            when {
+                method.name in setOf("reportData", "sendCrash") &&
+                    method.returnType == "V" &&
+                    method.implementation != null -> {
+                    method.disable()
+                    patchedLegacyMetricaMethods++
+                }
+
+                method.name in setOf("queuePauseUserSession", "queueReport", "queueResumeUserSession") &&
+                    method.returnType == "Ljava/util/concurrent/Future;" &&
+                    method.implementation != null -> {
+                    method.addInstructions(
+                        0,
+                        """
+                            const/4 p0, 0x0
+                            invoke-static {p0}, Ljava/util/concurrent/CompletableFuture;->completedFuture(Ljava/lang/Object;)Ljava/util/concurrent/CompletableFuture;
+                            move-result-object p0
+                            return-object p0
+                        """,
+                    )
+                    patchedLegacyMetricaMethods++
+                }
+            }
+        }
+
+        mutableClassDefByOrNull(LEGACY_YANDEX_METRICA_IMPL_CALLBACK_CLASS)?.methods
+            ?.filter { method ->
+                method.name == "call" &&
+                    method.returnType == "Ljava/lang/Void;" &&
+                    method.implementation != null
+            }
+            ?.forEach { method ->
+                method.addInstructions(
+                    0,
+                    """
+                        const/4 p0, 0x0
+                        return-object p0
+                    """,
+                )
+                patchedLegacyMetricaMethods++
+            }
+
         logger.info(
             "AppMetrica: patched ${patchedFacadeCounts.values.sum()} facade and " +
                 "$patchedReporterMethods reporter methods across " +
@@ -427,6 +529,7 @@ val disableAnalyticsDependency = bytecodePatch(
                 "(${reporterCandidates.size} contract implementations)",
         )
         logger.info("MyTracker: patched $patchedMyTrackerMethods public void methods")
+        logger.info("Legacy Yandex Metrica (pre-rename namespace): patched $patchedLegacyMetricaMethods SDK entry point methods")
         logger.info(
             "Firebase collection controls: patched " +
                 "${crashlyticsMethods.size + performanceMethods.size} methods",

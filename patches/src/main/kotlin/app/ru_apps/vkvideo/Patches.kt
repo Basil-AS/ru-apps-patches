@@ -7,6 +7,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLa
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.smali.ExternalLabel
+import app.privacy.patches.analytics.jl4ctuk.disableAnalyticsDependency
 import app.ru_apps.vkvideo.Constants.VK_VIDEO
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
@@ -23,6 +24,8 @@ val disableInAppUpdatePatch = bytecodePatch(
     default = true
 ) {
     compatibleWith(VK_VIDEO)
+
+    dependsOn(disableAnalyticsDependency)
 
     execute {
         InAppUpdateBootstrapFingerprint.method.addInstruction(0, "return-void")

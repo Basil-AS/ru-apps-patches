@@ -1,14 +1,24 @@
-// Universal, app-agnostic. Targets the scottyab/rootbeer native root-detection
-// library (`com.scottyab.rootbeer.RootBeerNative`), found bundled (JNI shim only,
-// or the full library) in Avito, T-Bank, Ozon and Ozon Bank during the outside-the-
+// Targets the scottyab/rootbeer native root-detection library
+// (`com.scottyab.rootbeer.RootBeerNative`), found bundled (JNI shim only, or the
+// full library) in Avito, T-Bank, Ozon and Ozon Bank during the outside-the-
 // 31-SDK-checklist package census. `checkForRoot([Ljava/lang/Object;)I` is a native
 // method, so it has no bytecode body to patch directly; every call site is nop'd
 // instead and its `move-result` forced to 0 (clean), matching the technique already
 // used by BypassAntiTamperPatch for T-Bank's native RASP executor calls.
+//
+// Gated to exactly these 4 packages (any version — the native method's signature is
+// JNI-stable and the call-site scan is structural, not version-sensitive) rather than
+// left universal: morphe-patcher force-disables `default = true` on any patch with no
+// package-scoped Compatibility (`resolveDefaultValue()` in the framework's own
+// Patch.kt), logging "Warning: Universal patches must be declared with default
+// false" and silently dropping back to false. Declaring real packageName targets
+// here (confirmed empirically to be the only way around that check) is what lets
+// this patch actually ship in the default build instead of staying opt-in-only.
 package app.privacy.patches.security
 
 import app.morphe.patcher.extensions.InstructionExtensions.instructionsOrNull
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
+import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.bytecodePatch
 import app.shared.*
 import com.android.tools.smali.dexlib2.Opcode
@@ -27,8 +37,15 @@ private fun MethodReference.isRootBeerCheckForRoot() = definingClass == ROOT_BEE
 val bypassRootBeerPatch = bytecodePatch(
     name = "Bypass RootBeer root detection",
     description = "Stubs calls into the scottyab/rootbeer native root-checking library so it always reports a clean (non-rooted) result.",
-    default = false,
+    default = true,
 ) {
+    compatibleWith(
+        Compatibility(packageName = "com.avito.android", name = "Avito"),
+        Compatibility(packageName = "com.idamob.tinkoff.android", name = "T-Bank"),
+        Compatibility(packageName = "ru.ozon.app.android", name = "Ozon"),
+        Compatibility(packageName = "ru.ozon.fintech.finance", name = "Ozon Bank"),
+    )
+
     execute {
         var patchedCalls = 0
 

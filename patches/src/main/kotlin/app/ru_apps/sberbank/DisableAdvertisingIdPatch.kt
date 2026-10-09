@@ -1,6 +1,7 @@
 package app.ru_apps.sberbank
 
 import app.morphe.patcher.patch.resourcePatch
+import app.privacy.patches.analytics.jl4ctuk.disableAnalyticsDependency
 import app.ru_apps.sberbank.Constants.COMPATIBILITY_SBERBANK
 import app.shared.removeUsesPermissions
 
@@ -27,6 +28,8 @@ val disableSberbankAdvertisingIdPatch = resourcePatch(
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_SBERBANK)
+
+    dependsOn(disableAnalyticsDependency)
 
     execute {
         document("AndroidManifest.xml").use { document ->

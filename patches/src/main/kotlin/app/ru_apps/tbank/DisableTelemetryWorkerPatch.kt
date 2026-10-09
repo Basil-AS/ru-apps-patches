@@ -22,6 +22,7 @@ import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
+import app.privacy.patches.analytics.jl4ctuk.disableAnalyticsDependency
 import app.ru_apps.tbank.Constants.COMPATIBILITY_TBANK
 import com.android.tools.smali.dexlib2.AccessFlags
 
@@ -42,6 +43,8 @@ val disableTelemetryWorkerPatch = bytecodePatch(
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_TBANK)
+
+    dependsOn(disableAnalyticsDependency)
 
     execute {
         val method = TelemetryWorkerDoWorkFingerprint.methodOrNull

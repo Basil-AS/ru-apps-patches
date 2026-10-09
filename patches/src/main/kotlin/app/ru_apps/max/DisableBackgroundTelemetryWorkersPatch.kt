@@ -3,6 +3,7 @@ package app.ru_apps.max
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
+import app.privacy.patches.analytics.jl4ctuk.disableAnalyticsDependency
 import app.ru_apps.max.Constants.COMPATIBILITY_MAX
 import com.android.tools.smali.dexlib2.AccessFlags
 
@@ -43,6 +44,8 @@ val disableBackgroundTelemetryWorkersPatch = bytecodePatch(
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_MAX)
+
+    dependsOn(disableAnalyticsDependency)
 
     execute {
         var patchedWorkers = 0

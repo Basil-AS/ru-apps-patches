@@ -17,9 +17,9 @@
 ## 🩹 Список патчей
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.1.0](https://github.com/Basil-AS/ru-apps-patches/releases/tag/v1.1.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;88 patches total
+> **[v1.1.1](https://github.com/Basil-AS/ru-apps-patches/releases/tag/v1.1.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;110 patches total
 <details open>
-<summary>📦 Avito&nbsp;&nbsp;•&nbsp;&nbsp;8 patches</summary>
+<summary>📦 Avito&nbsp;&nbsp;•&nbsp;&nbsp;11 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -31,6 +31,9 @@
 |----------|----------------|-----------|
 | [AMOLED dark theme](#amoled-dark-theme) | Makes dark-theme page, app navigation and system bars pure black (AMOLED) while keeping elevated cards, sheets and controls gray so their boundaries remain visible. |  |
 | [Block listings](#block-listings) | Hides Avito offers from blacklisted adverts or sellers and adds a blacklist manager (import/export compatible with the Ave Blacklist extension). |  |
+| [Bypass RootBeer root detection](#bypass-rootbeer-root-detection) | Stubs calls into the scottyab/rootbeer native root-checking library so it always reports a clean (non-rooted) result. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
 | [Disable telemetry](#disable-telemetry) | Disables Avito first-party clickstream analytics, Avito's direct Adjust telemetry wrapper, AppMetrica, and Varioqub A/B-test reporting. |  |
 | [Disable update prompts](#disable-update-prompts) | Prevents Avito's force-update screen opener from launching update screens. Toggleable in Настройки Morphe. |  |
 | [Hide professional sellers](#hide-professional-sellers) | Adds a maximum seller review count to Avito search filters and hides or dims offers from sellers above that limit. |  |
@@ -41,7 +44,7 @@
 </details>
 
 <details open>
-<summary>📦 VK Video&nbsp;&nbsp;•&nbsp;&nbsp;18 patches</summary>
+<summary>📦 VK Video&nbsp;&nbsp;•&nbsp;&nbsp;20 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -59,6 +62,8 @@
 | [Disable VK Video advertising ID](#disable-vk-video-advertising-id) | Removes the advertising ID permission so ad SDKs cannot read the device's real advertising identifier. |  |
 | [Disable ad pixel tracking](#disable-ad-pixel-tracking) | Stops PixelStatsTrackerImpl from sending individual and batch ad pixels. |  |
 | [Disable ad-free subscription promo](#disable-ad-free-subscription-promo) | Disables VK's VIDEO_AD_FREE_SUBSCRIPTION feature gate so profile promo items are never created. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
 | [Disable in-app update](#disable-in-app-update) | Disables the VK Video in-app update check and update prompt. |  |
 | [Disable video ad repository](#disable-video-ad-repository) | Replaces the real video advertising repository with VK's built-in no-op STUB. |  |
 | [Filter Clips SDK ads](#filter-clips-sdk-ads) | Drops client-side Clips SDK ad videos plus StaticAds/MarketAds before they enter the rendered feed. |  |
@@ -73,7 +78,59 @@
 </details>
 
 <details open>
-<summary>📦 MAX&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<summary>📦 T-Bank&nbsp;&nbsp;•&nbsp;&nbsp;6 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Bypass RootBeer root detection](#bypass-rootbeer-root-detection) | Stubs calls into the scottyab/rootbeer native root-checking library so it always reports a clean (non-rooted) result. |  |
+| [Bypass anti-tamper](#bypass-anti-tamper) | Stubs TBank's native RASP executor calls and neutralizes tamper flag reporting. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+| [Disable telemetry worker](#disable-telemetry-worker) | Stops T-Bank's BaseTelemetryWorker-derived background jobs (disk-buffered OpenTelemetry upload) from doing any work. |  |
+| [Remove TBank ads](#remove-tbank-ads) | Removes TBank stories and promotional surfaces. |  |
+
+</details>
+
+<details open>
+<summary>📦 Ozon&nbsp;&nbsp;•&nbsp;&nbsp;12 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Bypass RootBeer root detection](#bypass-rootbeer-root-detection) | Stubs calls into the scottyab/rootbeer native root-checking library so it always reports a clean (non-rooted) result. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+| [Disable checkout tips](#disable-checkout-tips) | Removes courier tips UI and prevents tip IDs or tip API calls from being submitted. |  |
+| [Disable lottery and in-app pushes](#disable-lottery-and-in-app-pushes) | Disables lottery onboarding and the in-app push SDK used for reward popups. |  |
+| [Disable telemetry](#disable-telemetry) | Disables Ozon analytics, attribution, crash reporting, and telemetry uploads. |  |
+| [Disable tip notifications](#disable-tip-notifications) | Suppresses Ozon push notifications asking the user to leave a pickup-point tip. |  |
+| [Hide Ozon Bank ad banner](#hide-ozon-bank-ad-banner) | Removes the advertising banner carousel from the Ozon Bank screen. |  |
+| [Hide account lottery and review feed](#hide-account-lottery-and-review-feed) | Removes the lottery entry banner and review feed shortcut from the account screen. |  |
+| [Hide seller rating prompt](#hide-seller-rating-prompt) | Removes the post-purchase seller rating prompt. |  |
+| [Remove Ozon ads](#remove-ozon-ads) | Removes Ozon ad widgets, banner carousels, video ads, and PDP promo blocks. | • Hide recommendation grids |
+| [Show final prices only](#show-final-prices-only) | Hides crossed-out prices, discount percentages, and redundant price rows in the cart total. |  |
+
+</details>
+
+<details open>
+<summary>📦 Ozon Bank&nbsp;&nbsp;•&nbsp;&nbsp;7 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Bypass RootBeer root detection](#bypass-rootbeer-root-detection) | Stubs calls into the scottyab/rootbeer native root-checking library so it always reports a clean (non-rooted) result. |  |
+| [Disable Ozon Bank VPN warning](#disable-ozon-bank-vpn-warning) | Removes the warning shown when Ozon Bank detects an active VPN connection. |  |
+| [Disable Ozon Bank advertising ID](#disable-ozon-bank-advertising-id) | Removes the advertising ID permission so AdMob and other ad SDKs cannot read the device's real advertising identifier. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+| [Hide Ozon Bank benefit sections](#hide-ozon-bank-benefit-sections) | Adds options to hide selected non-advertising sections from the Benefit page. | • Hide Buy for 1 ruble<br>• Hide Partner benefits<br>• Hide For shopping on Ozon<br>• Hide Ozon Premium |
+| [Hide Ozon Bank promotions](#hide-ozon-bank-promotions) | Uses the classic home design and removes promotional cards, sections, shortcuts, and the startup installment offer from Ozon Bank pages. |  |
+
+</details>
+
+<details open>
+<summary>📦 MAX&nbsp;&nbsp;•&nbsp;&nbsp;5 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -85,28 +142,14 @@
 |----------|----------------|-----------|
 | [Bypass VPN check](#bypass-vpn-check) | Reduces MAX's external IP-checker fallback list to a single, blockable endpoint. |  |
 | [Disable MAX advertising ID](#disable-max-advertising-id) | Removes the advertising ID permission so ad and analytics SDKs cannot read the device's real advertising identifier. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
 | [Disable background telemetry workers](#disable-background-telemetry-workers) | Stops MAX's SampleUploadWorker (diagnostic uploads to apptracer.ru) and DailyAnalyticsWorker (daily permission-status telemetry) from doing any work. |  |
 
 </details>
 
 <details open>
-<summary>📦 TBank&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
-<br>
-
-**🎯 Supported versions:**
-
-| 8.4.2 | 8.3.0 | 8.2.3 | 8.2.1 | 8.1.0 | 8.0.0 | 7.40.1 | 7.39.0 |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-
-| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
-|----------|----------------|-----------|
-| [Bypass anti-tamper](#bypass-anti-tamper) | Stubs TBank's native RASP executor calls and neutralizes tamper flag reporting. |  |
-| [Remove TBank ads](#remove-tbank-ads) | Removes TBank stories and promotional surfaces. |  |
-
-</details>
-
-<details open>
-<summary>📦 RuTube&nbsp;&nbsp;•&nbsp;&nbsp;6 patches</summary>
+<summary>📦 RuTube&nbsp;&nbsp;•&nbsp;&nbsp;9 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -118,7 +161,10 @@
 |----------|----------------|-----------|
 | [Custom branding icon](#custom-branding-icon) | Adds a badge to the launcher icon so the patched app is distinguishable from an unpatched install. |  |
 | [Disable RuTube advertising ID](#disable-rutube-advertising-id) | Removes the advertising ID permission so ad SDKs cannot read the device's real advertising identifier. |  |
+| [Disable Segment analytics](#disable-segment-analytics) | Disables Segment (segment.com) event tracking by no-opping its event-processing entry point. |  |
 | [Disable ads](#disable-ads) | Prevents the ad SDK from starting, which stops banner ads and pre-roll video ads. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
 | [Enable background playback](#enable-background-playback) | Allows playback to continue when the app is not in the foreground, which is otherwise only available with a paid subscription. |  |
 | [Lift download restrictions](#lift-download-restrictions) | Allows downloading videos the app otherwise refuses, either because the uploader disabled downloads or because the video is longer than six hours. |  |
 | [Unlock subscription features](#unlock-subscription-features) | Reports the account as subscribed to the app itself, which enables features gated behind a paid subscription such as background playback. Anything the server enforces is unaffected. |  |
@@ -126,7 +172,7 @@
 </details>
 
 <details open>
-<summary>📦 RuStore&nbsp;&nbsp;•&nbsp;&nbsp;14 patches</summary>
+<summary>📦 RuStore&nbsp;&nbsp;•&nbsp;&nbsp;16 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -139,6 +185,8 @@
 | [Disable Mine redesign](#disable-mine-redesign) | Reverts the Mine screen to the classic layout, disabling the redesigned V2/V3 interface. |  |
 | [Disable ads](#disable-ads) | Removes advertisements and search recommendations, clears advertising identifiers, keeps advertising consent disabled, and removes the unsolicited VK ID prompt, with options for additional interface cleanup. | • Disable loyalty program<br>• Hide Featured and Games tabs<br>• Hide notification buttons |
 | [Disable analytics](#disable-analytics) | Disables analytics and tracking in RuStore. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
 | [Disable background hooks](#disable-background-hooks) | Disables RuStore network-state monitoring, built-in VPN sessions, and startup hooks. |  |
 | [Disable background scan](#disable-background-scan) | Disables the periodic Kaspersky background device scan. |  |
 | [Disable gaming profile](#disable-gaming-profile) | Removes the Game Profile and usage statistics access, hides both gaming cards, and blocks navigation to the profile. |  |
@@ -154,25 +202,7 @@
 </details>
 
 <details open>
-<summary>📦 Ozon Bank&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
-<br>
-
-**🎯 Supported versions:**
-
-| 19.37.0 | 19.31.0 |
-| :---: | :---: |
-
-| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
-|----------|----------------|-----------|
-| [Disable Ozon Bank VPN warning](#disable-ozon-bank-vpn-warning) | Removes the warning shown when Ozon Bank detects an active VPN connection. |  |
-| [Disable Ozon Bank advertising ID](#disable-ozon-bank-advertising-id) | Removes the advertising ID permission so AdMob and other ad SDKs cannot read the device's real advertising identifier. |  |
-| [Hide Ozon Bank benefit sections](#hide-ozon-bank-benefit-sections) | Adds options to hide selected non-advertising sections from the Benefit page. | • Hide Buy for 1 ruble<br>• Hide Partner benefits<br>• Hide For shopping on Ozon<br>• Hide Ozon Premium |
-| [Hide Ozon Bank promotions](#hide-ozon-bank-promotions) | Uses the classic home design and removes promotional cards, sections, shortcuts, and the startup installment offer from Ozon Bank pages. |  |
-
-</details>
-
-<details open>
-<summary>📦 СберБанк&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<summary>📦 СберБанк&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -183,29 +213,20 @@
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Disable Sberbank advertising ID](#disable-sberbank-advertising-id) | Removes the advertising ID permission so ad and analytics SDKs cannot read the device's real advertising identifier. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
 
 </details>
 
 <details open>
-<summary>📦 Ozon&nbsp;&nbsp;•&nbsp;&nbsp;9 patches</summary>
+<summary>📦 Wildberries&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
-
-**🎯 Supported versions:**
-
-| 19.38.0 | 19.37.0 | 19.31.0 |
-| :---: | :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Disable checkout tips](#disable-checkout-tips) | Removes courier tips UI and prevents tip IDs or tip API calls from being submitted. |  |
-| [Disable lottery and in-app pushes](#disable-lottery-and-in-app-pushes) | Disables lottery onboarding and the in-app push SDK used for reward popups. |  |
-| [Disable telemetry](#disable-telemetry) | Disables Ozon analytics, attribution, crash reporting, and telemetry uploads. |  |
-| [Disable tip notifications](#disable-tip-notifications) | Suppresses Ozon push notifications asking the user to leave a pickup-point tip. |  |
-| [Hide Ozon Bank ad banner](#hide-ozon-bank-ad-banner) | Removes the advertising banner carousel from the Ozon Bank screen. |  |
-| [Hide account lottery and review feed](#hide-account-lottery-and-review-feed) | Removes the lottery entry banner and review feed shortcut from the account screen. |  |
-| [Hide seller rating prompt](#hide-seller-rating-prompt) | Removes the post-purchase seller rating prompt. |  |
-| [Remove Ozon ads](#remove-ozon-ads) | Removes Ozon ad widgets, banner carousels, video ads, and PDP promo blocks. | • Hide recommendation grids |
-| [Show final prices only](#show-final-prices-only) | Hides crossed-out prices, discount percentages, and redundant price rows in the cart total. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+| [Remove Wildberries ads](#remove-wildberries-ads) | Removes Wildberries home banners, grid banners, profile banners, promo headers, product recommendations, and lottery popups. | • Hide recommendation grids |
 
 </details>
 
@@ -225,37 +246,18 @@
 </details>
 
 <details open>
-<summary>📦 Wildberries&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
-<br>
-
-**🎯 Supported versions:**
-
-| 7.8.3002-rustore | 7.8.3002 | 7.8.2002-rustore | 7.8.2002 | 7.8.1002-rustore | 7.8.1002 | 7.8.0002-rustore | 7.8.0002 | 7.7.9003-rustore | 7.7.9003 | 7.7.8001-rustore | 7.7.8001 | 7.7.7001-rustore | 7.7.7001 | 7.7.6003-rustore | 7.7.6003 | 7.7.5003-rustore | 7.7.5003 | 7.7.4003-rustore | 7.7.4003 | 7.7.3001-rustore | 7.7.3001 | 7.7.2001-rustore | 7.7.2001 |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-
-| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
-|----------|----------------|-----------|
-| [Remove Wildberries ads](#remove-wildberries-ads) | Removes Wildberries home banners, grid banners, profile banners, promo headers, product recommendations, and lottery popups. | • Hide recommendation grids |
-
-</details>
-
-<details open>
-<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;21 patches</summary>
+<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;17 patches</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Disable Adjust](#disable-adjust) | Disables Adjust attribution manifest entry points. |  |
-| [Disable AppMetrica](#disable-appmetrica) | Disables AppMetrica and legacy Yandex Metrica SDK entry points. |  |
 | [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer install referrer and attribution manifest entry points. |  |
 | [Disable Firebase telemetry](#disable-firebase-telemetry) | Disables Firebase telemetry collection flags and DataTransport sender entry points. |  |
 | [Disable Google Analytics](#disable-google-analytics) | Disables legacy Google Analytics manifest entry points. |  |
 | [Disable Kaspersky SDK](#disable-kaspersky-sdk) | Disables Sberbank's bundled Kaspersky KAV SDK (background antivirus scanning) manifest entry points. |  |
-| [Disable MyTracker](#disable-mytracker) | Disables MyTracker manifest entry points. |  |
 | [Disable RuStore metrics](#disable-rustore-metrics) | Disables RuStore metrics manifest entry points. |  |
 | [Disable Sentry telemetry](#disable-sentry-telemetry) | Disables Sentry telemetry by turning off SDK auto-init and clearing the DSN. |  |
-| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
-| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
 | [Disable freeRASP](#disable-freerasp) | Disables the freeRASP mobile security SDK startup. |  |
 | [Spoof USB debugging status](#spoof-usb-debugging-status) | Spoofs USB debugging and related developer settings through common Android APIs. |  |
 | [Spoof VPN status](#spoof-vpn-status) | Spoofs VPN state through common Android network APIs. |  |

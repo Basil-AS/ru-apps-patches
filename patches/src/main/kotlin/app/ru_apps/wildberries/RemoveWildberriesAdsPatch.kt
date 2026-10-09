@@ -8,6 +8,7 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.booleanOption
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.resourcePatch
+import app.privacy.patches.analytics.jl4ctuk.disableAnalyticsDependency
 import app.shared.fieldReferenceOrNull
 import app.shared.removeUsesPermissions
 import app.ru_apps.wildberries.Constants.COMPATIBILITY_WILDBERRIES
@@ -242,6 +243,8 @@ val removeWildberriesAdsPatch = bytecodePatch(
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WILDBERRIES)
+
+    dependsOn(disableAnalyticsDependency)
     dependsOn(removeWildberriesAdIdPatch)
 
     val hideRecommendationGrids by booleanOption(

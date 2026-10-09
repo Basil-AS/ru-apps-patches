@@ -3,6 +3,7 @@ package app.ru_apps.ozonbank.warnings
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
+import app.privacy.patches.analytics.jl4ctuk.disableAnalyticsDependency
 import app.ru_apps.ozonbank.shared.Constants.COMPATIBILITY_OZON_BANK_CURRENT
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
@@ -18,6 +19,8 @@ val disableOzonBankVpnWarningPatch = bytecodePatch(
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_OZON_BANK_CURRENT)
+
+    dependsOn(disableAnalyticsDependency)
 
     execute {
         WebViewVpnStateFingerprint.method.addInstructions(
