@@ -8,6 +8,7 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.resourcePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
+import app.privacy.patches.analytics.jl4ctuk.disableAnalyticsDependency
 import app.ru_apps.ozon_jl4ctuk.shared.Constants.COMPATIBILITY_OZON_CURRENT
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
@@ -168,6 +169,7 @@ val disableOzonTelemetryPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_OZON_CURRENT)
 
     dependsOn(disableOzonTelemetryManifestPatch)
+    dependsOn(disableAnalyticsDependency)
 
     execute {
         OzonTrackerEnabledFingerprint.method.addInstructions(

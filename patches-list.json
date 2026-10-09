@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -368,6 +368,84 @@
       "options": []
     },
     {
+      "name": "Bypass RootBeer root detection",
+      "description": "Stubs calls into the scottyab/rootbeer native root-checking library so it always reports a clean (non-rooted) result.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.avito.android",
+          "name": "Avito",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.idamob.tinkoff.android",
+          "name": "T-Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.ozon.app.android",
+          "name": "Ozon",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.ozon.fintech.finance",
+          "name": "Ozon Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Bypass VPN check",
       "description": "Reduces MAX's external IP-checker fallback list to a single, blockable endpoint.",
       "default": true,
@@ -623,17 +701,6 @@
       "options": []
     },
     {
-      "name": "Disable AppMetrica",
-      "description": "Disables AppMetrica and legacy Yandex Metrica SDK entry points.",
-      "default": false,
-      "category": null,
-      "dependencies": [
-        "ResourcePatch"
-      ],
-      "compatiblePackages": null,
-      "options": []
-    },
-    {
       "name": "Disable AppsFlyer",
       "description": "Disables AppsFlyer install referrer and attribution manifest entry points.",
       "default": false,
@@ -764,15 +831,6 @@
       "options": []
     },
     {
-      "name": "Disable MyTracker",
-      "description": "Disables MyTracker manifest entry points.",
-      "default": false,
-      "category": null,
-      "dependencies": [],
-      "compatiblePackages": null,
-      "options": []
-    },
-    {
       "name": "Disable OpenTelemetry APM",
       "description": "Disables the ru.ok.tracer/OpenTelemetry pipeline (OkHttp request interception, CPU/network tech-stats, span/metric/log upload) by forcing its tracing-enabled gate off.",
       "default": true,
@@ -818,7 +876,9 @@
       "description": "Removes the warning shown when Ozon Bank detects an active VPN connection.",
       "default": true,
       "category": null,
-      "dependencies": [],
+      "dependencies": [
+        "BytecodePatch"
+      ],
       "compatiblePackages": [
         {
           "packageName": "ru.ozon.fintech.finance",
@@ -956,7 +1016,9 @@
       "description": "Removes the advertising ID permission so ad and analytics SDKs cannot read the device's real advertising identifier.",
       "default": true,
       "category": null,
-      "dependencies": [],
+      "dependencies": [
+        "BytecodePatch"
+      ],
       "compatiblePackages": [
         {
           "packageName": "ru.sberbankmobile",
@@ -975,6 +1037,49 @@
                 "X86": 2026062316
               },
               "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable Segment analytics",
+      "description": "Disables Segment (segment.com) event tracking by no-opping its event-processing entry point.",
+      "default": true,
+      "category": null,
+      "dependencies": [
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "ru.rutube.app",
+          "name": "RuTube",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#7B2FF7",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "31.17.2-rustore",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "31.14.2-rustore",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": true,
               "minSdk": null,
               "description": null
             }
@@ -1325,21 +1430,363 @@
     {
       "name": "Disable analytics libraries",
       "description": "Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase).",
-      "default": false,
+      "default": true,
       "category": null,
       "dependencies": [
         "ResourcePatch"
       ],
-      "compatiblePackages": null,
+      "compatiblePackages": [
+        {
+          "packageName": "com.avito.android",
+          "name": "Avito",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.idamob.tinkoff.android",
+          "name": "T-Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.ozon.app.android",
+          "name": "Ozon",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.ozon.fintech.finance",
+          "name": "Ozon Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.oneme.app",
+          "name": "MAX",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.vk.vkvideo",
+          "name": "VK Video",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.sberbankmobile",
+          "name": "Sberbank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.wildberries.ru",
+          "name": "Wildberries",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.rutube.app",
+          "name": "RuTube",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.vk.store",
+          "name": "RuStore",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
       "options": []
     },
     {
       "name": "Disable analytics manifest components",
       "description": "Disables analytics and tracking components and metadata in AndroidManifest.xml.",
-      "default": false,
+      "default": true,
       "category": null,
       "dependencies": [],
-      "compatiblePackages": null,
+      "compatiblePackages": [
+        {
+          "packageName": "com.avito.android",
+          "name": "Avito",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.idamob.tinkoff.android",
+          "name": "T-Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.ozon.app.android",
+          "name": "Ozon",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.ozon.fintech.finance",
+          "name": "Ozon Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.oneme.app",
+          "name": "MAX",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.vk.vkvideo",
+          "name": "VK Video",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.sberbankmobile",
+          "name": "Sberbank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.wildberries.ru",
+          "name": "Wildberries",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.rutube.app",
+          "name": "RuTube",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.vk.store",
+          "name": "RuStore",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
       "options": []
     },
     {
@@ -1443,7 +1890,9 @@
       "description": "Stops MAX's SampleUploadWorker (diagnostic uploads to apptracer.ru) and DailyAnalyticsWorker (daily permission-status telemetry) from doing any work.",
       "default": true,
       "category": null,
-      "dependencies": [],
+      "dependencies": [
+        "BytecodePatch"
+      ],
       "compatiblePackages": [
         {
           "packageName": "ru.oneme.app",
@@ -1604,7 +2053,9 @@
       "description": "Disables the VK Video in-app update check and update prompt.",
       "default": true,
       "category": null,
-      "dependencies": [],
+      "dependencies": [
+        "BytecodePatch"
+      ],
       "compatiblePackages": [
         {
           "packageName": "com.vk.vkvideo",
@@ -1940,7 +2391,8 @@
       "default": true,
       "category": null,
       "dependencies": [
-        "ResourcePatch"
+        "ResourcePatch",
+        "BytecodePatch"
       ],
       "compatiblePackages": [
         {
@@ -1985,6 +2437,124 @@
               },
               "isExperimental": false,
               "minSdk": 26,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable telemetry worker",
+      "description": "Stops T-Bank's BaseTelemetryWorker-derived background jobs (disk-buffered OpenTelemetry upload) from doing any work.",
+      "default": true,
+      "category": null,
+      "dependencies": [
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.idamob.tinkoff.android",
+          "name": "TBank",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#FFDD2D",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "8.4.2",
+              "versionCodes": {
+                "ARM64_V8A": 13282,
+                "ARMEABI_V7A": 13282,
+                "X86_64": 13282,
+                "X86": 13282
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
+            {
+              "version": "8.3.0",
+              "versionCodes": {
+                "ARM64_V8A": 13196,
+                "ARMEABI_V7A": 13196,
+                "X86_64": 13196,
+                "X86": 13196
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
+            {
+              "version": "8.2.3",
+              "versionCodes": {
+                "ARM64_V8A": 13126,
+                "ARMEABI_V7A": 13126,
+                "X86_64": 13126,
+                "X86": 13126
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
+            {
+              "version": "8.2.1",
+              "versionCodes": {
+                "ARM64_V8A": 13085,
+                "ARMEABI_V7A": 13085,
+                "X86_64": 13085,
+                "X86": 13085
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
+            {
+              "version": "8.1.0",
+              "versionCodes": {
+                "ARM64_V8A": 12998,
+                "ARMEABI_V7A": 12998,
+                "X86_64": 12998,
+                "X86": 12998
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
+            {
+              "version": "8.0.0",
+              "versionCodes": {
+                "ARM64_V8A": 12925,
+                "ARMEABI_V7A": 12925,
+                "X86_64": 12925,
+                "X86": 12925
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
+            {
+              "version": "7.40.1",
+              "versionCodes": {
+                "ARM64_V8A": 12861,
+                "ARMEABI_V7A": 12861,
+                "X86_64": 12861,
+                "X86": 12861
+              },
+              "isExperimental": false,
+              "minSdk": 28,
+              "description": null
+            },
+            {
+              "version": "7.39.0",
+              "versionCodes": {
+                "ARM64_V8A": 12782,
+                "ARMEABI_V7A": 12782,
+                "X86_64": 12782,
+                "X86": 12782
+              },
+              "isExperimental": false,
+              "minSdk": 28,
               "description": null
             }
           ]
@@ -3598,6 +4168,7 @@
       "default": true,
       "category": null,
       "dependencies": [
+        "BytecodePatch",
         "ResourcePatch"
       ],
       "compatiblePackages": [

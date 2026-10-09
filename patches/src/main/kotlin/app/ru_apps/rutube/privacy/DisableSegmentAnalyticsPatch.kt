@@ -4,6 +4,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
+import app.privacy.patches.analytics.jl4ctuk.disableAnalyticsDependency
 import app.ru_apps.rutube.shared.Constants.COMPATIBILITY_RUTUBE
 import java.util.logging.Logger
 
@@ -44,6 +45,8 @@ val disableSegmentAnalyticsPatch = bytecodePatch(
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_RUTUBE)
+
+    dependsOn(disableAnalyticsDependency)
 
     execute {
         var processMethod: MutableMethod? = null

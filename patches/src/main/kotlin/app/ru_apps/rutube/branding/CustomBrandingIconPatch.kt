@@ -9,12 +9,18 @@ import java.io.File
 /**
  * Where the replacement icons live inside this bundle.
  *
- * Files are named `<resource>-<density>.png`, which is only a convention for looking
- * them up here - they are written out under the app's own resource names.
+ * Files are named `<resource>-<density>.<ext>`, which is only a convention for looking
+ * them up here - they are written out under the app's own resource names. Both a `.png`
+ * and a `.webp` variant are bundled for every icon/density, because RuTube switched its
+ * launcher resources from PNG to lossless WebP at some point and may switch back or
+ * ship a mix; the target file's own extension picks which bundled variant is used, so
+ * the replacement is always written in the same format the app already ships.
  */
 private const val ICON_RESOURCES = "/rutube/branding"
 
 private val DENSITIES = listOf("mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi")
+
+private val SUPPORTED_EXTENSIONS = listOf("png", "webp")
 
 /**
  * Anchor for loading the bundled icons.
@@ -65,11 +71,11 @@ val customBrandingIconPatch = resourcePatch(
             DENSITIES.zip(sizes).forEach { (density, expectedSize) ->
                 val target = mipmapDirs
                     .filter { it.name.substringAfter("mipmap-").substringBefore("-") == density }
-                    .map { File(it, "$icon.png") }
+                    .flatMap { dir -> SUPPORTED_EXTENSIONS.map { ext -> File(dir, "$icon.$ext") } }
                     .firstOrNull(File::exists)
                     ?: return@forEach
 
-                val actualSize = target.pngWidth()
+                val actualSize = target.imageWidth()
                 if (actualSize != expectedSize) {
                     throw PatchException(
                         "Expected $icon at $density to be ${expectedSize}px, " +
@@ -78,9 +84,10 @@ val customBrandingIconPatch = resourcePatch(
                     )
                 }
 
+                val ext = target.extension
                 val replacement = BundledIcons.javaClass
-                    .getResourceAsStream("$ICON_RESOURCES/$icon-$density.png")
-                    ?: throw PatchException("Missing bundled icon $icon-$density.png.")
+                    .getResourceAsStream("$ICON_RESOURCES/$icon-$density.$ext")
+                    ?: throw PatchException("Missing bundled icon $icon-$density.$ext.")
 
                 replacement.use { input -> target.outputStream().use(input::copyTo) }
                 replaced++
@@ -99,13 +106,49 @@ val customBrandingIconPatch = resourcePatch(
 }
 
 /**
- * Reads the width out of a PNG's IHDR chunk.
+ * Reads the pixel width out of a launcher icon image, dispatching on its extension.
  *
  * Done by hand rather than with an image library because patches also run on device,
  * where `javax.imageio` does not exist.
  */
+private fun File.imageWidth(): Int = when (extension.lowercase()) {
+    "png" -> pngWidth()
+    "webp" -> webpWidth()
+    else -> throw PatchException("$name is neither a PNG nor a WebP file.")
+}
+
 private fun File.pngWidth(): Int = inputStream().use { stream ->
     val header = ByteArray(24)
     if (stream.readNBytes(header, 0, 24) != 24) throw PatchException("$name is not a PNG.")
     header.copyOfRange(16, 20).fold(0) { acc, byte -> (acc shl 8) or (byte.toInt() and 0xFF) }
+}
+
+/**
+ * Reads the pixel width out of a WebP file's RIFF container.
+ *
+ * Only the lossless `VP8L` chunk format is handled - the only format RuTube's launcher
+ * icons have been observed to use - since the simple fixed-width (lossy `VP8`) and
+ * extended (`VP8X`) chunk layouts encode dimensions differently.
+ */
+private fun File.webpWidth(): Int = inputStream().use { stream ->
+    val header = ByteArray(25)
+    if (stream.readNBytes(header, 0, 25) != 25 ||
+        header.copyOfRange(0, 4).toString(Charsets.US_ASCII) != "RIFF" ||
+        header.copyOfRange(8, 12).toString(Charsets.US_ASCII) != "WEBP"
+    ) {
+        throw PatchException("$name is not a WebP file.")
+    }
+
+    val fourCc = header.copyOfRange(12, 16).toString(Charsets.US_ASCII)
+    if (fourCc != "VP8L") {
+        throw PatchException("$name uses unsupported WebP chunk format '$fourCc' (only VP8L is handled).")
+    }
+
+    // VP8L: 1 signature byte (0x2F) then a little-endian 32-bit field packing
+    // 14 bits width-1, 14 bits height-1, 1 bit alpha flag, 3 bits version.
+    val bits = header[21].toInt().and(0xFF) or
+        (header[22].toInt().and(0xFF) shl 8) or
+        (header[23].toInt().and(0xFF) shl 16) or
+        (header[24].toInt().and(0xFF) shl 24)
+    (bits and 0x3FFF) + 1
 }
