@@ -11,6 +11,9 @@
 | Ozon | `ru.ozon.app.android` | Реклама (два независимых набора патчей — xob0t и Jl4cTuk, держатся раздельно для сравнения) |
 | Wildberries | `com.wildberries.ru` | Реклама |
 | Т-Банк | `com.idamob.tinkoff.android` | Реклама, обход anti-tamper (RASP) |
+| Альфа-Банк | `ru.alfabank.mobile.android` | Compatibility target для проверенной версии; app-specific bytecode patch пока не добавлен |
+| ВТБ Онлайн | `ru.vtb24.mobilebanking.android` | Compatibility target для проверенной версии; app-specific bytecode patch пока не добавлен |
+| Mir Pay | `ru.nspk.mirpay` | Compatibility target для проверенной версии; app-specific bytecode patch пока не добавлен |
 | RuStore | `ru.vk.store` | Реклама, аналитика, фоновый антивирус-скан, permissions, push, device-id (два независимых набора — Freeman022026 и Jl4cTuk) |
 | Сбербанк | `ru.sberbankmobile` | Фоновый антивирус-скан (Kaspersky KAV SDK) — первый открытый патч для этого приложения |
 | RuTube | `ru.rutube.app` | Реклама, фоновое воспроизведение, ограничения на скачивание, подписка |
