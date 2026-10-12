@@ -3,12 +3,12 @@
 Локальный исследовательский реестр российских Android-приложений для анализа детекта VPN, аналитики и создания патчей.
 Машиночитаемая версия: [`research/targets.tsv`](file:///var/home/basil/Projects/ru_apps_patching/research/targets.tsv).
 
-Для расширения покрытия Task 1 используется отдельная canonical-матрица [`research/ru_apps_expansion.tsv`](file:///var/home/basil/Projects/ru_apps_patching/research/ru_apps_expansion.tsv). Она содержит 24 уникальных package-строки (включая оба поддержанных пакета AliExpress; Go/Taxi используют один пакет), вывод `scripts/rustore_dl.py` и источник Basil-AS/rustore-downloader. `verified` означает, что package identity, версия, состав split-файлов и SHA-256 проверены валидатором; `download_failed` означает, что APK не был сохранён и строка не должна использоваться как доказательство.
+Для расширения покрытия используется отдельная матрица [`research/ru_apps_expansion.tsv`](research/ru_apps_expansion.tsv): 24 уникальных пакета из запрошенного списка (Go/Taxi — один пакет), включая отдельный Яндекс Пэй. Все 24 APK-набора скачаны реализацией Basil-AS/rustore-downloader; package identity, версия, состав split-файлов, SHA-256, ZIP/CRC и подписи файлов проверены. Глобальный пакет AliExpress `com.alibaba.aliexpresshd` не опубликован в RuStore (API возвращает 404); российский AliExpress `ru.aliexpress.buyer` доступен и проверен. Результаты применения финального `.mpp` записаны в `research/ru_apps_validation_20261012.md`.
 
 Проверка матрицы и локального каталога загрузок:
 
 ```text
-python scripts/verify_rustore_downloads.py --matrix research/ru_apps_expansion.tsv --downloads /tmp/rustore-task1
+python scripts/verify_rustore_downloads.py --matrix research/ru_apps_expansion.tsv --downloads /path/to/rustore-downloads
 ```
 
 Для multi-APK строк SHA-256 вычисляется от канонического списка `filename<TAB>file_sha256` в лексикографическом порядке. Валидатор читает архивы только как байты и не исполняет APK или загруженные скрипты.

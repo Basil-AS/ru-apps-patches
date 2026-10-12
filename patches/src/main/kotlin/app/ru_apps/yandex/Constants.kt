@@ -6,27 +6,32 @@ import app.morphe.patcher.patch.Compatibility
 /**
  * Compatibility declarations for the requested Yandex applications.
  *
- * Versions are provisional values copied from research/targets.tsv. They are
- * pending a fresh download and package/signature verification; no app-specific
- * fingerprint or bytecode patch is declared here.
+ * Versions are pinned to APKs downloaded through the RuStore API and verified
+ * by package identity, version metadata and SHA-256 artifact evidence.
  */
 object Constants {
     val COMPATIBILITY_YANDEX_MUSIC = Compatibility(
         name = "Yandex Music",
         packageName = "ru.yandex.music",
-        targets = listOf(AppTarget(version = "2026.09.4 #166gpr")),
+        targets = listOf(AppTarget(version = "2026.09.5 #167.1rur")),
     )
 
     val COMPATIBILITY_YANDEX_MAPS = Compatibility(
         name = "Yandex Maps",
         packageName = "ru.yandex.yandexmaps",
-        targets = listOf(AppTarget(version = "31.0.3")),
+        targets = listOf(AppTarget(version = "31.1.3")),
     )
 
     val COMPATIBILITY_YANDEX_TAXI = Compatibility(
         name = "Yandex Go",
         packageName = "ru.yandex.taxi",
         targets = listOf(AppTarget(version = "5.98.0")),
+    )
+
+    val COMPATIBILITY_YANDEX_PAY = Compatibility(
+        name = "Yandex Pay",
+        packageName = "com.yandex.bank",
+        targets = listOf(AppTarget(version = "0.243.0")),
     )
 
     val COMPATIBILITY_YANDEX_RASP = Compatibility(
@@ -38,6 +43,6 @@ object Constants {
     val COMPATIBILITY_YANDEX_MAIL = Compatibility(
         name = "Yandex Mail",
         packageName = "ru.yandex.mail",
-        targets = listOf(AppTarget(version = "9.30.0")),
+        targets = listOf(AppTarget(version = "9.30.1")),
     )
 }

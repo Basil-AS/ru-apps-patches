@@ -7,6 +7,7 @@ import hashlib
 import json
 import re
 import sys
+import zipfile
 from pathlib import Path
 
 
@@ -14,13 +15,16 @@ REQUIRED_COLUMNS = {
     "package",
     "app_name",
     "source_version",
+    "version_code",
     "split_set",
     "sha256",
     "acquisition_status",
 }
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+VERSION_CODE_RE = re.compile(r"^[0-9]+$")
 PACKAGE_KEYS = ("packageName", "package", "package_name", "applicationPackageName")
 VERSION_KEYS = ("versionName", "version_name", "appVersionName")
+VERSION_CODE_KEYS = ("versionCode", "version_code", "appVersionCode")
 
 
 class MatrixError(ValueError):
@@ -45,6 +49,11 @@ def load_matrix(path: Path) -> list[dict[str, str]]:
                 raise MatrixError(f"line {line_number}: duplicate package {package}")
             packages.add(package)
             status = row["acquisition_status"].strip()
+            version_code = row["version_code"].strip()
+            if version_code and not VERSION_CODE_RE.fullmatch(version_code):
+                raise MatrixError(f"line {line_number}: invalid version_code")
+            if status == "verified" and not version_code:
+                raise MatrixError(f"line {line_number}: verified row has invalid version_code")
             digest = row["sha256"].strip().lower()
             if status == "verified" and not SHA256_RE.fullmatch(digest):
                 raise MatrixError(f"line {line_number}: verified row has invalid sha256")
@@ -88,14 +97,35 @@ def verify_download(row: dict[str, str], downloads_root: Path) -> dict:
         raise MatrixError(f"{package}: package identity mismatch ({identity!r})")
     expected_version = row["source_version"]
     actual_version = _value(info, VERSION_KEYS)
-    if expected_version and actual_version and expected_version != actual_version:
+    if not expected_version or not actual_version or expected_version != actual_version:
         raise MatrixError(
             f"{package}: version mismatch ({actual_version!r} != {expected_version!r})"
+        )
+    expected_version_code = row["version_code"]
+    actual_version_code = _value(info, VERSION_CODE_KEYS)
+    if (
+        not actual_version_code
+        or not VERSION_CODE_RE.fullmatch(actual_version_code)
+        or expected_version_code != actual_version_code
+    ):
+        raise MatrixError(
+            f"{package}: versionCode mismatch "
+            f"({actual_version_code!r} != {expected_version_code!r})"
         )
 
     apk_files = sorted(package_dir.glob("*.apk"))
     if not apk_files:
         raise MatrixError(f"{package}: no APK files")
+    for apk_file in apk_files:
+        if not zipfile.is_zipfile(apk_file):
+            raise MatrixError(f"{package}: {apk_file.name} is not a valid ZIP/APK")
+        try:
+            with zipfile.ZipFile(apk_file) as archive:
+                broken_member = archive.testzip()
+        except (OSError, zipfile.BadZipFile) as exc:
+            raise MatrixError(f"{package}: invalid APK archive {apk_file.name}: {exc}") from exc
+        if broken_member is not None:
+            raise MatrixError(f"{package}: corrupted APK member {apk_file.name}:{broken_member}")
     digest, file_hashes = _artifact_digest(apk_files)
     if row["sha256"] != digest:
         raise MatrixError(f"{package}: sha256 mismatch ({digest} != {row['sha256']})")
@@ -108,6 +138,7 @@ def verify_download(row: dict[str, str], downloads_root: Path) -> dict:
     return {
         "package": package,
         "version": actual_version,
+        "version_code": int(actual_version_code),
         "sha256": digest,
         "apk_files": [file.name for file in apk_files],
         "file_sha256": file_hashes,

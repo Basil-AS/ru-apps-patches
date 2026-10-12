@@ -16,6 +16,7 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.resourcePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
+import app.privacy.patches.analytics.jl4ctuk.DISABLE_ANALYTICS_COMPATIBILITY
 import app.shared.*
 import java.util.logging.Logger
 
@@ -54,6 +55,8 @@ val disableAppsFlyerPatch = bytecodePatch(
         "manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries.",
     default = true,
 ) {
+    compatibleWith(*DISABLE_ANALYTICS_COMPATIBILITY)
+
     dependsOn(disableAppsFlyerManifestPatch)
 
     execute {
