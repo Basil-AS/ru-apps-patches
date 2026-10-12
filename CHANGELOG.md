@@ -1,0 +1,9 @@
+## [1.3.0](https://github.com/Basil-AS/ru-apps-patches/compare/v1.2.0...v1.3.0) (2026-10-12)
+
+### 🐛 Bug Fixes
+
+* populate patches-bundle.json for v1.2.0 ([5ed8053](https://github.com/Basil-AS/ru-apps-patches/commit/5ed80530bafb893878db9bfe01ad30aaab462293))
+
+### ✨ New Features
+
+* **ru-apps:** publish verified app matrix and release CI ([11942d6](https://github.com/Basil-AS/ru-apps-patches/commit/11942d687189da8129e730273dd5530c59869e5c))

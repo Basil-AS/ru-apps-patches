@@ -1354,49 +1354,6 @@
       "options": []
     },
     {
-      "name": "Disable KFP fraud prevention",
-      "description": "Disables RuTube's bundled device-fingerprinting/anti-fraud SDK (VPN, root, ad-ID, device-ID, USB-debug and call-state detection) by no-opping its single activation entry point and disabling its call-monitoring service.",
-      "default": true,
-      "category": null,
-      "dependencies": [
-        "ResourcePatch"
-      ],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.rutube.app",
-          "name": "RuTube",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#7B2FF7",
-          "signatures": null,
-          "targets": [
-            {
-              "version": "31.17.2-rustore",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": "31.14.2-rustore",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": true,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
       "name": "Disable Kaspersky SDK",
       "description": "Disables Sberbank's bundled Kaspersky KAV SDK (background antivirus scanning) manifest entry points.",
       "default": false,
@@ -6316,57 +6273,6 @@
       "default": true,
       "category": null,
       "dependencies": [],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0077FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
-            {
-              "version": "1.111.0.3",
-              "versionCodes": {
-                "ARM64_V8A": 1111003,
-                "ARMEABI_V7A": 1111003,
-                "X86_64": 1111003,
-                "X86": 1111003
-              },
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": "1.108.0.2",
-              "versionCodes": {
-                "ARM64_V8A": 1108002,
-                "ARMEABI_V7A": 1108002,
-                "X86_64": 1108002,
-                "X86": 1108002
-              },
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Restrict background work to updates",
-      "description": "Keeps background workers required for update checks, downloads, patching, and installation.",
-      "default": true,
-      "category": null,
-      "dependencies": [
-        "BytecodePatch",
-        "BytecodePatch",
-        "BytecodePatch",
-        "BytecodePatch"
-      ],
       "compatiblePackages": [
         {
           "packageName": "ru.vk.store",

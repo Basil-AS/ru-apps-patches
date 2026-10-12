@@ -17,9 +17,9 @@
 ## 🩹 Список патчей
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.2.0](https://github.com/Basil-AS/ru-apps-patches/releases/tag/v1.2.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;111 patches total
+> **[v1.3.0](https://github.com/Basil-AS/ru-apps-patches/releases/tag/v1.3.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;173 patches total
 <details open>
-<summary>📦 Avito&nbsp;&nbsp;•&nbsp;&nbsp;11 patches</summary>
+<summary>📦 Avito&nbsp;&nbsp;•&nbsp;&nbsp;12 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -32,6 +32,7 @@
 | [AMOLED dark theme](#amoled-dark-theme) | Makes dark-theme page, app navigation and system bars pure black (AMOLED) while keeping elevated cards, sheets and controls gray so their boundaries remain visible. |  |
 | [Block listings](#block-listings) | Hides Avito offers from blacklisted adverts or sellers and adds a blacklist manager (import/export compatible with the Ave Blacklist extension). |  |
 | [Bypass RootBeer root detection](#bypass-rootbeer-root-detection) | Stubs calls into the scottyab/rootbeer native root-checking library so it always reports a clean (non-rooted) result. |  |
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
 | [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
 | [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
 | [Disable telemetry](#disable-telemetry) | Disables Avito first-party clickstream analytics, Avito's direct Adjust telemetry wrapper, AppMetrica, and Varioqub A/B-test reporting. |  |
@@ -44,7 +45,7 @@
 </details>
 
 <details open>
-<summary>📦 VK Video&nbsp;&nbsp;•&nbsp;&nbsp;20 patches</summary>
+<summary>📦 VK Video&nbsp;&nbsp;•&nbsp;&nbsp;21 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -57,6 +58,7 @@
 | [Block deep midroll ads](#block-deep-midroll-ads) | Disables the dedicated request_midroll runnable, midpoint configuration, and direct named midroll starts. |  |
 | [Block midroll ads](#block-midroll-ads) | Stops the runtime MIDROLL branch before VideoAutoPlay pauses or switches the main video player to the instream ad engine. |  |
 | [Bypass native signature check](#bypass-native-signature-check) | Prevents libvkcore.so from terminating re-signed VK Video builds at startup. |  |
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
 | [Disable OpenTelemetry APM](#disable-opentelemetry-apm) | Disables the ru.ok.tracer/OpenTelemetry pipeline (OkHttp request interception, CPU/network tech-stats, span/metric/log upload) by forcing its tracing-enabled gate off. |  |
 | [Disable VK Video MyTarget SDK](#disable-vk-video-mytarget-sdk) | Disables MyTarget's auto-init content provider and ad activity so the SDK never starts. |  |
 | [Disable VK Video advertising ID](#disable-vk-video-advertising-id) | Removes the advertising ID permission so ad SDKs cannot read the device's real advertising identifier. |  |
@@ -78,7 +80,7 @@
 </details>
 
 <details open>
-<summary>📦 T-Bank&nbsp;&nbsp;•&nbsp;&nbsp;7 patches</summary>
+<summary>📦 T-Bank&nbsp;&nbsp;•&nbsp;&nbsp;8 patches</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
@@ -86,6 +88,7 @@
 | [Bypass RootBeer root detection](#bypass-rootbeer-root-detection) | Stubs calls into the scottyab/rootbeer native root-checking library so it always reports a clean (non-rooted) result. |  |
 | [Bypass STCrypt CKey root detection](#bypass-stcrypt-ckey-root-detection) | Disables the STCrypt/CKey SDK's aggregate root-detection check so it always reports a clean (non-rooted) result. |  |
 | [Bypass anti-tamper](#bypass-anti-tamper) | Stubs TBank's native RASP executor calls and neutralizes tamper flag reporting. |  |
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
 | [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
 | [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
 | [Disable telemetry worker](#disable-telemetry-worker) | Stops T-Bank's BaseTelemetryWorker-derived background jobs (disk-buffered OpenTelemetry upload) from doing any work. |  |
@@ -94,12 +97,13 @@
 </details>
 
 <details open>
-<summary>📦 Ozon&nbsp;&nbsp;•&nbsp;&nbsp;12 patches</summary>
+<summary>📦 Ozon&nbsp;&nbsp;•&nbsp;&nbsp;13 patches</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Bypass RootBeer root detection](#bypass-rootbeer-root-detection) | Stubs calls into the scottyab/rootbeer native root-checking library so it always reports a clean (non-rooted) result. |  |
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
 | [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
 | [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
 | [Disable checkout tips](#disable-checkout-tips) | Removes courier tips UI and prevents tip IDs or tip API calls from being submitted. |  |
@@ -115,12 +119,13 @@
 </details>
 
 <details open>
-<summary>📦 Ozon Bank&nbsp;&nbsp;•&nbsp;&nbsp;7 patches</summary>
+<summary>📦 Ozon Bank&nbsp;&nbsp;•&nbsp;&nbsp;8 patches</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Bypass RootBeer root detection](#bypass-rootbeer-root-detection) | Stubs calls into the scottyab/rootbeer native root-checking library so it always reports a clean (non-rooted) result. |  |
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
 | [Disable Ozon Bank VPN warning](#disable-ozon-bank-vpn-warning) | Removes the warning shown when Ozon Bank detects an active VPN connection. |  |
 | [Disable Ozon Bank advertising ID](#disable-ozon-bank-advertising-id) | Removes the advertising ID permission so AdMob and other ad SDKs cannot read the device's real advertising identifier. |  |
 | [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
@@ -131,7 +136,7 @@
 </details>
 
 <details open>
-<summary>📦 MAX&nbsp;&nbsp;•&nbsp;&nbsp;5 patches</summary>
+<summary>📦 MAX&nbsp;&nbsp;•&nbsp;&nbsp;6 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -142,6 +147,7 @@
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Bypass VPN check](#bypass-vpn-check) | Reduces MAX's external IP-checker fallback list to a single, blockable endpoint. |  |
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
 | [Disable MAX advertising ID](#disable-max-advertising-id) | Removes the advertising ID permission so ad and analytics SDKs cannot read the device's real advertising identifier. |  |
 | [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
 | [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
@@ -150,7 +156,7 @@
 </details>
 
 <details open>
-<summary>📦 RuTube&nbsp;&nbsp;•&nbsp;&nbsp;9 patches</summary>
+<summary>📦 RuTube&nbsp;&nbsp;•&nbsp;&nbsp;10 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -161,6 +167,7 @@
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Custom branding icon](#custom-branding-icon) | Adds a badge to the launcher icon so the patched app is distinguishable from an unpatched install. |  |
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
 | [Disable RuTube advertising ID](#disable-rutube-advertising-id) | Removes the advertising ID permission so ad SDKs cannot read the device's real advertising identifier. |  |
 | [Disable Segment analytics](#disable-segment-analytics) | Disables Segment (segment.com) event tracking by no-opping its event-processing entry point. |  |
 | [Disable ads](#disable-ads) | Prevents the ad SDK from starting, which stops banner ads and pre-roll video ads. |  |
@@ -176,13 +183,9 @@
 <summary>📦 RuStore&nbsp;&nbsp;•&nbsp;&nbsp;16 patches</summary>
 <br>
 
-**🎯 Supported versions:**
-
-| 1.111.0.3 | 1.108.0.2 |
-| :---: | :---: |
-
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
 | [Disable Mine redesign](#disable-mine-redesign) | Reverts the Mine screen to the classic layout, disabling the redesigned V2/V3 interface. |  |
 | [Disable ads](#disable-ads) | Removes advertisements and search recommendations, clears advertising identifiers, keeps advertising consent disabled, and removes the unsolicited VK ID prompt, with options for additional interface cleanup. | • Disable loyalty program<br>• Hide Featured and Games tabs<br>• Hide notification buttons |
 | [Disable analytics](#disable-analytics) | Disables analytics and tracking in RuStore. |  |
@@ -197,13 +200,97 @@
 | [Replace RuStore SDK device identifier](#replace-rustore-sdk-device-identifier) | Replaces the RuStore SDK device identifier sent with payment and session requests with the zero UUID. |  |
 | [Replace VK SDK device identifier](#replace-vk-sdk-device-identifier) | Replaces the VK SDK device fingerprint sent by VK ID and VK Pay request paths with the zero UUID. |  |
 | [Restore secure-session compatibility](#restore-secure-session-compatibility) | Preserves RuStore secure-session requests when the APK is re-signed. |  |
-| [Restrict background work to updates](#restrict-background-work-to-updates) | Keeps background workers required for update checks, downloads, patching, and installation. |  |
 | [Skip update authentication](#skip-update-authentication) | Skips the VK ID authorization suggestion shown during app installs and updates. |  |
 
 </details>
 
 <details open>
-<summary>📦 СберБанк&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<summary>📦 Yandex Music&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 2026.09.5 #167.1rur |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Yandex Maps&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 31.1.3 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Yandex Go&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 5.98.0 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Yandex Rasp&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 3.73.0 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Yandex Pay&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 0.243.0 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Sberbank&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -213,6 +300,7 @@
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
 | [Disable Sberbank advertising ID](#disable-sberbank-advertising-id) | Removes the advertising ID permission so ad and analytics SDKs cannot read the device's real advertising identifier. |  |
 | [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
 | [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
@@ -220,14 +308,241 @@
 </details>
 
 <details open>
-<summary>📦 Wildberries&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<summary>📦 Alfa-Bank&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
+
+**🎯 Supported versions:**
+
+| 12.60.07 |
+| :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 VTB Online&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 20.18.1.3 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Mir Pay&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 1.64.5.350 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 2GIS&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 7.29.1.632.4 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Zvuk&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 4.117.0rs |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Gosuslugi&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 27.1.0.9876-rustore |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Wildberries&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 7.8.3002-rustore |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
 | [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
 | [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
 | [Remove Wildberries ads](#remove-wildberries-ads) | Removes Wildberries home banners, grid banners, profile banners, promo headers, product recommendations, and lottery popups. | • Hide recommendation grids |
+
+</details>
+
+<details open>
+<summary>📦 AliExpress&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 8.89.1.3597464 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Perekrestok&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 3.99.0 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Whoosh&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 4.0.0 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Yandex Mail&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 9.30.1 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 Beeline&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 5.48.5 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 MTS&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 6.77 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
+
+</details>
+
+<details open>
+<summary>📦 MegaFon&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 4.69.0 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries. |  |
+| [Disable analytics libraries](#disable-analytics-libraries) | Disables runtime analytics tracking calls and initializers (AppMetrica, MyTracker, Firebase). |  |
+| [Disable analytics manifest components](#disable-analytics-manifest-components) | Disables analytics and tracking components and metadata in AndroidManifest.xml. |  |
 
 </details>
 
@@ -247,13 +562,12 @@
 </details>
 
 <details open>
-<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;17 patches</summary>
+<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;16 patches</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Disable Adjust](#disable-adjust) | Disables Adjust attribution manifest entry points. |  |
-| [Disable AppsFlyer](#disable-appsflyer) | Disables AppsFlyer install referrer and attribution manifest entry points. |  |
 | [Disable Firebase telemetry](#disable-firebase-telemetry) | Disables Firebase telemetry collection flags and DataTransport sender entry points. |  |
 | [Disable Google Analytics](#disable-google-analytics) | Disables legacy Google Analytics manifest entry points. |  |
 | [Disable Kaspersky SDK](#disable-kaspersky-sdk) | Disables Sberbank's bundled Kaspersky KAV SDK (background antivirus scanning) manifest entry points. |  |
