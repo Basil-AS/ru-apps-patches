@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -729,11 +729,610 @@
     },
     {
       "name": "Disable AppsFlyer",
-      "description": "Disables AppsFlyer install referrer and attribution manifest entry points.",
-      "default": false,
+      "description": "Disables AppsFlyer attribution/tracking: no-ops its SDK implementation's start() choke point (the actual activation entry point, called directly from app code — not manifest-gated in the v6+ SDK) and disables its install-referrer manifest entries.",
+      "default": true,
       "category": null,
-      "dependencies": [],
-      "compatiblePackages": null,
+      "dependencies": [
+        "ResourcePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "ru.ozon.fintech.finance",
+          "name": "Ozon Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.vk.vkvideo",
+          "name": "VK Video",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.rutube.app",
+          "name": "RuTube",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.vk.store",
+          "name": "RuStore",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.music",
+          "name": "Yandex Music",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "2026.09.5 #167.1rur",
+              "versionCodes": {
+                "ARM64_V8A": 24026502,
+                "ARMEABI_V7A": 24026502,
+                "X86_64": 24026502,
+                "X86": 24026502
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.yandexmaps",
+          "name": "Yandex Maps",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "31.1.3",
+              "versionCodes": {
+                "ARM64_V8A": 739706910,
+                "ARMEABI_V7A": 739706910,
+                "X86_64": 739706910,
+                "X86": 739706910
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.taxi",
+          "name": "Yandex Go",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.98.0",
+              "versionCodes": {
+                "ARM64_V8A": 30128554,
+                "ARMEABI_V7A": 30128554,
+                "X86_64": 30128554,
+                "X86": 30128554
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.rasp",
+          "name": "Yandex Rasp",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "3.73.0",
+              "versionCodes": {
+                "ARM64_V8A": 35000063,
+                "ARMEABI_V7A": 35000063,
+                "X86_64": 35000063,
+                "X86": 35000063
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.yandex.bank",
+          "name": "Yandex Pay",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "0.243.0",
+              "versionCodes": {
+                "ARM64_V8A": 11920,
+                "ARMEABI_V7A": 11920,
+                "X86_64": 11920,
+                "X86": 11920
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.sberbankmobile",
+          "name": "Sberbank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "17.13.0",
+              "versionCodes": {
+                "ARM64_V8A": 2026062316,
+                "ARMEABI_V7A": 2026062316,
+                "X86_64": 2026062316,
+                "X86": 2026062316
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.alfabank.mobile.android",
+          "name": "Alfa-Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "12.60.07",
+              "versionCodes": {
+                "ARM64_V8A": 2042600700,
+                "ARMEABI_V7A": 2042600700,
+                "X86_64": 2042600700,
+                "X86": 2042600700
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.vtb24.mobilebanking.android",
+          "name": "VTB Online",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "20.18.1.3",
+              "versionCodes": {
+                "ARM64_V8A": 2090141585,
+                "ARMEABI_V7A": 2090141585,
+                "X86_64": 2090141585,
+                "X86": 2090141585
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.nspk.mirpay",
+          "name": "Mir Pay",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "1.64.5.350",
+              "versionCodes": {
+                "ARM64_V8A": 405,
+                "ARMEABI_V7A": 405,
+                "X86_64": 405,
+                "X86": 405
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.dublgis.dgismobile",
+          "name": "2GIS",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "7.29.1.632.4",
+              "versionCodes": {
+                "ARM64_V8A": 282010632,
+                "ARMEABI_V7A": 282010632,
+                "X86_64": 282010632,
+                "X86": 282010632
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.zvooq.openplay",
+          "name": "Zvuk",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "4.117.0rs",
+              "versionCodes": {
+                "ARM64_V8A": 511700129,
+                "ARMEABI_V7A": 511700129,
+                "X86_64": 511700129,
+                "X86": 511700129
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.oneme.app",
+          "name": "MAX",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.35.0",
+              "versionCodes": {
+                "ARM64_V8A": 6861,
+                "ARMEABI_V7A": 6861,
+                "X86_64": 6861,
+                "X86": 6861
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.rostel",
+          "name": "Gosuslugi",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "27.1.0.9876-rustore",
+              "versionCodes": {
+                "ARM64_V8A": 9876,
+                "ARMEABI_V7A": 9876,
+                "X86_64": 9876,
+                "X86": 9876
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.ozon.app.android",
+          "name": "Ozon",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.wildberries.ru",
+          "name": "Wildberries",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "7.8.3002-rustore",
+              "versionCodes": {
+                "ARM64_V8A": 61085,
+                "ARMEABI_V7A": 61085,
+                "X86_64": 61085,
+                "X86": 61085
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.avito.android",
+          "name": "Avito",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "234.5",
+              "versionCodes": {
+                "ARM64_V8A": 3561,
+                "ARMEABI_V7A": 3561,
+                "X86_64": 3561,
+                "X86": 3561
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.aliexpress.buyer",
+          "name": "AliExpress",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "8.89.1.3597464",
+              "versionCodes": {
+                "ARM64_V8A": 844,
+                "ARMEABI_V7A": 844,
+                "X86_64": 844,
+                "X86": 844
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.perekrestok.app",
+          "name": "Perekrestok",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "3.99.0",
+              "versionCodes": {
+                "ARM64_V8A": 4128,
+                "ARMEABI_V7A": 4128,
+                "X86_64": 4128,
+                "X86": 4128
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.punicapp.whoosh",
+          "name": "Whoosh",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "4.0.0",
+              "versionCodes": {
+                "ARM64_V8A": 418060,
+                "ARMEABI_V7A": 418060,
+                "X86_64": 418060,
+                "X86": 418060
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.idamob.tinkoff.android",
+          "name": "T-Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "8.4.2",
+              "versionCodes": {
+                "ARM64_V8A": 13282,
+                "ARMEABI_V7A": 13282,
+                "X86_64": 13282,
+                "X86": 13282
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.mail",
+          "name": "Yandex Mail",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "9.30.1",
+              "versionCodes": {
+                "ARM64_V8A": 125935,
+                "ARMEABI_V7A": 125935,
+                "X86_64": 125935,
+                "X86": 125935
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.beeline.services",
+          "name": "Beeline",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.48.5",
+              "versionCodes": {
+                "ARM64_V8A": 4391,
+                "ARMEABI_V7A": 4391,
+                "X86_64": 4391,
+                "X86": 4391
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.mts.mymts",
+          "name": "MTS",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "6.77",
+              "versionCodes": {
+                "ARM64_V8A": 150770030,
+                "ARMEABI_V7A": 150770030,
+                "X86_64": 150770030,
+                "X86": 150770030
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.megafon.mlk",
+          "name": "MegaFon",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "4.69.0",
+              "versionCodes": {
+                "ARM64_V8A": 42400548,
+                "ARMEABI_V7A": 42400548,
+                "X86_64": 42400548,
+                "X86": 42400548
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
       "options": []
     },
     {
@@ -752,6 +1351,49 @@
       "category": null,
       "dependencies": [],
       "compatiblePackages": null,
+      "options": []
+    },
+    {
+      "name": "Disable KFP fraud prevention",
+      "description": "Disables RuTube's bundled device-fingerprinting/anti-fraud SDK (VPN, root, ad-ID, device-ID, USB-debug and call-state detection) by no-opping its single activation entry point and disabling its call-monitoring service.",
+      "default": true,
+      "category": null,
+      "dependencies": [
+        "ResourcePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "ru.rutube.app",
+          "name": "RuTube",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#7B2FF7",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "31.17.2-rustore",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "31.14.2-rustore",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
       "options": []
     },
     {
@@ -1464,57 +2106,6 @@
       ],
       "compatiblePackages": [
         {
-          "packageName": "com.avito.android",
-          "name": "Avito",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "targets": [
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        },
-        {
-          "packageName": "com.idamob.tinkoff.android",
-          "name": "T-Bank",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "targets": [
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        },
-        {
-          "packageName": "ru.ozon.app.android",
-          "name": "Ozon",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "targets": [
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        },
-        {
           "packageName": "ru.ozon.fintech.finance",
           "name": "Ozon Bank",
           "description": null,
@@ -1532,59 +2123,8 @@
           ]
         },
         {
-          "packageName": "ru.oneme.app",
-          "name": "MAX",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "targets": [
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        },
-        {
           "packageName": "com.vk.vkvideo",
           "name": "VK Video",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "targets": [
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        },
-        {
-          "packageName": "ru.sberbankmobile",
-          "name": "Sberbank",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "targets": [
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        },
-        {
-          "packageName": "com.wildberries.ru",
-          "name": "Wildberries",
           "description": null,
           "apkFileType": null,
           "appIconColor": null,
@@ -1627,6 +2167,534 @@
             {
               "version": null,
               "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.music",
+          "name": "Yandex Music",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "2026.09.5 #167.1rur",
+              "versionCodes": {
+                "ARM64_V8A": 24026502,
+                "ARMEABI_V7A": 24026502,
+                "X86_64": 24026502,
+                "X86": 24026502
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.yandexmaps",
+          "name": "Yandex Maps",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "31.1.3",
+              "versionCodes": {
+                "ARM64_V8A": 739706910,
+                "ARMEABI_V7A": 739706910,
+                "X86_64": 739706910,
+                "X86": 739706910
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.taxi",
+          "name": "Yandex Go",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.98.0",
+              "versionCodes": {
+                "ARM64_V8A": 30128554,
+                "ARMEABI_V7A": 30128554,
+                "X86_64": 30128554,
+                "X86": 30128554
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.rasp",
+          "name": "Yandex Rasp",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "3.73.0",
+              "versionCodes": {
+                "ARM64_V8A": 35000063,
+                "ARMEABI_V7A": 35000063,
+                "X86_64": 35000063,
+                "X86": 35000063
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.yandex.bank",
+          "name": "Yandex Pay",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "0.243.0",
+              "versionCodes": {
+                "ARM64_V8A": 11920,
+                "ARMEABI_V7A": 11920,
+                "X86_64": 11920,
+                "X86": 11920
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.sberbankmobile",
+          "name": "Sberbank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "17.13.0",
+              "versionCodes": {
+                "ARM64_V8A": 2026062316,
+                "ARMEABI_V7A": 2026062316,
+                "X86_64": 2026062316,
+                "X86": 2026062316
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.alfabank.mobile.android",
+          "name": "Alfa-Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "12.60.07",
+              "versionCodes": {
+                "ARM64_V8A": 2042600700,
+                "ARMEABI_V7A": 2042600700,
+                "X86_64": 2042600700,
+                "X86": 2042600700
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.vtb24.mobilebanking.android",
+          "name": "VTB Online",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "20.18.1.3",
+              "versionCodes": {
+                "ARM64_V8A": 2090141585,
+                "ARMEABI_V7A": 2090141585,
+                "X86_64": 2090141585,
+                "X86": 2090141585
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.nspk.mirpay",
+          "name": "Mir Pay",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "1.64.5.350",
+              "versionCodes": {
+                "ARM64_V8A": 405,
+                "ARMEABI_V7A": 405,
+                "X86_64": 405,
+                "X86": 405
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.dublgis.dgismobile",
+          "name": "2GIS",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "7.29.1.632.4",
+              "versionCodes": {
+                "ARM64_V8A": 282010632,
+                "ARMEABI_V7A": 282010632,
+                "X86_64": 282010632,
+                "X86": 282010632
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.zvooq.openplay",
+          "name": "Zvuk",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "4.117.0rs",
+              "versionCodes": {
+                "ARM64_V8A": 511700129,
+                "ARMEABI_V7A": 511700129,
+                "X86_64": 511700129,
+                "X86": 511700129
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.oneme.app",
+          "name": "MAX",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.35.0",
+              "versionCodes": {
+                "ARM64_V8A": 6861,
+                "ARMEABI_V7A": 6861,
+                "X86_64": 6861,
+                "X86": 6861
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.rostel",
+          "name": "Gosuslugi",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "27.1.0.9876-rustore",
+              "versionCodes": {
+                "ARM64_V8A": 9876,
+                "ARMEABI_V7A": 9876,
+                "X86_64": 9876,
+                "X86": 9876
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.ozon.app.android",
+          "name": "Ozon",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.wildberries.ru",
+          "name": "Wildberries",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "7.8.3002-rustore",
+              "versionCodes": {
+                "ARM64_V8A": 61085,
+                "ARMEABI_V7A": 61085,
+                "X86_64": 61085,
+                "X86": 61085
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.avito.android",
+          "name": "Avito",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "234.5",
+              "versionCodes": {
+                "ARM64_V8A": 3561,
+                "ARMEABI_V7A": 3561,
+                "X86_64": 3561,
+                "X86": 3561
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.aliexpress.buyer",
+          "name": "AliExpress",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "8.89.1.3597464",
+              "versionCodes": {
+                "ARM64_V8A": 844,
+                "ARMEABI_V7A": 844,
+                "X86_64": 844,
+                "X86": 844
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.perekrestok.app",
+          "name": "Perekrestok",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "3.99.0",
+              "versionCodes": {
+                "ARM64_V8A": 4128,
+                "ARMEABI_V7A": 4128,
+                "X86_64": 4128,
+                "X86": 4128
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.punicapp.whoosh",
+          "name": "Whoosh",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "4.0.0",
+              "versionCodes": {
+                "ARM64_V8A": 418060,
+                "ARMEABI_V7A": 418060,
+                "X86_64": 418060,
+                "X86": 418060
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.idamob.tinkoff.android",
+          "name": "T-Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "8.4.2",
+              "versionCodes": {
+                "ARM64_V8A": 13282,
+                "ARMEABI_V7A": 13282,
+                "X86_64": 13282,
+                "X86": 13282
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.mail",
+          "name": "Yandex Mail",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "9.30.1",
+              "versionCodes": {
+                "ARM64_V8A": 125935,
+                "ARMEABI_V7A": 125935,
+                "X86_64": 125935,
+                "X86": 125935
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.beeline.services",
+          "name": "Beeline",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.48.5",
+              "versionCodes": {
+                "ARM64_V8A": 4391,
+                "ARMEABI_V7A": 4391,
+                "X86_64": 4391,
+                "X86": 4391
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.mts.mymts",
+          "name": "MTS",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "6.77",
+              "versionCodes": {
+                "ARM64_V8A": 150770030,
+                "ARMEABI_V7A": 150770030,
+                "X86_64": 150770030,
+                "X86": 150770030
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.megafon.mlk",
+          "name": "MegaFon",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "4.69.0",
+              "versionCodes": {
+                "ARM64_V8A": 42400548,
+                "ARMEABI_V7A": 42400548,
+                "X86_64": 42400548,
+                "X86": 42400548
+              },
               "isExperimental": false,
               "minSdk": null,
               "description": null
@@ -1644,57 +2712,6 @@
       "dependencies": [],
       "compatiblePackages": [
         {
-          "packageName": "com.avito.android",
-          "name": "Avito",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "targets": [
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        },
-        {
-          "packageName": "com.idamob.tinkoff.android",
-          "name": "T-Bank",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "targets": [
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        },
-        {
-          "packageName": "ru.ozon.app.android",
-          "name": "Ozon",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "targets": [
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        },
-        {
           "packageName": "ru.ozon.fintech.finance",
           "name": "Ozon Bank",
           "description": null,
@@ -1712,59 +2729,8 @@
           ]
         },
         {
-          "packageName": "ru.oneme.app",
-          "name": "MAX",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "targets": [
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        },
-        {
           "packageName": "com.vk.vkvideo",
           "name": "VK Video",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "targets": [
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        },
-        {
-          "packageName": "ru.sberbankmobile",
-          "name": "Sberbank",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "targets": [
-            {
-              "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        },
-        {
-          "packageName": "com.wildberries.ru",
-          "name": "Wildberries",
           "description": null,
           "apkFileType": null,
           "appIconColor": null,
@@ -1807,6 +2773,534 @@
             {
               "version": null,
               "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.music",
+          "name": "Yandex Music",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "2026.09.5 #167.1rur",
+              "versionCodes": {
+                "ARM64_V8A": 24026502,
+                "ARMEABI_V7A": 24026502,
+                "X86_64": 24026502,
+                "X86": 24026502
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.yandexmaps",
+          "name": "Yandex Maps",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "31.1.3",
+              "versionCodes": {
+                "ARM64_V8A": 739706910,
+                "ARMEABI_V7A": 739706910,
+                "X86_64": 739706910,
+                "X86": 739706910
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.taxi",
+          "name": "Yandex Go",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.98.0",
+              "versionCodes": {
+                "ARM64_V8A": 30128554,
+                "ARMEABI_V7A": 30128554,
+                "X86_64": 30128554,
+                "X86": 30128554
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.rasp",
+          "name": "Yandex Rasp",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "3.73.0",
+              "versionCodes": {
+                "ARM64_V8A": 35000063,
+                "ARMEABI_V7A": 35000063,
+                "X86_64": 35000063,
+                "X86": 35000063
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.yandex.bank",
+          "name": "Yandex Pay",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "0.243.0",
+              "versionCodes": {
+                "ARM64_V8A": 11920,
+                "ARMEABI_V7A": 11920,
+                "X86_64": 11920,
+                "X86": 11920
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.sberbankmobile",
+          "name": "Sberbank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "17.13.0",
+              "versionCodes": {
+                "ARM64_V8A": 2026062316,
+                "ARMEABI_V7A": 2026062316,
+                "X86_64": 2026062316,
+                "X86": 2026062316
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.alfabank.mobile.android",
+          "name": "Alfa-Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "12.60.07",
+              "versionCodes": {
+                "ARM64_V8A": 2042600700,
+                "ARMEABI_V7A": 2042600700,
+                "X86_64": 2042600700,
+                "X86": 2042600700
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.vtb24.mobilebanking.android",
+          "name": "VTB Online",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "20.18.1.3",
+              "versionCodes": {
+                "ARM64_V8A": 2090141585,
+                "ARMEABI_V7A": 2090141585,
+                "X86_64": 2090141585,
+                "X86": 2090141585
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.nspk.mirpay",
+          "name": "Mir Pay",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "1.64.5.350",
+              "versionCodes": {
+                "ARM64_V8A": 405,
+                "ARMEABI_V7A": 405,
+                "X86_64": 405,
+                "X86": 405
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.dublgis.dgismobile",
+          "name": "2GIS",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "7.29.1.632.4",
+              "versionCodes": {
+                "ARM64_V8A": 282010632,
+                "ARMEABI_V7A": 282010632,
+                "X86_64": 282010632,
+                "X86": 282010632
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.zvooq.openplay",
+          "name": "Zvuk",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "4.117.0rs",
+              "versionCodes": {
+                "ARM64_V8A": 511700129,
+                "ARMEABI_V7A": 511700129,
+                "X86_64": 511700129,
+                "X86": 511700129
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.oneme.app",
+          "name": "MAX",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.35.0",
+              "versionCodes": {
+                "ARM64_V8A": 6861,
+                "ARMEABI_V7A": 6861,
+                "X86_64": 6861,
+                "X86": 6861
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.rostel",
+          "name": "Gosuslugi",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "27.1.0.9876-rustore",
+              "versionCodes": {
+                "ARM64_V8A": 9876,
+                "ARMEABI_V7A": 9876,
+                "X86_64": 9876,
+                "X86": 9876
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.ozon.app.android",
+          "name": "Ozon",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "19.38.0",
+              "versionCodes": {
+                "ARM64_V8A": 2721,
+                "ARMEABI_V7A": 2721,
+                "X86_64": 2721,
+                "X86": 2721
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.wildberries.ru",
+          "name": "Wildberries",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "7.8.3002-rustore",
+              "versionCodes": {
+                "ARM64_V8A": 61085,
+                "ARMEABI_V7A": 61085,
+                "X86_64": 61085,
+                "X86": 61085
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.avito.android",
+          "name": "Avito",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "234.5",
+              "versionCodes": {
+                "ARM64_V8A": 3561,
+                "ARMEABI_V7A": 3561,
+                "X86_64": 3561,
+                "X86": 3561
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.aliexpress.buyer",
+          "name": "AliExpress",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "8.89.1.3597464",
+              "versionCodes": {
+                "ARM64_V8A": 844,
+                "ARMEABI_V7A": 844,
+                "X86_64": 844,
+                "X86": 844
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.perekrestok.app",
+          "name": "Perekrestok",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "3.99.0",
+              "versionCodes": {
+                "ARM64_V8A": 4128,
+                "ARMEABI_V7A": 4128,
+                "X86_64": 4128,
+                "X86": 4128
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.punicapp.whoosh",
+          "name": "Whoosh",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "4.0.0",
+              "versionCodes": {
+                "ARM64_V8A": 418060,
+                "ARMEABI_V7A": 418060,
+                "X86_64": 418060,
+                "X86": 418060
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.idamob.tinkoff.android",
+          "name": "T-Bank",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "8.4.2",
+              "versionCodes": {
+                "ARM64_V8A": 13282,
+                "ARMEABI_V7A": 13282,
+                "X86_64": 13282,
+                "X86": 13282
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.yandex.mail",
+          "name": "Yandex Mail",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "9.30.1",
+              "versionCodes": {
+                "ARM64_V8A": 125935,
+                "ARMEABI_V7A": 125935,
+                "X86_64": 125935,
+                "X86": 125935
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.beeline.services",
+          "name": "Beeline",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.48.5",
+              "versionCodes": {
+                "ARM64_V8A": 4391,
+                "ARMEABI_V7A": 4391,
+                "X86_64": 4391,
+                "X86": 4391
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.mts.mymts",
+          "name": "MTS",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "6.77",
+              "versionCodes": {
+                "ARM64_V8A": 150770030,
+                "ARMEABI_V7A": 150770030,
+                "X86_64": 150770030,
+                "X86": 150770030
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "ru.megafon.mlk",
+          "name": "MegaFon",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "4.69.0",
+              "versionCodes": {
+                "ARM64_V8A": 42400548,
+                "ARMEABI_V7A": 42400548,
+                "X86_64": 42400548,
+                "X86": 42400548
+              },
               "isExperimental": false,
               "minSdk": null,
               "description": null

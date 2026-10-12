@@ -2,6 +2,7 @@
 package app.privacy.patches.analytics.jl4ctuk
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
+import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
@@ -30,17 +31,131 @@ private val logger = Logger.getLogger("DisableAnalytics")
  * leaving this "shared, invisible" and relying on being `dependsOn`-ed, is what actually
  * makes it run in the apps that need it instead of silently never executing.
  */
-private val DISABLE_ANALYTICS_COMPATIBILITY = arrayOf(
-    Compatibility(packageName = "com.avito.android", name = "Avito"),
-    Compatibility(packageName = "com.idamob.tinkoff.android", name = "T-Bank"),
-    Compatibility(packageName = "ru.ozon.app.android", name = "Ozon"),
+internal val DISABLE_ANALYTICS_COMPATIBILITY = arrayOf(
     Compatibility(packageName = "ru.ozon.fintech.finance", name = "Ozon Bank"),
-    Compatibility(packageName = "ru.oneme.app", name = "MAX"),
     Compatibility(packageName = "com.vk.vkvideo", name = "VK Video"),
-    Compatibility(packageName = "ru.sberbankmobile", name = "Sberbank"),
-    Compatibility(packageName = "com.wildberries.ru", name = "Wildberries"),
     Compatibility(packageName = "ru.rutube.app", name = "RuTube"),
     Compatibility(packageName = "ru.vk.store", name = "RuStore"),
+    Compatibility(
+        packageName = "ru.yandex.music",
+        name = "Yandex Music",
+        targets = listOf(AppTarget(version = "2026.09.5 #167.1rur", versionCode = 24026502)),
+    ),
+    Compatibility(
+        packageName = "ru.yandex.yandexmaps",
+        name = "Yandex Maps",
+        targets = listOf(AppTarget(version = "31.1.3", versionCode = 739706910)),
+    ),
+    Compatibility(
+        packageName = "ru.yandex.taxi",
+        name = "Yandex Go",
+        targets = listOf(AppTarget(version = "5.98.0", versionCode = 30128554)),
+    ),
+    Compatibility(
+        packageName = "ru.yandex.rasp",
+        name = "Yandex Rasp",
+        targets = listOf(AppTarget(version = "3.73.0", versionCode = 35000063)),
+    ),
+    Compatibility(
+        packageName = "com.yandex.bank",
+        name = "Yandex Pay",
+        targets = listOf(AppTarget(version = "0.243.0", versionCode = 11920)),
+    ),
+    Compatibility(
+        packageName = "ru.sberbankmobile",
+        name = "Sberbank",
+        targets = listOf(AppTarget(version = "17.13.0", versionCode = 2026062316)),
+    ),
+    Compatibility(
+        packageName = "ru.alfabank.mobile.android",
+        name = "Alfa-Bank",
+        targets = listOf(AppTarget(version = "12.60.07", versionCode = 2042600700)),
+    ),
+    Compatibility(
+        packageName = "ru.vtb24.mobilebanking.android",
+        name = "VTB Online",
+        targets = listOf(AppTarget(version = "20.18.1.3", versionCode = 2090141585)),
+    ),
+    Compatibility(
+        packageName = "ru.nspk.mirpay",
+        name = "Mir Pay",
+        targets = listOf(AppTarget(version = "1.64.5.350", versionCode = 405)),
+    ),
+    Compatibility(
+        packageName = "ru.dublgis.dgismobile",
+        name = "2GIS",
+        targets = listOf(AppTarget(version = "7.29.1.632.4", versionCode = 282010632)),
+    ),
+    Compatibility(
+        packageName = "com.zvooq.openplay",
+        name = "Zvuk",
+        targets = listOf(AppTarget(version = "4.117.0rs", versionCode = 511700129)),
+    ),
+    Compatibility(
+        packageName = "ru.oneme.app",
+        name = "MAX",
+        targets = listOf(AppTarget(version = "26.35.0", versionCode = 6861)),
+    ),
+    Compatibility(
+        packageName = "ru.rostel",
+        name = "Gosuslugi",
+        targets = listOf(AppTarget(version = "27.1.0.9876-rustore", versionCode = 9876)),
+    ),
+    Compatibility(
+        packageName = "ru.ozon.app.android",
+        name = "Ozon",
+        targets = listOf(AppTarget(version = "19.38.0", versionCode = 2721)),
+    ),
+    Compatibility(
+        packageName = "com.wildberries.ru",
+        name = "Wildberries",
+        targets = listOf(AppTarget(version = "7.8.3002-rustore", versionCode = 61085)),
+    ),
+    Compatibility(
+        packageName = "com.avito.android",
+        name = "Avito",
+        targets = listOf(AppTarget(version = "234.5", versionCode = 3561)),
+    ),
+    Compatibility(
+        packageName = "ru.aliexpress.buyer",
+        name = "AliExpress",
+        targets = listOf(AppTarget(version = "8.89.1.3597464", versionCode = 844)),
+    ),
+    Compatibility(
+        packageName = "ru.perekrestok.app",
+        name = "Perekrestok",
+        targets = listOf(AppTarget(version = "3.99.0", versionCode = 4128)),
+    ),
+    Compatibility(
+        packageName = "com.punicapp.whoosh",
+        name = "Whoosh",
+        targets = listOf(AppTarget(version = "4.0.0", versionCode = 418060)),
+    ),
+    Compatibility(
+        packageName = "com.idamob.tinkoff.android",
+        name = "T-Bank",
+        targets = listOf(AppTarget(version = "8.4.2", versionCode = 13282)),
+    ),
+    Compatibility(
+        packageName = "ru.yandex.mail",
+        name = "Yandex Mail",
+        targets = listOf(AppTarget(version = "9.30.1", versionCode = 125935)),
+    ),
+    Compatibility(
+        packageName = "ru.beeline.services",
+        name = "Beeline",
+        targets = listOf(AppTarget(version = "5.48.5", versionCode = 4391)),
+    ),
+    Compatibility(
+        packageName = "ru.mts.mymts",
+        name = "MTS",
+        targets = listOf(AppTarget(version = "6.77", versionCode = 150770030)),
+    ),
+    Compatibility(
+        packageName = "ru.megafon.mlk",
+        name = "MegaFon",
+        targets = listOf(AppTarget(version = "4.69.0", versionCode = 42400548)),
+    ),
 )
 
 private const val APP_METRICA_API_CLASS = "Lio/appmetrica/analytics/AppMetrica;"
@@ -376,22 +491,6 @@ val disableAnalyticsDependency = bytecodePatch(
         if (reporterCandidates.isEmpty()) {
             logger.info("AppMetrica reporter implementations: not found")
         } else {
-            if (reporterCandidates.size != 4) {
-                throw PatchException(
-                    "Expected four AppMetrica reporter implementations, " +
-                        "found ${reporterCandidates.size}",
-                )
-            }
-            val abstractReporterCandidates = reporterCandidates
-                .filterValues { isAbstract -> isAbstract }
-                .keys
-            if (abstractReporterCandidates.size != 1) {
-                throw PatchException(
-                    "Expected one abstract AppMetrica reporter base, " +
-                        "found ${abstractReporterCandidates.size}",
-                )
-            }
-
             val reporterTypes = reporterCandidates.keys.toMutableSet()
             while (true) {
                 val descendants = classHierarchy
@@ -399,40 +498,17 @@ val disableAnalyticsDependency = bytecodePatch(
                     .keys - reporterTypes
                 if (!reporterTypes.addAll(descendants)) break
             }
-            val abstractReporterBase = abstractReporterCandidates.single()
-            fun isDescendantOf(type: String, ancestor: String): Boolean {
-                var currentType: String? = type
-                val visitedTypes = mutableSetOf<String>()
-                while (currentType != null && visitedTypes.add(currentType)) {
-                    currentType = classHierarchy[currentType]
-                    if (currentType == ancestor) return true
-                }
-                return false
-            }
-
-            val inheritedReporterTypes = reporterTypes - reporterCandidates.keys
-            val abstractBaseDescendants = inheritedReporterTypes.filter { reporterType ->
-                isDescendantOf(reporterType, abstractReporterBase)
-            }
-            val reporterRootsWithDescendants = reporterCandidates.keys.count { reporterRoot ->
-                inheritedReporterTypes.any { reporterType ->
-                    isDescendantOf(reporterType, reporterRoot)
-                }
-            }
-            if (
-                inheritedReporterTypes.size != 3 ||
-                abstractBaseDescendants.size != 2 ||
-                reporterRootsWithDescendants != 2 ||
-                reporterTypes.size != 7
-            ) {
-                throw PatchException(
-                    "Unexpected AppMetrica reporter hierarchy: " +
-                        "${inheritedReporterTypes.size} inherited reporters, " +
-                        "${abstractBaseDescendants.size} abstract-base descendants, " +
-                        "$reporterRootsWithDescendants roots with descendants, and " +
-                        "${reporterTypes.size} covered classes",
-                )
-            }
+            // AppMetrica's R8 output is version-dependent: releases have shipped with
+            // different numbers of reporter roots and synthetic subclasses. The old
+            // implementation required exactly 4 roots / 7 covered classes, which made a
+            // valid newer Yandex Music APK fail with "found 7" before any method was patched.
+            // Candidate classes are already constrained by the full reporter signature set;
+            // patch those candidates and their direct/inherited descendants, while retaining
+            // the non-empty and method-level checks below as the safety boundary.
+            logger.info(
+                "AppMetrica reporter hierarchy: ${reporterCandidates.size} matching roots, " +
+                    "${reporterTypes.size} covered classes",
+            )
 
             reporterTypes.forEach { reporterType ->
                 val methods = mutableClassDefBy(reporterType).methods
