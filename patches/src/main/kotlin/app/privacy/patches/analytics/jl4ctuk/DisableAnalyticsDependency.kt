@@ -159,6 +159,7 @@ internal val DISABLE_ANALYTICS_COMPATIBILITY = arrayOf(
 )
 
 private const val APP_METRICA_API_CLASS = "Lio/appmetrica/analytics/AppMetrica;"
+private const val APP_METRICA_CONFIG_CLASS = "Lio/appmetrica/analytics/AppMetricaConfig;"
 private const val APP_METRICA_LIBRARY_ADAPTER_CLASS =
     "Lio/appmetrica/analytics/AppMetricaLibraryAdapter;"
 private const val APP_METRICA_MODULES_FACADE_CLASS =
@@ -199,6 +200,47 @@ private fun Method.isPublicVoidImplementation() =
 
 private fun MutableMethod.disable() {
     addInstructions(0, "return-void")
+}
+
+private fun MutableMethod.injectBeforeFinalReturnVoid(instructions: String) {
+    val methodInstructions = implementation?.instructions
+        ?: throw PatchException("${name} has no implementation")
+    if (methodInstructions.lastOrNull()?.opcode?.name?.startsWith("return-") != true) {
+        throw PatchException(
+            "${name} ends with ${methodInstructions.lastOrNull()?.opcode?.name ?: "no instruction"}; " +
+                "refusing unsafe instrumentation",
+        )
+    }
+    addInstructions(methodInstructions.size - 1, instructions)
+}
+
+private fun MutableMethod.forceAppMetricaActivationDataSendingOff() {
+    if (signature().parameters != listOf("Landroid/content/Context;", APP_METRICA_CONFIG_CLASS)) {
+        return
+    }
+    addInstructions(
+        0,
+        """
+            sget-object v0, Ljava/lang/Boolean;->FALSE:Ljava/lang/Boolean;
+            iput-object v0, p1, $APP_METRICA_CONFIG_CLASS->dataSendingEnabled:Ljava/lang/Boolean;
+        """,
+    )
+}
+
+private fun MutableMethod.disableAppMetricaDataSending() {
+    if (signature() != MethodSignature("setDataSendingEnabled", listOf("Z"))) {
+        throw PatchException("Unexpected AppMetrica data-sending setter signature")
+    }
+    addInstructions(0, "const/4 p0, 0x0")
+}
+
+private fun MutableMethod.disableAppMetricaDataSendingAfterActivation() {
+    injectBeforeFinalReturnVoid(
+        """
+            const/4 p0, 0x0
+            invoke-static {p0}, $APP_METRICA_API_CLASS->setDataSendingEnabled(Z)V
+        """,
+    )
 }
 
 private val appMetricaFacadeRequirements = mapOf(
@@ -429,7 +471,21 @@ val disableAnalyticsDependency = bytecodePatch(
                         "AppMetrica facade ${classDef.type} has no public void methods",
                     )
                 }
-                methods.forEach(MutableMethod::disable)
+                methods.forEach { method ->
+                    when {
+                        classDef.type == APP_METRICA_API_CLASS && method.name == "activate" -> {
+                            method.forceAppMetricaActivationDataSendingOff()
+                            method.disableAppMetricaDataSendingAfterActivation()
+                        }
+
+                        classDef.type == APP_METRICA_API_CLASS &&
+                            method.signature() == MethodSignature("setDataSendingEnabled", listOf("Z")) -> {
+                            method.disableAppMetricaDataSending()
+                        }
+
+                        else -> method.disable()
+                    }
+                }
                 patchedFacadeCounts[classDef.type] = methods.size
             }
 
