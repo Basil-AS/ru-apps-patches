@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/Basil-AS/ru-apps-patches/compare/v1.3.0...v1.3.1) (2026-10-13)
+
+### 🐛 Bug Fixes
+
+* **analytics:** preserve AppMetrica activation with sending disabled ([ab7d269](https://github.com/Basil-AS/ru-apps-patches/commit/ab7d269e7483dd728cc5db06584de9b0e660ba60))
+
 ## [1.3.0](https://github.com/Basil-AS/ru-apps-patches/compare/v1.2.0...v1.3.0) (2026-10-12)
 
 ### 🐛 Bug Fixes
