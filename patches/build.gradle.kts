@@ -29,6 +29,7 @@ tasks {
 
         classpath = sourceSets["main"].runtimeClasspath + patchListGeneratorClasspath
         mainClass.set("util.PatchListGeneratorKt")
+        systemProperty("patches.version", project.version.toString())
     }
 
     // Used by gradle-semantic-release-plugin.

@@ -2,13 +2,13 @@
 
 ## Result and limits
 
-The exact 24-package source matrix was revalidated through the project downloader and all 24 targets were repatched from the verified originals with the current bundle. The runner reported successful PATCHING, REBUILDING and SIGNING steps, no failed patches, and passed per-output SHA-256, `apksigner verify`, package/version/versionCode (`aapt dump badging`) and ZIP checks.
+The RuStore source matrix now contains 25 packages and strict source verification passes 25/25. The original 24 targets were patched and checked in the main batch; Яндекс Погода was added afterward as an exact-version target (`26.10.10`, code `260100010`) and patched separately with the same privacy-only set. All 17 standalone APKs and eight complete split APK sets are available unpacked under the working-tree `artifacts/` directory. Morphe steps, package/version/versionCode, SHA-256, APK signatures and ZIP integrity were checked.
 
 This is static artifact validation, not a claim that all apps launch without errors. An isolated Android 16 emulator could not be brought online: QEMU terminated with SIGSEGV before ADB became available with both SwiftShader and GPU-off modes. Previous smoke results belong to the earlier AppMetrica patch and do not verify these rebuilt outputs.
 
-Eight sources are split APK sets. This run patches only each base APK; those outputs are not complete installable bundles. Every output is signed with the Morphe certificate, not the original RuStore developer certificate, so it cannot update an official installation in place. Do not install financial-app outputs over existing installations.
+Eight sources are split APK sets. Their patched base APK and source configuration APK parts are signed with the same Morphe certificate and packaged as complete sets in `artifacts/ru-apps-split-20261014/`; installation was not run. Every output uses the Morphe certificate, not the original RuStore developer certificate, so it cannot update an official installation in place. Do not install financial-app outputs over existing installations.
 
-Artifacts, per-app JSON/logs, `manifest_draft.json` and `batch_report.md` are on the workstation under `/var/mnt/data/ru-apps-patched-20261012/`; APK binaries are not committed to GitHub.
+APK files are available directly in the working tree: standalone outputs and reports in `artifacts/ru-apps-patched-20261014/`, split sets in `artifacts/ru-apps-split-20261014/`. The combined index is `artifacts/ru-apps-patched-20261014/manifest.json`. Patch source and compatibility targets are versioned in GitHub; generated APK binaries remain local artifacts.
 
 ## Patch selection
 
@@ -22,6 +22,7 @@ The run used `--exclusive` with `Disable AppsFlyer`, `Disable analytics librarie
 | Яндекс Карты | `ru.yandex.yandexmaps` | `31.1.3` / `739706910` | Disable AppsFlyer; Disable analytics libraries; Disable analytics manifest components | `ru.yandex.yandexmaps.apk` | Один APK; запуск не проверен | `8396043e8ae0258c7ac7898a02a3e9ed691adb77359b7ec38040c9c8b804d9ea` |
 | Яндекс Go / Taxi | `ru.yandex.taxi` | `5.98.0` / `30128554` | Disable AppsFlyer; Disable analytics libraries; Disable analytics manifest components | `ru.yandex.taxi.apk` | Один APK; запуск не проверен | `e64fc7ea1483b49bc799e7f10ce39231059c7b9ee5ad0e36b743cb62c474a266` |
 | Яндекс Расписания | `ru.yandex.rasp` | `3.73.0` / `35000063` | Disable AppsFlyer; Disable analytics libraries; Disable analytics manifest components | `ru.yandex.rasp.apk` | Один APK; запуск не проверен | `55214be05a49af5af2a4bf18482f4b0bd985b0ab8e5595593fb837bd83e9525c` |
+| Яндекс Погода | `ru.yandex.weatherplugin` | `26.10.10` / `260100010` | Disable AppsFlyer; Disable analytics libraries; Disable analytics manifest components | `ru.yandex.weatherplugin/ru.yandex.weatherplugin.apk` | Один APK; запуск не проверен | `f66ec5016769d5985e2966f1d348ff2110497a1d4fe1638c2bb7281f63c8ef90` |
 | Яндекс Пэй | `com.yandex.bank` | `0.243.0` / `11920` | Disable AppsFlyer; Disable analytics libraries; Disable analytics manifest components | `com.yandex.bank.apk` | Один APK; запуск не проверен | `9ea47df69f16b6bc927bf46b814f775b1e646b3518b45492cb85761ee79c8d62` |
 | СберБанк | `ru.sberbankmobile` | `17.13.0` / `2026062316` | Disable AppsFlyer; Disable Sberbank advertising ID; Disable analytics libraries; Disable analytics manifest components | `ru.sberbankmobile.patched-base.apk` | **Неполный комплект:** patched base only | `c928f2f8c7424a11fcb42538e64fc0d6b0589caa211ea3c304e02371daa620ed` |
 | Альфа-Банк | `ru.alfabank.mobile.android` | `12.60.07` / `2042600700` | Disable AppsFlyer; Disable analytics libraries; Disable analytics manifest components | `ru.alfabank.mobile.android.apk` | Один APK; запуск не проверен | `4e4dc57095c59290c5904b673535f91eb6201ca5640d6f0b275ad62acbda2313` |
@@ -45,9 +46,10 @@ The run used `--exclusive` with `Disable AppsFlyer`, `Disable analytics librarie
 
 ## Verification evidence
 
-- RuStore source files and package/version/versionCode/SHA-256: `research/ru_apps_expansion.tsv` and `scripts/verify_rustore_downloads.py`.
-- Current run: 24/24 successful in `manifest_draft.json`; each row records the source APK hashes, applied patch names and output hash.
+- RuStore source files and package/version/versionCode/SHA-256: `research/ru_apps_expansion.tsv` and `scripts/verify_rustore_downloads.py` (25/25 verified).
+- The 24-target batch is recorded in the batch manifest and copied per-app reports; Яндекс Погода has its own Morphe and verification reports. The combined in-worktree manifest indexes all 25 targets and their output hashes. Final verification passed for all 41 APK files (17 standalone plus 24 split parts): SHA-256, signer, package/version metadata and ZIP structure.
 - AppMetrica regression check on Yandex Maps output: `apkanalyzer dex code` shows `activate(Context, AppMetricaConfig)` sets `dataSendingEnabled=false`, calls the original SDK activation, then calls `setDataSendingEnabled(false)`. The setter forces its argument to false before its SDK call.
-- A source DEX check found `io.appmetrica.analytics.AppMetrica.setDataSendingEnabled(Z)V` in all 16 targets containing the AppMetrica facade. The other eight targets contain no `io.appmetrica.analytics.AppMetrica` facade.
+- Яндекс Погода AppMetrica regression check: the same DEX inspection confirms original activation is preserved with sending disabled before/after activation, and the setter forces `false`.
+- A source DEX check found `io.appmetrica.analytics.AppMetrica.setDataSendingEnabled(Z)V` in all 17 targets containing the AppMetrica facade. The other eight targets contain no `io.appmetrica.analytics.AppMetrica` facade.
 - Runtime launch, login, account, map-route, order, payment, notifications and deep-link flows are not verified for these rebuilt outputs. No financial/account flow was used.
 - RuStore downloader project: https://github.com/Basil-AS/rustore-downloader; its documented API can return APK or split APK sources.

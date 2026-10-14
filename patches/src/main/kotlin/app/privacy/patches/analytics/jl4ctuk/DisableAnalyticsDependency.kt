@@ -57,6 +57,11 @@ internal val DISABLE_ANALYTICS_COMPATIBILITY = arrayOf(
         targets = listOf(AppTarget(version = "3.73.0", versionCode = 35000063)),
     ),
     Compatibility(
+        packageName = "ru.yandex.weatherplugin",
+        name = "Yandex Weather",
+        targets = listOf(AppTarget(version = "26.10.10", versionCode = 260100010)),
+    ),
+    Compatibility(
         packageName = "com.yandex.bank",
         name = "Yandex Pay",
         targets = listOf(AppTarget(version = "0.243.0", versionCode = 11920)),
