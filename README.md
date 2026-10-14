@@ -17,7 +17,7 @@
 ## 🩹 Список патчей
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.3.1](https://github.com/Basil-AS/ru-apps-patches/releases/tag/v1.3.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;177 patches total
+> **[v1.4.0](https://github.com/Basil-AS/ru-apps-patches/releases/tag/v1.4.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;176 patches total
 <details open>
 <summary>📦 Avito&nbsp;&nbsp;•&nbsp;&nbsp;12 patches</summary>
 <br>
@@ -180,7 +180,7 @@
 </details>
 
 <details open>
-<summary>📦 RuStore&nbsp;&nbsp;•&nbsp;&nbsp;17 patches</summary>
+<summary>📦 RuStore&nbsp;&nbsp;•&nbsp;&nbsp;16 patches</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
@@ -200,7 +200,6 @@
 | [Replace RuStore SDK device identifier](#replace-rustore-sdk-device-identifier) | Replaces the RuStore SDK device identifier sent with payment and session requests with the zero UUID. |  |
 | [Replace VK SDK device identifier](#replace-vk-sdk-device-identifier) | Replaces the VK SDK device fingerprint sent by VK ID and VK Pay request paths with the zero UUID. |  |
 | [Restore secure-session compatibility](#restore-secure-session-compatibility) | Preserves RuStore secure-session requests when the APK is re-signed. |  |
-| [Restrict background work to updates](#restrict-background-work-to-updates) | Keeps background workers required for update checks, downloads, patching, and installation. |  |
 | [Skip update authentication](#skip-update-authentication) | Skips the VK ID authorization suggestion shown during app installs and updates. |  |
 
 </details>

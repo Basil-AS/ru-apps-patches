@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/Basil-AS/ru-apps-patches/compare/v1.3.1...v1.4.0) (2026-10-14)
+
+### ✨ New Features
+
+* add Yandex Weather support ([588367d](https://github.com/Basil-AS/ru-apps-patches/commit/588367d584e0dabeb8a7329aa204a9552c1fe522))
+
 ## [1.3.1](https://github.com/Basil-AS/ru-apps-patches/compare/v1.3.0...v1.3.1) (2026-10-13)
 
 ### 🐛 Bug Fixes

@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -6339,57 +6339,6 @@
       "default": true,
       "category": null,
       "dependencies": [],
-      "compatiblePackages": [
-        {
-          "packageName": "ru.vk.store",
-          "name": "RuStore",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#0077FF",
-          "signatures": [
-            "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
-          ],
-          "targets": [
-            {
-              "version": "1.111.0.3",
-              "versionCodes": {
-                "ARM64_V8A": 1111003,
-                "ARMEABI_V7A": 1111003,
-                "X86_64": 1111003,
-                "X86": 1111003
-              },
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": "1.108.0.2",
-              "versionCodes": {
-                "ARM64_V8A": 1108002,
-                "ARMEABI_V7A": 1108002,
-                "X86_64": 1108002,
-                "X86": 1108002
-              },
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Restrict background work to updates",
-      "description": "Keeps background workers required for update checks, downloads, patching, and installation.",
-      "default": true,
-      "category": null,
-      "dependencies": [
-        "BytecodePatch",
-        "BytecodePatch",
-        "BytecodePatch",
-        "BytecodePatch"
-      ],
       "compatiblePackages": [
         {
           "packageName": "ru.vk.store",
