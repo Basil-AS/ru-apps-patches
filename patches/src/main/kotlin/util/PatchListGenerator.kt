@@ -10,30 +10,24 @@ import app.morphe.patcher.patch.loadPatchesFromJar
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import java.io.File
-import java.net.URLClassLoader
-import java.util.jar.Manifest
+import java.util.jar.JarFile
 
 fun main() {
-    val patchFiles = setOf(
-        File("build/libs/").listFiles { file ->
-            val fileName = file.name
-            !fileName.contains("javadoc") &&
-                    !fileName.contains("sources") &&
-                    fileName.endsWith(".mpp")
-        }!!.first()
-    )
-    val loadedPatches = loadPatchesFromJar(patchFiles)
-    val patchClassLoader = URLClassLoader(patchFiles.map { it.toURI().toURL() }.toTypedArray())
-    val manifest = patchClassLoader.getResources("META-INF/MANIFEST.MF")
-
-    while (manifest.hasMoreElements()) {
-        Manifest(manifest.nextElement().openStream())
-            .mainAttributes
-            .getValue("Version")
-            ?.let {
-                generatePatchList(it, loadedPatches)
-            }
+    val expectedVersion = System.getProperty("patches.version")
+        ?: error("Missing patches.version system property from Gradle")
+    val patchFile = File("build/libs/patches-$expectedVersion.mpp")
+    check(patchFile.isFile) {
+        "Expected current patch bundle does not exist: ${patchFile.path}"
     }
+    val patchFiles = setOf(patchFile)
+    val loadedPatches = loadPatchesFromJar(patchFiles)
+    val actualVersion = JarFile(patchFile).use { jar ->
+        jar.manifest?.mainAttributes?.getValue("Version")
+    } ?: error("Patch bundle has no Version in its manifest: ${patchFile.path}")
+    check(actualVersion == expectedVersion) {
+        "Patch bundle version mismatch: expected $expectedVersion, found $actualVersion"
+    }
+    generatePatchList(actualVersion, loadedPatches)
 }
 
 @Suppress("DEPRECATION")

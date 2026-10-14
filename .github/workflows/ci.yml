@@ -36,7 +36,7 @@ jobs:
           python-version: '3.12'
 
       - name: Compile Python verification scripts
-        run: python -m py_compile scripts/verify_rustore_downloads.py scripts/test_verify_rustore_downloads.py
+        run: python -m py_compile scripts/verify_rustore_downloads.py scripts/test_verify_rustore_downloads.py scripts/test_patch_list_generator.py
 
       - name: Run downloader verification tests
         run: python -m unittest discover -s scripts -p 'test_*.py' -v

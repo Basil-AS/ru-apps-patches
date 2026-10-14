@@ -3,6 +3,7 @@ app_name	package	source_version	split_set	sha256	acquisition_status	acquisition_
 Яндекс Карты	ru.yandex.yandexmaps	31.1.3	ru.yandex.yandexmaps	1a446b2ebdf9a520440428414143abbcfacc56e10213b8d3bb81afac6247306a	verified	ruStore/Basil-AS-rustore-downloader	739706910
 Яндекс Go / Taxi	ru.yandex.taxi	5.98.0	ru.yandex.taxi	ab16b2571cd88870458cbee087cb9ffbda0a48b5bfb73719199cb43cb0bbbcaf	verified	ruStore/Basil-AS-rustore-downloader	30128554
 Яндекс Расписания	ru.yandex.rasp	3.73.0	ru.yandex.rasp	9d4b8632c0fcf1304d5845892ad94026032b8f42831707fe58bd96affc74ff3c	verified	ruStore/Basil-AS-rustore-downloader	35000063
+Яндекс Погода	ru.yandex.weatherplugin	26.10.10	ru.yandex.weatherplugin	2f7e93398bea8d177ead2f9dfc9297102be00d42bbae3e95ce4bf13b64a6de99	verified	ruStore/Basil-AS-rustore-downloader	260100010
 Яндекс Пэй	com.yandex.bank	0.243.0	com.yandex.bank	03dc4398b6def38a258cdb686ebb9783d88d0a68928b0276c535e05177dd4a35	verified	ruStore/Basil-AS-rustore-downloader	11920
 СберБанк	ru.sberbankmobile	17.13.0	ru.sberbankmobile.split0,ru.sberbankmobile.split1	42235c5016020fffa3f3eb9a7fc8406dc8f2217818d7cd0bcbc817a3003d4db6	verified	ruStore/Basil-AS-rustore-downloader	2026062316
 Альфа-Банк	ru.alfabank.mobile.android	12.60.07	ru.alfabank.mobile.android	6f0c04c2d046c78224d3e7db3650c1c94dd1c39318291b85b2311990c1084b40	verified	ruStore/Basil-AS-rustore-downloader	2042600700
